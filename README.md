@@ -8,6 +8,8 @@
 
 **SpiralMind Nexus** to zaawansowany system AI wykorzystujący architekturę **Double Pipeline** z modułowym orkiestratorem **SYNERGY** do inteligentnego przetwarzania różnych typów treści, ze szczególnym naciskiem na integrację z platformą X (dawny Twitter).
 
+Autonomiczny pipeline AI z transcendencją i etyką – SpiralMind Nexus.
+
 ### 🎯 Kluczowe Cechy
 
 - **🔄 Double Pipeline Architecture**: GOK:AI (kreatywny) + LOGIKA:AI (analityczny)
