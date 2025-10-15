@@ -576,6 +576,120 @@ stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3
         });
     }; 
 </script> 
+
+<!-- Rocket Fuel Girls Gallery Section -->
+<div id="rocket-fuel-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+    <div class="bg-gray-900 rounded-xl p-6 max-w-4xl max-h-[90vh] overflow-y-auto border-2 border-purple-500">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold text-purple-400">🚀 Rocket Fuel Girls Gallery</h2>
+            <button id="close-gallery" class="text-white hover:text-red-400 text-2xl">&times;</button>
+        </div>
+        <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Gallery content will be dynamically loaded here -->
+        </div>
+    </div>
+</div>
+
+<!-- Gallery Trigger Button -->
+<button id="open-gallery" class="fixed bottom-4 right-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 z-40">
+    🚀 Gallery
+</button>
+
+<script>
+// Rocket Fuel Girls Gallery Component
+const RocketFuelGallery = {
+    girls: [
+        {
+            name: "Nova Strike",
+            role: "Quantum Engineer",
+            image: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=300&h=400&fit=crop&crop=face",
+            fuel: "Quantum Plasma",
+            story: "Mistrzyni manipulacji kwantowej energii, potrafi przekształcać materie na poziomie subatomowym."
+        },
+        {
+            name: "Stellar Phoenix",
+            role: "Navigation Expert",
+            image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop&crop=face",
+            fuel: "Stellar Wind",
+            story: "Przewodniczka przez galaktyczne szlaki, czyta gwiazdy jak mapę drogową wszechświata."
+        },
+        {
+            name: "Cosmic Viper",
+            role: "Tactical Specialist",
+            image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&h=400&fit=crop&crop=face",
+            fuel: "Dark Energy",
+            story: "Ekspertka od strategii kosmicznych, wykorzystuje ciemną energię jako broń taktyczną."
+        },
+        {
+            name: "Nebula Dream",
+            role: "Fuel Synthesizer",
+            image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300&h=400&fit=crop&crop=face",
+            fuel: "Nebula Essence",
+            story: "Alchemiczka kosmosu, tworzy najczystsze paliwa z mgławic i pyłu gwiezdnego."
+        },
+        {
+            name: "Aurora Blast",
+            role: "Energy Conductor",
+            image: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=300&h=400&fit=crop&crop=face",
+            fuel: "Aurora Plasma",
+            story: "Potrafi przewodzić i kierować energią polarną, tworząc spektakularne wybuchy światła."
+        },
+        {
+            name: "Galaxy Racer",
+            role: "Speed Champion",
+            image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=400&fit=crop&crop=face",
+            fuel: "Warp Fuel",
+            story: "Najszybsza pilotka w galaktyce, łamie bariery prędkości światła z gracją i precyzją."
+        }
+    ],
+
+    init() {
+        const openBtn = document.getElementById('open-gallery');
+        const closeBtn = document.getElementById('close-gallery');
+        const modal = document.getElementById('rocket-fuel-modal');
+        const grid = document.getElementById('gallery-grid');
+
+        openBtn.addEventListener('click', () => {
+            this.render();
+            modal.classList.remove('hidden');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    },
+
+    render() {
+        const grid = document.getElementById('gallery-grid');
+        grid.innerHTML = this.girls.map(girl => `
+            <div class="bg-gray-800 rounded-lg overflow-hidden border border-purple-400 hover:border-pink-400 transition-all duration-300 transform hover:scale-105">
+                <img src="${girl.image}" alt="${girl.name}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-lg font-bold text-purple-300 mb-1">${girl.name}</h3>
+                    <p class="text-sm text-blue-300 mb-2">${girl.role}</p>
+                    <div class="flex items-center mb-2">
+                        <span class="text-xs bg-gradient-to-r from-pink-500 to-purple-600 text-white px-2 py-1 rounded-full">
+                            ⚡ ${girl.fuel}
+                        </span>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">${girl.story}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+};
+
+// Initialize Gallery when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    RocketFuelGallery.init();
+});
+</script>
  
 </body> 
 </html> 

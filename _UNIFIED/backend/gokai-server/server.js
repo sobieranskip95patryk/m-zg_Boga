@@ -10,6 +10,8 @@ const __dirname = path.dirname(__filename);
 
 // Load environment from unified config
 dotenv.config({ path: path.join(__dirname, "../../config/.env") });
+// Also load local .env as backup
+dotenv.config();
 
 /* =============== KONFIG =============== */
 const PORT = process.env.PORT || 3000;
