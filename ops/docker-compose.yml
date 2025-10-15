@@ -1,0 +1,34 @@
+services:
+  chat-backend:
+    build: ./services/chat-backend
+    environment:
+      - GV_DATA_DIR=/app_data
+    volumes:
+      - ../data/knowledge:/app_data
+    ports:
+      - "8080:8080"
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8080
+
+  mta-quest-webside-x:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./apps/mta-quest-webside-x:/app
+      - ./apps/mta-quest-webside-x/globalvision.config.json:/app/globalvision.config.json
+    command: bash -lc "npx --yes http-server -p 5173"
+    ports:
+      - "5173:5173"
+    depends_on:
+      - chat-backend
+
+  chatgpt-pinkman-ai:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./apps/chatgpt-pinkman-ai:/app
+      - ./apps/chatgpt-pinkman-ai/globalvision.config.json:/app/globalvision.config.json
+    command: bash -lc "npx --yes http-server -p 5174"
+    ports:
+      - "5174:5174"
+    depends_on:
+      - chat-backend

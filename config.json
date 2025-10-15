@@ -1,0 +1,156 @@
+{
+  "project": {
+    "name": "Mózg Boga - AI Ecosystem",
+    "version": "1.0.0",
+    "description": "Zintegrowany ekosystem silników AI",
+    "author": "Patryk Sobieranski"
+  },
+  "engines": {
+    "spiralmind": {
+      "name": "SpiralMind-Nexus (GOK:AI)",
+      "repository": "https://github.com/sobieranskip95patryk/SpiralMind-Nexus.git",
+      "endpoint": "http://localhost:3000/api/ask",
+      "status": "active",
+      "features": [
+        "Quantum consciousness algorithm (9π + F(n))",
+        "Double pipeline architecture",
+        "X/Twitter integration",
+        "Multi-provider support (OpenAI + Gemini)",
+        "Psychometric analysis",
+        "Adaptive learning"
+      ],
+      "requirements": {
+        "nodejs": ">=16.0.0",
+        "npm": ">=7.0.0",
+        "api_keys": ["OPENAI_KEYS", "GEMINI_KEYS"]
+      }
+    },
+    "migi": {
+      "name": "Apex Infinity MIGI Core",
+      "repository": "https://github.com/sobieranskip95patryk/apex_infinity_MIGI_Core.git",
+      "endpoint": "http://localhost:3001/api/process",
+      "status": "in_development",
+      "features": [
+        "Global intelligence core",
+        "Infinity perspective processing",
+        "Advanced consciousness modules",
+        "Apex system integration"
+      ],
+      "requirements": {
+        "status": "Repository contains only LICENSE file",
+        "note": "Implementation pending"
+      }
+    },
+    "simulation": {
+      "name": "Local Simulation Engine",
+      "endpoint": null,
+      "status": "always_available",
+      "features": [
+        "Offline functionality",
+        "Demo responses",
+        "No external dependencies",
+        "Development testing"
+      ]
+    }
+  },
+  "api": {
+    "spiralmind_format": {
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "prompt": "string",
+        "provider": "openai|gemini",
+        "model": "string (optional)"
+      },
+      "response": {
+        "ok": "boolean",
+        "text": "string",
+        "error": "string (if ok=false)"
+      }
+    },
+    "migi_format": {
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "query": "string",
+        "context": "object (optional)",
+        "mode": "string (optional)"
+      },
+      "response": {
+        "success": "boolean",
+        "result": "string",
+        "metadata": "object"
+      }
+    }
+  },
+  "frontend": {
+    "framework": "Vanilla JavaScript",
+    "styling": "Tailwind CSS",
+    "features": [
+      "Engine selection",
+      "Real-time status monitoring",
+      "Data stream visualization",
+      "Responsive design",
+      "Error handling with fallbacks"
+    ]
+  },
+  "deployment": {
+    "development": {
+      "spiralmind": "npm run dev (port 3000)",
+      "frontend": "Open mózgBogaindex.html or serve on port 8080"
+    },
+    "production": {
+      "spiralmind": "Configure .env with production API keys",
+      "frontend": "Deploy to web server or CDN",
+      "migi": "Configure when repository is ready"
+    }
+  },
+  "monitoring": {
+    "data_streams": {
+      "spiralmind": ["GOK:AI Core", "Quantum Pipeline", "X Integration", "Psyche Module"],
+      "migi": ["MIGI Core", "Infinity Engine", "Global Intelligence", "Apex Systems"],
+      "simulation": ["Demo Core", "Symulacja AI", "Test Pipeline", "Mock Data"]
+    },
+    "connection_states": {
+      "connected": "Engine active and responding",
+      "offline": "Fallback to simulation mode",
+      "in_development": "Placeholder mode"
+    }
+  },
+  "roadmap": {
+    "phase_1": {
+      "name": "Basic Integration",
+      "status": "completed",
+      "features": [
+        "Engine selection interface",
+        "SpiralMind-Nexus integration",
+        "Simulation mode",
+        "Status monitoring"
+      ]
+    },
+    "phase_2": {
+      "name": "Extended Functionality",
+      "status": "planned",
+      "features": [
+        "MIGI Core integration",
+        "Advanced query routing",
+        "AI personality modules",
+        "Extended analytics"
+      ]
+    },
+    "phase_3": {
+      "name": "Future Capabilities",
+      "status": "future",
+      "features": [
+        "Multi-modal processing",
+        "Voice interface",
+        "3D visualizations",
+        "Neural network insights"
+      ]
+    }
+  }
+}

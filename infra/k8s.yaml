@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Namespace
+metadata: { name: migi }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: gokai-core, namespace: migi }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: gokai-core } }
+  template:
+    metadata: { labels: { app: gokai-core } }
+    spec:
+      containers:
+      - name: backend
+        image: ghcr.io/example/gokai-core:0.1.0
+        ports: [{containerPort:8000}]

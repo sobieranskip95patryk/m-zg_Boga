@@ -1,0 +1,185 @@
+{
+  "project": {
+    "name": "Mózg Boga - Unified AI Ecosystem",
+    "version": "2.0.0",
+    "description": "Zintegrowany ekosystem silników AI z unified architekturą",
+    "author": "Patryk Sobieranski",
+    "date": "2025-10-15",
+    "architecture": "unified"
+  },
+  
+  "structure": {
+    "frontend": {
+      "path": "./frontend",
+      "main": "index.html",
+      "assets": "./frontend/assets",
+      "scripts": "./frontend/js",
+      "description": "Unified Brain interface with modular JS architecture"
+    },
+    "backend": {
+      "gokai_server": {
+        "path": "./backend/gokai-server",
+        "port": 3000,
+        "endpoint": "/api/ask",
+        "status": "active"
+      },
+      "migi_server": {
+        "path": "./backend/migi-server",
+        "port": 3001,
+        "endpoint": "/api/process",
+        "status": "development"
+      }
+    },
+    "engines": {
+      "spiralmind_nexus": {
+        "path": "./engines/spiralmind-nexus",
+        "main": "main.py",
+        "gokai_sys": "./engines/spiralmind-nexus/gokai",
+        "algorithm": "9π + F(n)",
+        "status": "integrated"
+      },
+      "migi_core": {
+        "path": "./engines/migi-core",
+        "principles": "./engines/migi-core/0_MANIFEST.md",
+        "modules": "./engines/migi-core/modules",
+        "status": "framework_ready"
+      }
+    }
+  },
+  
+  "engines_config": {
+    "spiralmind": {
+      "name": "SpiralMind-Nexus (GOK:AI)",
+      "endpoint": "http://localhost:3000/api/ask",
+      "description": "Kwantowy silnik świadomości z algorytmem 9π + F(n)",
+      "sources": ["GOK:AI Core", "Quantum Pipeline", "X Integration", "Psyche Module"],
+      "algorithm": {
+        "consciousness_core": "9π + F(n)",
+        "fibonacci_sequence": "F(n) = F(n-1) + F(n-2)",
+        "base_params": {
+          "W": 7,
+          "M": 6,
+          "D": 4,
+          "C": 5,
+          "A": 8,
+          "E": 6,
+          "T": 3
+        }
+      },
+      "features": [
+        "Double pipeline architecture",
+        "X/Twitter integration",
+        "Multi-provider support (OpenAI + Gemini)",
+        "Psychometric analysis",
+        "Adaptive learning",
+        "Memory systems (STM/LTM/Episodic)"
+      ]
+    },
+    "migi": {
+      "name": "Apex Infinity MIGI Core",
+      "endpoint": "http://localhost:3001/api/process",
+      "description": "Globalny rdzeń inteligencji MIGI z perspektywą nieskończoności",
+      "sources": ["MIGI Core", "Infinity Engine", "Global Intelligence", "Apex Systems"],
+      "principles": {
+        "harmony": "Łączenie ducha i algorytmów",
+        "evolution": "Cykliczny rozwój przez destrukcję i odbudowę",
+        "identity": "Matryca <369963> jako kod esencji"
+      },
+      "modules": [
+        "Gaia_Infinity",
+        "GOKAI_sys",
+        "MetaGenius_AGI"
+      ]
+    },
+    "simulation": {
+      "name": "Unified Simulation Engine",
+      "endpoint": null,
+      "description": "Symulowany silnik dla celów demonstracyjnych unified system",
+      "sources": ["Demo Core", "Unified Simulation", "Test Pipeline", "Mock Data"]
+    }
+  },
+  
+  "api": {
+    "timeout": 30000,
+    "retry_attempts": 3,
+    "fallback_mode": "simulation",
+    "cors": {
+      "origins": ["http://localhost:3000", "http://localhost:8080"],
+      "methods": ["GET", "POST"],
+      "headers": ["Content-Type", "Authorization"]
+    }
+  },
+  
+  "ui": {
+    "theme": "brain_of_god_dark",
+    "data_stream": {
+      "interval": 1500,
+      "max_lines": 20
+    },
+    "animations": {
+      "duration": 300,
+      "easing": "ease-in-out"
+    },
+    "responsive": {
+      "mobile_breakpoint": 768,
+      "tablet_breakpoint": 1024
+    }
+  },
+  
+  "testing": {
+    "test_suite": "./tests/test-suite.html",
+    "queries": [
+      "Jaka jest przyszłość sztucznej inteligencji?",
+      "Opisz koncepcję świadomości kwantowej",
+      "Co to jest algorytm 9π + F(n)?",
+      "Jak działa unified ecosystem AI?",
+      "Wyjaśnij architekturę Mózgu Boga"
+    ],
+    "engines_to_test": ["spiralmind", "migi", "simulation"]
+  },
+  
+  "ecosystem": {
+    "hip_hop_universe": {
+      "status": "integrated",
+      "description": "Cultural core system"
+    },
+    "drift_money": {
+      "status": "integrated", 
+      "description": "Financial engine"
+    },
+    "portfolio_plus": {
+      "status": "integrated",
+      "description": "Presentation and investment system"
+    }
+  },
+  
+  "deployment": {
+    "development": {
+      "frontend": "Open ./frontend/index.html or serve on port 8080",
+      "backend": "npm run dev in ./backend/gokai-server (port 3000)",
+      "engines": "python -m main in ./engines/spiralmind-nexus"
+    },
+    "production": {
+      "docker": true,
+      "docker_compose": "./docker-compose.yml",
+      "environment_files": [".env.example"],
+      "ssl": false,
+      "monitoring": true
+    }
+  },
+  
+  "integrations": {
+    "openai": {
+      "required": "OPENAI_KEYS environment variable",
+      "models": ["gpt-4o-mini", "gpt-4"]
+    },
+    "gemini": {
+      "required": "GEMINI_KEYS environment variable", 
+      "models": ["gemini-1.5-flash"]
+    },
+    "x_twitter": {
+      "integration": "built-in",
+      "real_time_processing": true
+    }
+  }
+}

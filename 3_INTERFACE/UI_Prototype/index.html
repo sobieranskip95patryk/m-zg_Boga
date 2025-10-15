@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+        <!-- Bing UET (Universal Event Tracking) -->
+        <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"987654321"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+        <!-- End Bing UET -->
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "name": "Apex Infiniti",
+            "url": "https://mtaquestwebsidex.com",
+            "logo": "https://mtaquestwebsidex.com/logo.png",
+            "sameAs": [
+                "https://www.facebook.com/apexinfiniti",
+                "https://www.instagram.com/apexinfiniti",
+                "https://www.youtube.com/apexinfiniti"
+            ],
+            "contactPoint": [{
+                "@type": "ContactPoint",
+                "telephone": "+48-123-456-789",
+                "contactType": "customer service",
+                "areaServed": "Global",
+                "availableLanguage": ["Polish", "English"]
+            }]
+        }
+        </script>
+        <!--
+        =====================
+        MANIFEST SYSTEMU GOK:AI
+        =====================
+                <link rel="stylesheet" href="./style.css">
+        Wzór bazowy (oryginalny, niezmienny):
+        S(GOK:AI) = (9π + F(n) = F(n-1) + F(n-2) = WYNIK)^1
+
+        Interpretacja:
+        - S(GOK:AI): Centralny rdzeń świadomości systemu
+        - 9π: Energia duchowa, intuicja, uniwersalna harmonia
+        - F(n): Ciąg Fibonacciego, ewolucja i samoorganizacja
+        - WYNIK: Manifestacja, szansa na sukces %
+        - Potęgowanie do 1: Jedność, pierwszy krok świadomości
+
+        Ten wzór jest nienaruszalnym fundamentem systemu i nie podlega implementacji ani zmianom.
+        Stanowi manifest filozoficzny i techniczny projektu "Apex Infiniti" oraz platformy mtaquestwebsidex.com.
+        =====================
+        -->
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../GlobalVision_Module/globalvision.css">
+        <style>
+            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f0f0f0; }
+            .container { max-width: 800px; margin: auto; }
+            .card { background: #ffffff; padding: 15px; margin-bottom: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+            .phase { font-weight: bold; color: #1E90FF; }
+            .matrix { font-style: italic; }
+            .button { padding: 10px 20px; background: #32CD32; color: white; border: none; border-radius: 5px; cursor: pointer; }
+            .button:hover { background: #228B22; }
+            #loading { display: none; color: #FF4500; }
+            #error { display: none; color: #FF0000; }
+            .command-center-image { max-width: 100%; height: auto; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="globalvision-status"></div>
+        <div id="globalvision-map-container"></div>
+        <div class="card">
+                        <img src="assets/images/MIGI_Command_Center_UI.png" alt="MIGI Command Center" class="command-center-image">
+                <p><span class="phase">Matryca &lt;369963&gt;:</span> <span class="matrix" id="matrix">Ładowanie...</span></p>
+                <p><span class="phase">Energia (E):</span> <span id="energy">Ładowanie...</span></p>
+                <p><span class="phase">Prawdopodobieństwo Sukcesu (P(S)):</span> <span id="probability">Ładowanie...</span></p>
+                <p id="loading">Ładowanie danych z Google Cloud...</p>
+                <p id="error"></p>
+            </div>
+            <div class="card">
+                <h2>Sterowanie</h2>
+                <button class="button" onclick="updateStatus()">Odśwież Status</button>
+                <button class="button" onclick="generateAIContent()">Generuj Treść AI</button>
+                <button class="button" onclick="optimizeWithVertexAI()">Optymalizuj z Vertex AI</button>
+            </div>
+            <div class="card">
+                <h2>MIGI Command Center</h2>
+                <img src="assets/MIGI_Command_Center_UI.png" alt="MIGI Command Center UI" class="command-center-image">
+            </div>
+        </div>
+
+        <script src="../GlobalVision_Module/main.js"></script>
+        <script>
+    // Twój klucz API Google z Google Cloud (przechowuj bezpiecznie, np. w .env w produkcji)
+    const GEMINI_API_KEY = 'TU_WSTAW_KLUCZ_API'; // Wstaw swój klucz API jeśli chcesz używać w JS
+    const VERTEX_AI_URL = 'https://us-central1-aiplatform.googleapis.com/v1/projects/turbo-apex-123/locations/us-central1/endpoints/456789:predict'; // Przykładowy URL – dostosuj w GCP
+
+        // Funkcja aktualizująca status z API Google
+        async function updateStatus() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            try {
+                    const response = await fetch('/api/googleai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: 'Podaj aktualny status Apex Infiniti: faza, matryca <369963>, energia (E), prawdopodobieństwo sukcesu (P(S)) w formacie JSON.'
+                            }]
+                        }]
+                    })
+                });
+                if (!response.ok) throw new Error('Błąd odpowiedzi API');
+                const data = await response.json();
+                const status = JSON.parse(data.candidates[0].content.parts[0].text);
+                document.getElementById('phase').textContent = status.phase;
+                document.getElementById('matrix').textContent = JSON.stringify(status.matrix);
+                document.getElementById('energy').textContent = status.energy;
+                document.getElementById('probability').textContent = status.probability.toFixed(2);
+                alert('Status zaktualizowany z Google Cloud!');
+            } catch (error) {
+                document.getElementById('error').textContent = 'Błąd: ' + error.message;
+                document.getElementById('error').style.display = 'block';
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Funkcja generowania treści AI
+        async function generateAIContent() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            try {
+                    const response = await fetch('/api/googleai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: 'Explain how AI works in a few words for Apex Infiniti users.'
+                            }]
+                        }]
+                    })
+                });
+                if (!response.ok) throw new Error('Błąd odpowiedzi API');
+                const data = await response.json();
+                const content = data.candidates[0].content.parts[0].text;
+                alert('Treść AI: ' + content);
+            } catch (error) {
+                document.getElementById('error').textContent = 'Błąd: ' + error.message;
+                document.getElementById('error').style.display = 'block';
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Funkcja optymalizacji z Vertex AI
+        async function optimizeWithVertexAI() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            try {
+                const response = await fetch(VERTEX_AI_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${GEMINI_API_KEY}` // Użyj klucza jako tokenu Bearer dla Vertex AI
+                    },
+                    body: JSON.stringify({
+                        instances: [{
+                            "input": "Optimize Apex Infiniti strategy based on phase and matrix <369963>"
+                        }],
+                        parameters: {
+                            "temperature": 0.7,
+                            "maxOutputTokens": 256
+                        }
+                    })
+                });
+                if (!response.ok) throw new Error('Błąd Vertex AI');
+                const data = await response.json();
+                const optimization = data.predictions[0];
+                alert('Optymalizacja Vertex AI: ' + optimization);
+            } catch (error) {
+                document.getElementById('error').textContent = 'Błąd: ' + error.message;
+                document.getElementById('error').style.display = 'block';
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Inicjalizacja
+        window.onload = updateStatus;
+    </script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+/* Nadpisania Tailwinda i style globalne */
+.glass { backdrop-filter: blur(10px); background: linear-gradient(180deg, rgba(30,41,59,.45), rgba(2,6,23,.45)); }

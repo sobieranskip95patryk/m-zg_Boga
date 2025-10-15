@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+# OS
+.DS_Store
+Thumbs.db
+# Build
+dist/
+build/
+# CAD/3D/Binaries
+*.step
+*.stp
+*.igs
+*.iges
+*.ply
+*.stl
+*.3mf
+*.bin
+*.hex
+# Archives
+*.zip
+*.7z
+*.tar
+*.gz

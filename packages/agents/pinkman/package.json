@@ -1,0 +1,12 @@
+{
+  "name": "@metageniusz/pinkman",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "uvicorn main:app --host 0.0.0.0 --port 3003",
+    "test": "pytest"
+  },
+  "devDependencies": {
+    "pytest": "^8.0.0",
+    "httpx": "^0.27.0"
+  }
+}

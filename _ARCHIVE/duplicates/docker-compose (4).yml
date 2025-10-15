@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./core  # Katalog z kodem API
+      dockerfile: Dockerfile  # Plik Dockerfile dla API
+    ports:
+      - "8000:8000"  # Port API
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}  # Klucz API OpenAI z .env
+    volumes:
+      - ./core:/app  # Montowanie katalogu core do kontenera
+    networks:
+      - app-network  # Sieć aplikacji
+
+  vector_db:
+    image: qdrant/qdrant  # Obraz bazy wektorowej Qdrant
+    ports:
+      - "6333:6333"  # Port Qdrant
+    networks:
+      - app-network
+
+  knowledge_graph:
+    build:
+      context: ./knowledge_graph  # Katalog z grafem wiedzy
+      dockerfile: Dockerfile  # Plik Dockerfile dla grafu wiedzy
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge  # Typ sieci: bridge
+
+volumes:
+  db-data:
+    driver: local  # Wolumen lokalny na dane

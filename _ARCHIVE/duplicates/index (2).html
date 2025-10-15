@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hip-Hop Universe - Modułowa Mapa Strategiczna</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="universe-container">
+        <!-- Header Navigation -->
+        <header class="universe-header">
+            <div class="header-content">
+                <h1 class="universe-title">🧠 HIP-HOP UNIVERSE</h1>
+                <p class="universe-subtitle">Modułowa Struktura Kulturowo-Finansowej Transformacji</p>
+                <nav class="universe-nav">
+                    <a href="#overview" class="nav-link active">Przegląd</a>
+                    <a href="#modules" class="nav-link">Moduły</a>
+                    <a href="#roadmap" class="nav-link">Roadmapa</a>
+                    <a href="#manifest" class="nav-link">Manifest</a>
+                    <a href="ecosystem.html" class="nav-link ecosystem-link">🌐 Ekosystem</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Overview Section -->
+        <section id="overview" class="universe-overview">
+            <div class="overview-content">
+                <h2>Wizja Projektu</h2>
+                <p class="vision-text">
+                    Cyfrowe miasto hip-hopowe łączące twórców, fanów i technologię w jednym ekosystemie. 
+                    Miejsce, gdzie kultura spotyka się z blockchainem, a pasja przekształca się w niezależność finansową.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Głównych Modułów</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Możliwości Twórczych</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1%</span>
+                        <span class="stat-label">Wsparcie z Drift Money</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modules Grid -->
+        <section id="modules" class="modules-section">
+            <h2 class="section-title">Interaktywna Mapa Modułów</h2>
+            <div class="modules-grid">
+                
+                <!-- Module 1: Cultural Infrastructure -->
+                <div class="module-card" data-module="1">
+                    <div class="module-header">
+                        <span class="module-number">01</span>
+                        <h3 class="module-title">Infrastruktura Kulturowa</h3>
+                    </div>
+                    <div class="module-content">
+                        <p class="module-goal">Zjednoczenie wszystkich elementów kultury hip-hopowej w jednej cyfrowej przestrzeni</p>
+                        <ul class="module-features">
+                            <li>Profile artystów: raperzy, DJ-e, producenci, tancerze, grafficiarze</li>
+                            <li>Kreatywne pokoje: prywatne strefy współpracy</li>
+                            <li>Centrum edukacyjne: warsztaty od legend hip-hopu</li>
+                            <li>AI matchmaking: łączenie twórców</li>
+                        </ul>
+                        <div class="module-effect">
+                            <strong>Efekt:</strong> Żywe, cyfrowe miasto hip-hopowe
+                        </div>
+                    </div>
+                    <button class="explore-btn" onclick="exploreModule(1)">Eksploruj Moduł</button>
+                </div>
+
+                <!-- Module 2: Tokenization & Marketplace -->
+                <div class="module-card" data-module="2">
+                    <div class="module-header">
+                        <span class="module-number">02</span>
+                        <h3 class="module-title">Tokenizacja i Marketplace</h3>
+                    </div>
+                    <div class="module-content">
+                        <p class="module-goal">Przekształcenie wartości artystycznej w realne dochody</p>
+                        <ul class="module-features">
+                            <li>Tokeny artystów: fani inwestują jak w akcje</li>
+                            <li>NFT sklep: unikalne beaty, grafiki, merch</li>
+                            <li>Smart-kontrakty: automatyczne rozliczenia</li>
+                            <li>Platforma inwestycyjna: współfinansowanie projektów</li>
+                        </ul>
+                        <div class="module-effect">
+                            <strong>Efekt:</strong> Hip-hop jako zdecentralizowany ekosystem finansowy
+                        </div>
+                    </div>
+                    <button class="explore-btn" onclick="exploreModule(2)">Eksploruj Moduł</button>
+                </div>
+
+                <!-- Module 3: Drift Money Integration -->
+                <div class="module-card" data-module="3">
+                    <div class="module-header">
+                        <span class="module-number">03</span>
+                        <h3 class="module-title">Integracja z Drift Money</h3>
+                    </div>
+                    <div class="module-content">
+                        <p class="module-goal">Zapewnienie stabilnego finansowania i niezależności</p>
+                        <ul class="module-features">
+                            <li>1% z Drift Global na rozwój platformy</li>
+                            <li>Finansowanie edukacji, eventów, produkcji</li>
+                            <li>AI do analizy trendów i optymalizacji</li>
+                            <li>Blockchain jako fundament przejrzystości</li>
+                        </ul>
+                        <div class="module-effect">
+                            <strong>Efekt:</strong> Hip-hop uniezależniony od wytwórni
+                        </div>
+                    </div>
+                    <button class="explore-btn" onclick="exploreModule(3)">Eksploruj Moduł</button>
+                </div>
+
+                <!-- Module 4: UI/UX Platform -->
+                <div class="module-card" data-module="4">
+                    <div class="module-header">
+                        <span class="module-number">04</span>
+                        <h3 class="module-title">UI/UX i Projekt Platformy</h3>
+                    </div>
+                    <div class="module-content">
+                        <p class="module-goal">Intuicyjny, inkluzywny interfejs dla twórców i fanów</p>
+                        <ul class="module-features">
+                            <li>Strefa twórcza (prywatna) i publiczna (dla fanów)</li>
+                            <li>Aplikacja mobilna i desktopowa</li>
+                            <li>Głosowanie społeczności nad projektami</li>
+                            <li>Streaming: koncerty, bitwy, backstage</li>
+                        </ul>
+                        <div class="module-effect">
+                            <strong>Efekt:</strong> Platforma jako dom dla twórców i scena dla fanów
+                        </div>
+                    </div>
+                    <button class="explore-btn" onclick="exploreModule(4)">Eksploruj Moduł</button>
+                </div>
+
+                <!-- Module 5: Global Expansion -->
+                <div class="module-card" data-module="5">
+                    <div class="module-header">
+                        <span class="module-number">05</span>
+                        <h3 class="module-title">Ekspansja Globalna</h3>
+                    </div>
+                    <div class="module-content">
+                        <p class="module-goal">Polska jako centrum technologiczne i kulturowe</p>
+                        <ul class="module-features">
+                            <li>Apex Infinity: zarządzanie AI i blockchainem</li>
+                            <li>Lokalne huby połączone z HQ</li>
+                            <li>Polscy twórcy jako kuratorzy globalni</li>
+                            <li>Dyplomacja kulturowa z Polski</li>
+                        </ul>
+                        <div class="module-effect">
+                            <strong>Efekt:</strong> Globalna sieć z polskim mózgiem
+                        </div>
+                    </div>
+                    <button class="explore-btn" onclick="exploreModule(5)">Eksploruj Moduł</button>
+                </div>
+
+                <!-- Module 6: Governance & Community -->
+                <div class="module-card" data-module="6">
+                    <div class="module-header">
+                        <span class="module-number">06</span>
+                        <h3 class="module-title">Governance i Społeczność</h3>
+                    </div>
+                    <div class="module-content">
+                        <p class="module-goal">Zaprojektowanie skalowalnej, odpornej struktury społecznej</p>
+                        <ul class="module-features">
+                            <li>Testowanie modeli interakcji społecznych</li>
+                            <li>Hierarchia członkostwa i zatwierdzania</li>
+                            <li>Pętle feedbacku i adaptacyjne reguły</li>
+                            <li>Autonomia twórców nad własnymi światami</li>
+                        </ul>
+                        <div class="module-effect">
+                            <strong>Efekt:</strong> Samoregulująca społeczność oparta na szacunku
+                        </div>
+                    </div>
+                    <button class="explore-btn" onclick="exploreModule(6)">Eksploruj Moduł</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="roadmap-section">
+            <h2 class="section-title">Roadmapa Wdrożenia</h2>
+            <div class="roadmap-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Faza 1: Fundament</h3>
+                        <p>Layout platformy, system tokenów, podstawowa infrastruktura</p>
+                        <span class="timeline-duration">Q1 2025</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Faza 2: Społeczność</h3>
+                        <p>Onboarding artystów, system mentoringu, pierwsze pokoje twórcze</p>
+                        <span class="timeline-duration">Q2 2025</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Faza 3: Marketplace</h3>
+                        <p>NFT sklep, tokenizacja artystów, integracja z Drift Money</p>
+                        <span class="timeline-duration">Q3 2025</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Faza 4: Ekspansja</h3>
+                        <p>Lokalne huby, Apex Infinity HQ, dyplomacja kulturowa</p>
+                        <span class="timeline-duration">Q4 2025</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="universe-footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Hip-Hop Universe. Technologia spotyka kulturę.</p>
+                <div class="footer-links">
+                    <a href="#contact">Kontakt</a>
+                    <a href="#docs">Dokumentacja</a>
+                    <a href="#github">GitHub</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Module Detail Modal -->
+    <div id="moduleModal" class="module-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

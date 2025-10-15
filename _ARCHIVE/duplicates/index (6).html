@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroLuxe Drive - Ekskluzywna Kolekcja NASA</title>
+    <!-- Ładowanie Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        /* Definicja Kolorów NASA */
+        :root {
+            --nasa-blue-dark: #03045e; /* Głęboki Niebieski */
+            --nasa-blue-light: #0077b6; /* Jasny Niebieski */
+            --nasa-red: #e63946; /* Ikoniczna Czerwień (Swoosh) */
+            --nasa-white: #f1faee;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--nasa-blue-dark);
+            color: var(--nasa-white);
+            transition: background-color 0.3s ease;
+        }
+        
+        /* Stylizacja Akcji (Czerwień Swoosh) */
+        .btn-action {
+            background-color: var(--nasa-red);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.6);
+        }
+        .btn-action:hover {
+            background-color: #d62839; /* Ciemniejszy odcień czerwieni */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.8);
+        }
+        
+        /* Stylizacja Kart Produktów */
+        .product-card {
+            background-color: var(--nasa-blue-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px var(--nasa-white); 
+        }
+
+        /* Tło Nagłówka */
+        .header-bg {
+            background-color: #000; /* Czysta czerń dla kontrastu z logo */
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Nagłówek i Nawigacja -->
+    <header class="header-bg shadow-2xl sticky top-0 z-10 border-b-4 border-nasa-red">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- NOWE LOGO NASA ASTROLUXE DRIVE -->
+                <a href="#" class="flex items-center space-x-2">
+                    <!-- Stylizowane logo: NASA (Niebiański) + Luksus (Czerwień i Biel) -->
+                    <span class="text-4xl font-black tracking-tighter text-white">NASA</span>
+                    <span class="text-2xl font-extrabold tracking-widest text-nasa-red">ASTRO<span class="text-nasa-white">LUXE</span> DRIVE</span>
+                </a>
+
+                <!-- Przycisk Koszyka (Czerwień Swoosh) -->
+                <button id="cart-button" onclick="showCartMessage()" class="btn-action text-white font-bold py-3 px-6 rounded-full shadow-lg flex items-center space-x-2 transition duration-150 text-base">
+                    <!-- Ikona Koszyka -->
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span id="cart-counter">Koszyk (0)</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Główna Sekcja Treści -->
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:py-16 sm:px-6 lg:px-8">
+
+        <!-- Banner - W Tonalności NASA Blue -->
+        <div class="bg-nasa-blue-light p-8 sm:p-12 rounded-3xl mb-16 shadow-2xl border-4 border-nasa-red/70">
+            <p class="text-lg sm:text-xl font-light text-nasa-white mb-3 tracking-widest uppercase">Ekskluzywna Kolekcja</p>
+            <h1 class="text-4xl sm:text-6xl font-black mb-4 leading-tight text-white">DZIEDZICTWO <span style="color:var(--nasa-red);">KOSMOSU</span>, PRECYZJA <span class="text-nasa-white">LUX</span>.</h1>
+            <p class="text-xl text-nasa-white/90 mb-8 max-w-3xl">Każdy element ubioru jest inżynierią: od włókien stringów po bieżnik butów sportowych. Fuzja technologii NASA i prędkości luksusowej motoryzacji.</p>
+            <a href="#produkty" class="btn-action inline-block text-white font-extrabold py-3 px-8 rounded-full shadow-xl transition duration-300 text-lg uppercase tracking-wider">
+                Zobacz Produkty
+            </a>
+        </div>
+
+        <!-- Sekcja Produktów -->
+        <section id="produkty" class="pt-8">
+            <h2 class="text-4xl font-bold mb-12 text-center text-white">NAJNOWSZA LINIA: OD BIELIZNY DO OBUWIA</h2>
+
+            <!-- Siatka Produktów -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+                <!-- Produkty zostaną wstrzyknięte przez JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal/Message Box dla Koszyka -->
+    <div id="message-box" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" onclick="this.classList.add('hidden')">
+        <div class="bg-nasa-blue-dark p-7 sm:p-10 rounded-2xl shadow-2xl max-w-sm w-full transform transition-all duration-300 border border-nasa-red/50" onclick="event.stopPropagation()">
+            <h3 id="message-title" class="text-3xl font-bold mb-3 text-nasa-red">Dodano!</h3>
+            <p id="message-content" class="text-gray-200 mb-6 text-lg">Produkt został dodany do Twojego luksusowego koszyka AstroLuxe.</p>
+            <button onclick="document.getElementById('message-box').classList.add('hidden')" class="w-full btn-action text-white font-extrabold py-3 rounded-xl">
+                Kontynuuj
+            </button>
+        </div>
+    </div>
+
+    <!-- Stopka -->
+    <footer class="bg-nasa-blue-light border-t-4 border-nasa-red/50 mt-20">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-nasa-white/80 text-sm tracking-wide">© 2025 NASA AstroLuxe Drive. Powered by Kosmiczna Inżynieria.</p>
+            <p class="text-nasa-white/60 text-xs mt-1">Luksus i Technologia w Pełnym Spektrum.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Symulacja Danych Produktów dla AstroLuxe Drive
+        const products = [
+            {
+                id: 201,
+                name: "BUTY 'ZERO-G RUNNER'",
+                description: "Ultralekkie sneakersy z amortyzacją 'antygrawitacyjną'. Design inspirowany podwoziem bolidu F1. Maksymalna wydajność.",
+                price: 2199.00,
+                imagePlaceholder: "https://placehold.co/400x300/03045e/f1faee?text=BUTY+SPORTOWE"
+            },
+            {
+                id: 202,
+                name: "CZAPKA 'TELEMETRY CAP'",
+                description: "Czarna czapka z daszkiem wykonana z technicznego materiału. Złoty haft z liniami telemetrii bolidu. Elegancja i funkcja.",
+                price: 399.00,
+                imagePlaceholder: "https://placehold.co/400x300/03045e/f1faee?text=CZAPKA+LOGO"
+            },
+            {
+                id: 103,
+                name: "KAMIZELKA 'APOLLO RACING'",
+                description: "Kamizelka typu puffer, lekka jak tytan. Detale z logo inspirowanym luksusowymi markami samochodowymi. Must-have dla miłośników prędkości.",
+                price: 1499.00,
+                imagePlaceholder: "https://placehold.co/400x300/03045e/f1faee?text=KAMIZELKA+LUX"
+            },
+            {
+                id: 101,
+                name: "LEGGINSY 'HYPERDRIVE'",
+                description: "Aerodynamiczne legginsy z włókien węglowych (imitacja). Inspirowane wyścigami F1 i kombinezonami kosmicznymi. Komfort i szybkość.",
+                price: 799.00,
+                imagePlaceholder: "https://placehold.co/400x300/03045e/f1faee?text=LEGGINSY+HYPER"
+            },
+            {
+                id: 102,
+                name: "STRINGI 'NEBULA'",
+                description: "Delikatne, luksusowe stringi z satynowym wykończeniem. Wzór inspirowany mgławicą. Subtelna moc i elegancja.",
+                price: 299.00,
+                imagePlaceholder: "https://placehold.co/400x300/03045e/f1faee?text=STRINGI+NEBULA"
+            },
+            {
+                id: 203,
+                name: "BUTY 'VELOCITY BOOT'",
+                description: "Buty za kostkę, militarne i luksusowe. Elementy zaczerpnięte z bieżnika opon wyścigowych. Trwałość i ekskluzywność.",
+                price: 2899.00,
+                imagePlaceholder: "https://placehold.co/400x300/03045e/f1faee?text=BOOTS+VELOCITY"
+            },
+            {
+                id: 204,
+                name: "CZAPKA 'MISSION CONTROL'",
+                description: "Minimalistyczna czapka z wełny merino, z dyskretnym, czerwonym akcentem (przycisk 'Start Engine'). Ciepło i styl.",
+                price: 449.00,
+                imagePlaceholder: "https://placehold.co/400x300/03045e/f1faee?text=CZAPKA+CONTROL"
+            },
+            {
+                id: 107,
+                name: "LEGGINSY 'MILKY WAY'",
+                description: "Legginsy z unikalnym, błyszczącym nadrukiem Drogi Mlecznej na czarnym tle. Idealne do luksusowego athleisure.",
+                price: 899.00,
+                imagePlaceholder: "https://placehold.co/400x300/03045e/f1faee?text=LEGGINSY+KOSMOS"
+            }
+        ];
+
+        let cartItems = [];
+
+        // Funkcja do aktualizacji licznika koszyka
+        function updateCartCounter() {
+            const counterElement = document.getElementById('cart-counter');
+            counterElement.textContent = `Koszyk (${cartItems.length})`;
+        }
+
+        // Funkcja do pokazywania wiadomości/modala (zastępuje alert())
+        function showMessage(title, content) {
+            const box = document.getElementById('message-box');
+            document.getElementById('message-title').textContent = title;
+            document.getElementById('message-content').textContent = content;
+            box.classList.remove('hidden');
+        }
+
+        // Funkcja obsługująca dodawanie produktu do koszyka
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                cartItems.push(product);
+                updateCartCounter();
+                showMessage('Dodano do Koszyka', `Luksusowy produkt: ${product.name} został pomyślnie dodany!`);
+            } else {
+                 showMessage('Błąd Systemu', 'Nie można dodać produktu o nieznanym ID.');
+            }
+        }
+
+        // Funkcja symulująca pokazanie koszyka
+        function showCartMessage() {
+            if (cartItems.length === 0) {
+                showMessage('Twój Koszyk (AstroLuxe)', 'Twój ekskluzywny koszyk jest pusty. Odkryj fuzję Mody i Inżynierii!');
+            } else {
+                const total = cartItems.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+                const content = `Masz ${cartItems.length} luksusowych przedmiotów w koszyku. Całkowita wartość: ${total} PLN. (To jest tylko symulacja transakcji.)`;
+                showMessage('Twój Koszyk (AstroLuxe)', content);
+            }
+        }
+
+
+        // Funkcja renderująca karty produktów
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map(product => `
+                <div class="product-card rounded-2xl shadow-2xl overflow-hidden flex flex-col justify-between border-2 border-nasa-red/50">
+                    <!-- Obrazek (placeholder) -->
+                    <img src="${product.imagePlaceholder}" alt="${product.name}" onerror="this.src='https://placehold.co/400x300/03045e/f1faee?text=AstroLuxe'" class="w-full h-56 object-cover object-center border-b border-nasa-blue-dark">
+
+                    <div class="p-6 flex flex-col flex-grow">
+                        <!-- Nazwa -->
+                        <h3 class="text-xl font-bold mb-2 text-nasa-white tracking-wider">${product.name}</h3>
+                        <!-- Opis -->
+                        <p class="text-sm text-nasa-white/70 flex-grow mb-5">${product.description}</p>
+                        <!-- Cena i Akcja -->
+                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-nasa-blue-dark">
+                            <span class="text-2xl font-black text-nasa-white">${product.price.toFixed(2)} PLN</span>
+                            <!-- Przycisk dodania do koszyka -->
+                            <button onclick="addToCart(${product.id})" class="btn-action text-white font-bold py-2.5 px-5 rounded-lg shadow-xl transition duration-150 text-sm uppercase tracking-wide">
+                                Kup LUX
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Uruchomienie renderowania po załadowaniu strony
+        window.onload = renderProducts;
+
+    </script>
+</body>
+</html>

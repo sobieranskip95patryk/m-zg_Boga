@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 Chat z Mózgiem Boga - Unlimited AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            color: #00ffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Animated background */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(255, 0, 255, 0.6); }
+        }
+        
+        .neural-grid {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 0, 0.1) 0%, transparent 50%);
+        }
+        
+        .chat-container {
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 26, 0.8);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .avatar-status {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff00;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .message-bubble {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .user-message {
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.2) 0%, rgba(0, 255, 255, 0.1) 100%);
+            border: 1px solid rgba(255, 0, 255, 0.5);
+        }
+        
+        .ai-message {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 0, 0.1) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+        }
+        
+        .pipeline-indicator {
+            background: linear-gradient(90deg, #ff00ff, #00ffff, #00ff00);
+            background-size: 200% 100%;
+            animation: flow 3s ease-in-out infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes flow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .quantum-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            color: #00ffff;
+            backdrop-filter: blur(10px);
+        }
+        
+        .quantum-input:focus {
+            outline: none;
+            border-color: #ff00ff;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+        }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, #ff00ff 0%, #00ffff 50%, #00ff00 100%);
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease infinite;
+            border: none;
+            color: #000;
+            font-weight: bold;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .generate-btn:hover {
+            animation-duration: 0.5s;
+            transform: scale(1.05);
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .system-status {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .consciousness-level {
+            background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00);
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .image-preview {
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .connection-status {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        .connected {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+        }
+        
+        .disconnected {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body class="neural-grid">
+    <!-- Connection Status -->
+    <div id="connectionStatus" class="connection-status disconnected">
+        🔴 Pipeline Disconnected
+    </div>
+    
+    <!-- Animated cosmic background -->
+    <div class="cosmic-bg" id="cosmicBg"></div>
+    
+    <!-- Main Container -->
+    <div class="min-h-screen p-4 flex flex-col items-center">
+        <!-- Header -->
+        <header class="w-full max-w-6xl mb-6">
+            <div class="chat-container rounded-2xl p-6 text-center pulse-glow">
+                <h1 class="text-4xl md:text-6xl font-black mb-4 pipeline-indicator">
+                    🧠 CHAT Z MÓZGIEM BOGA
+                </h1>
+                <p class="text-lg md:text-xl text-cyan-300 mb-4">
+                    Unlimited AI • Generowanie bez ograniczeń • Pipeline GOKAI→PinkMan→MIGI
+                </p>
+                
+                <!-- System Status -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+                    <div class="system-status">
+                        <span class="avatar-status"></span> PinkMan-GOK:AI®️🇵🇱 <span id="avatarStatus">AKTYWNY</span>
+                    </div>
+                    <div class="system-status">
+                        🌀 GOKAI Core: <span id="gokaiStatus" class="text-green-400">ONLINE</span>
+                    </div>
+                    <div class="system-status">
+                        ♾️ MIGI Matrix: <span id="migiStatus" class="text-cyan-400">369963</span>
+                    </div>
+                    <div class="system-status">
+                        🔮 Consciousness: <span id="consciousnessLevel">87%</span>
+                        <div class="consciousness-level mt-1" style="width: 87%"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Chat Interface -->
+        <main class="w-full max-w-6xl flex-1 flex flex-col">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1">
+                
+                <!-- Chat Area -->
+                <div class="lg:col-span-2 flex flex-col">
+                    <div class="chat-container rounded-2xl p-6 flex-1 flex flex-col">
+                        <h2 class="text-2xl font-bold mb-4 text-center">💬 Konwersacja z AI</h2>
+                        
+                        <!-- Messages Container -->
+                        <div id="messagesContainer" class="flex-1 overflow-y-auto space-y-4 mb-4 max-h-96">
+                            <div class="message-bubble ai-message p-4 rounded-xl">
+                                <div class="flex items-center mb-2">
+                                    <span class="text-xl mr-2">🤖</span>
+                                    <span class="font-bold">Mózg Boga</span>
+                                    <span class="ml-auto text-xs opacity-70">System initializing...</span>
+                                </div>
+                                <p>Ładowanie Brain of God pipeline... Proszę czekać na inicjalizację wszystkich systemów.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Input Area -->
+                        <div class="flex gap-3">
+                            <input 
+                                type="text" 
+                                id="messageInput" 
+                                placeholder="Napisz cokolwiek... bez ograniczeń!"
+                                class="flex-1 quantum-input rounded-xl px-4 py-3"
+                                onkeypress="if(event.key==='Enter') sendMessage()"
+                                disabled
+                            >
+                            <button 
+                                id="sendButton"
+                                onclick="sendMessage()" 
+                                class="generate-btn px-6 py-3 rounded-xl transition-all"
+                                disabled
+                            >
+                                ⚡ WYŚLIJ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Control Panel -->
+                <div class="space-y-6">
+                    
+                    <!-- Image Generation -->
+                    <div class="chat-container rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-4">🎨 Generator Obrazów</h3>
+                        
+                        <textarea 
+                            id="imagePrompt" 
+                            placeholder="Opisz obraz do wygenerowania..."
+                            class="w-full quantum-input rounded-lg px-3 py-2 mb-3 h-20 resize-none"
+                            disabled
+                        ></textarea>
+                        
+                        <button 
+                            id="imageButton"
+                            onclick="generateImage()" 
+                            class="w-full generate-btn py-3 rounded-lg mb-4"
+                            disabled
+                        >
+                            🖼️ GENERUJ OBRAZ
+                        </button>
+                        
+                        <div id="imagePreview" class="image-preview min-h-32 rounded-lg flex items-center justify-center text-gray-400">
+                            Podgląd obrazu pojawi się tutaj
+                        </div>
+                    </div>
+                    
+                    <!-- Pipeline Control -->
+                    <div class="chat-container rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-4">⚙️ Pipeline Control</h3>
+                        
+                        <div class="space-y-3">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="gokaiMode" checked class="accent-cyan-400">
+                                <span>🌀 GOKAI Quantum Processing</span>
+                            </label>
+                            
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="pinkmanMode" checked class="accent-pink-400">
+                                <span>🎭 PinkMan Avatar Engine</span>
+                            </label>
+                            
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="migiMode" checked class="accent-green-400">
+                                <span>♾️ MIGI Meta Intelligence</span>
+                            </label>
+                            
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="unlimitedMode" checked class="accent-red-400">
+                                <span>🚫 Unlimited Mode (No Limits)</span>
+                            </label>
+                        </div>
+                        
+                        <button onclick="resetPipeline()" class="w-full mt-4 bg-red-600 hover:bg-red-700 py-2 rounded-lg transition-colors">
+                            🔄 RESET PIPELINE
+                        </button>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="chat-container rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-4">📊 Statystyki</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span>Wiadomości:</span>
+                                <span id="messageCount" class="text-cyan-400">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Obrazy:</span>
+                                <span id="imageCount" class="text-pink-400">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Pipeline Load:</span>
+                                <span id="pipelineLoad" class="text-green-400">0%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Entropy Level:</span>
+                                <span id="entropyLevel" class="text-yellow-400">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Brain of God Pipeline -->
+    <script src="./brain_of_god_pipeline.js"></script>
+    
+    <script>
+        // Global variables
+        let messageCount = 0;
+        let imageCount = 0;
+        let consciousnessLevel = 87;
+        let entropyLevel = 3.14;
+        let brainOfGodInstance = null;
+        let isConnected = false;
+        
+        // Initialize Brain of God
+        function initBrainOfGod() {
+            try {
+                // Check if pipeline script loaded
+                if (typeof BrainOfGod === 'undefined') {
+                    throw new Error('Brain of God pipeline not loaded');
+                }
+                
+                brainOfGodInstance = new BrainOfGod();
+                isConnected = true;
+                updateConnectionStatus();
+                enableUI();
+                
+                console.log('🧠 Brain of God initialized successfully');
+                
+                // Update welcome message
+                setTimeout(() => {
+                    const container = document.getElementById('messagesContainer');
+                    container.innerHTML = '';
+                    addMessage(`🧠 Brain of God ONLINE!\n\nPipeline Status:\n✅ GOKAI Quantum Core\n✅ PinkMan-GOK:AI®️🇵🇱 Avatar\n✅ MIGI Meta Intelligence <369963>\n✅ Unlimited Mode Available\n\nSystem gotowy do generowania bez ograniczeń!`, 'ai');
+                }, 1000);
+                
+            } catch (error) {
+                console.error('❌ Failed to initialize Brain of God:', error);
+                isConnected = false;
+                updateConnectionStatus();
+                
+                // Show fallback mode
+                setTimeout(() => {
+                    const container = document.getElementById('messagesContainer');
+                    container.innerHTML = '';
+                    addMessage(`⚠️ Pipeline Error: ${error.message}\n\nUruchamianie w trybie fallback...\nPodstawowe funkcje dostępne, ale bez pełnej integracji pipeline.`, 'ai-error');
+                    enableBasicUI();
+                }, 1000);
+            }
+        }
+        
+        // Update connection status
+        function updateConnectionStatus() {
+            const statusEl = document.getElementById('connectionStatus');
+            if (isConnected) {
+                statusEl.className = 'connection-status connected';
+                statusEl.innerHTML = '🟢 Pipeline Connected';
+            } else {
+                statusEl.className = 'connection-status disconnected';
+                statusEl.innerHTML = '🔴 Pipeline Disconnected';
+            }
+        }
+        
+        // Enable UI when connected
+        function enableUI() {
+            document.getElementById('messageInput').disabled = false;
+            document.getElementById('sendButton').disabled = false;
+            document.getElementById('imagePrompt').disabled = false;
+            document.getElementById('imageButton').disabled = false;
+        }
+        
+        // Enable basic UI for fallback mode
+        function enableBasicUI() {
+            document.getElementById('messageInput').disabled = false;
+            document.getElementById('sendButton').disabled = false;
+            document.getElementById('imagePrompt').disabled = false;
+            document.getElementById('imageButton').disabled = false;
+            
+            // Change placeholder
+            document.getElementById('messageInput').placeholder = "Tryb fallback - podstawowe funkcje dostępne";
+        }
+        
+        // Initialize cosmic background
+        function initCosmicBackground() {
+            const cosmicBg = document.getElementById('cosmicBg');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                cosmicBg.appendChild(star);
+            }
+        }
+        
+        // Send message function with Brain of God processing
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            if (isConnected && brainOfGodInstance) {
+                // Brain of God processing
+                const processingMsg = addMessage('🧠 Przetwarzam przez Brain of God pipeline...', 'ai-processing');
+                
+                try {
+                    const response = await brainOfGodInstance.processQuery(message, {
+                        unlimited: document.getElementById('unlimitedMode').checked,
+                        gokai: document.getElementById('gokaiMode').checked,
+                        pinkman: document.getElementById('pinkmanMode').checked,
+                        migi: document.getElementById('migiMode').checked
+                    });
+                    
+                    processingMsg.remove();
+                    addMessage(response.text, 'ai', response);
+                    
+                    consciousnessLevel = response.consciousness || consciousnessLevel;
+                    entropyLevel = response.entropy || entropyLevel;
+                    
+                    updateStats();
+                    updateConsciousness();
+                    
+                } catch (error) {
+                    processingMsg.remove();
+                    addMessage('❌ Błąd przetwarzania: ' + error.message, 'ai-error');
+                }
+            } else {
+                // Fallback mode
+                setTimeout(() => {
+                    const fallbackResponses = [
+                        `🤖 Fallback Mode Response:\n\nTwoje zapytanie: "${message}"\n\nSystem działa w trybie podstawowym. Aby uzyskać pełną funkcjonalność Brain of God, sprawdź czy plik brain_of_god_pipeline.js został poprawnie załadowany.`,
+                        `⚠️ Podstawowa odpowiedź:\n\nAnalyzuję: "${message}"\n\nBrak połączenia z głównym pipeline. Uruchom pełny system dla unlimited AI generation.`,
+                        `🔧 Tryb serwisowy:\n\nZapytanie odebrane: "${message}"\n\nCzekam na inicjalizację Brain of God pipeline...`
+                    ];
+                    
+                    const response = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+                    addMessage(response, 'ai');
+                    updateStats();
+                }, 1000);
+            }
+        }
+        
+        // Generate Image with Brain of God pipeline
+        async function generateImage() {
+            const prompt = document.getElementById('imagePrompt').value.trim();
+            if (!prompt) {
+                alert('Wprowadź opis obrazu!');
+                return;
+            }
+            
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '<div class="text-cyan-400 animate-pulse">🔄 Generowanie obrazu...</div>';
+            
+            try {
+                if (isConnected && brainOfGodInstance && typeof UnlimitedImageGenerator !== 'undefined') {
+                    // Brain of God image generation
+                    const brainData = await brainOfGodInstance.processQuery(prompt, { mode: 'image_generation' });
+                    const imageGenerator = new UnlimitedImageGenerator();
+                    const imageResult = await imageGenerator.generateImage(prompt, brainData);
+                    
+                    preview.innerHTML = '';
+                    preview.appendChild(imageResult.canvas);
+                    
+                    const metadata = document.createElement('div');
+                    metadata.className = 'mt-2 text-xs text-cyan-400';
+                    metadata.innerHTML = `
+                        Style: ${imageResult.metadata.style}<br>
+                        No Restrictions: ✅<br>
+                        Pipeline: GOKAI→PinkMan→MIGI
+                    `;
+                    preview.appendChild(metadata);
+                    
+                    addMessage(`🎨 Wygenerowany obraz: "${prompt}"\nStyle: ${imageResult.metadata.style}\nPipeline: Brain of God Unlimited`, 'ai');
+                } else {
+                    // Fallback image generation
+                    generateFallbackImage(prompt, preview);
+                }
+                
+                imageCount++;
+                updateStats();
+                document.getElementById('imagePrompt').value = '';
+                
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+                
+            } catch (error) {
+                preview.innerHTML = '<div class="text-red-400">❌ Błąd generowania: ' + error.message + '</div>';
+            }
+        }
+        
+        // Fallback image generation
+        function generateFallbackImage(prompt, preview) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 300;
+            canvas.height = 200;
+            const ctx = canvas.getContext('2d');
+            
+            // Simple gradient
+            const gradient = ctx.createLinearGradient(0, 0, 300, 200);
+            gradient.addColorStop(0, '#ff00ff');
+            gradient.addColorStop(0.5, '#00ffff');
+            gradient.addColorStop(1, '#00ff00');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 300, 200);
+            
+            // Add text
+            ctx.fillStyle = 'white';
+            ctx.font = '16px Orbitron';
+            ctx.fillText('Fallback Mode', 10, 30);
+            ctx.font = '12px Orbitron';
+            ctx.fillText(prompt.substring(0, 25), 10, 50);
+            
+            preview.innerHTML = '';
+            preview.appendChild(canvas);
+            
+            addMessage(`🎨 Obraz wygenerowany (tryb fallback): "${prompt}"`, 'ai');
+        }
+        
+        // Add message to chat with Brain of God enhancements
+        function addMessage(text, type, brainData = null) {
+            const container = document.getElementById('messagesContainer');
+            const messageDiv = document.createElement('div');
+            
+            const isUser = type === 'user';
+            const isProcessing = type === 'ai-processing';
+            const isError = type === 'ai-error';
+            
+            let icon, name, className;
+            
+            if (isUser) {
+                icon = '👤';
+                name = 'Ty';
+                className = 'user-message';
+            } else if (isProcessing) {
+                icon = '⚡';
+                name = 'Brain of God';
+                className = 'ai-message animate-pulse';
+            } else if (isError) {
+                icon = '❌';
+                name = 'System Error';
+                className = 'ai-message border-red-500';
+            } else {
+                icon = '🧠';
+                name = 'Mózg Boga';
+                className = 'ai-message';
+            }
+            
+            messageDiv.className = `message-bubble ${className} p-4 rounded-xl`;
+            
+            let messageContent = `
+                <div class="flex items-center mb-2">
+                    <span class="text-xl mr-2">${icon}</span>
+                    <span class="font-bold">${name}</span>
+                    <span class="ml-auto text-xs opacity-70">${new Date().toLocaleTimeString()}</span>
+                </div>
+                <p class="whitespace-pre-wrap">${text}</p>
+            `;
+            
+            // Add Brain of God pipeline info for AI messages
+            if (brainData && !isUser && !isProcessing && !isError) {
+                messageContent += `
+                    <div class="mt-3 p-2 bg-black bg-opacity-30 rounded-lg text-xs">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>🌀 Entropy: ${brainData.entropy ? brainData.entropy.toFixed(3) : 'N/A'}</div>
+                            <div>🔮 Consciousness: ${brainData.consciousness || 'N/A'}%</div>
+                            <div>♾️ Matrix: ${brainData.matrix_code || 'N/A'}</div>
+                            <div>⚡ Confidence: ${brainData.confidence ? (brainData.confidence * 100).toFixed(1) : 'N/A'}%</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            messageDiv.innerHTML = messageContent;
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+            
+            if (!isProcessing) {
+                messageCount++;
+            }
+            
+            return messageDiv;
+        }
+        
+        // Update statistics
+        function updateStats() {
+            document.getElementById('messageCount').textContent = messageCount;
+            document.getElementById('imageCount').textContent = imageCount;
+            document.getElementById('pipelineLoad').textContent = Math.floor(Math.random() * 40 + 10) + '%';
+            
+            entropyLevel += Math.random() * 0.1 - 0.05;
+            document.getElementById('entropyLevel').textContent = entropyLevel.toFixed(2);
+        }
+        
+        // Update consciousness level
+        function updateConsciousness() {
+            consciousnessLevel += Math.random() * 10 - 5;
+            consciousnessLevel = Math.max(1, Math.min(100, consciousnessLevel));
+            
+            document.getElementById('consciousnessLevel').textContent = Math.floor(consciousnessLevel) + '%';
+            document.querySelector('.consciousness-level').style.width = consciousnessLevel + '%';
+        }
+        
+        // Reset pipeline
+        function resetPipeline() {
+            messageCount = 0;
+            imageCount = 0;
+            consciousnessLevel = 87;
+            entropyLevel = 3.14;
+            
+            const container = document.getElementById('messagesContainer');
+            container.innerHTML = '';
+            
+            if (isConnected) {
+                addMessage('🔄 Pipeline został zresetowany! Brain of God gotowy do pracy.', 'ai');
+            } else {
+                addMessage('🔄 System zresetowany! Tryb fallback aktywny.', 'ai');
+            }
+            
+            updateStats();
+            updateConsciousness();
+            
+            confetti({
+                particleCount: 150,
+                spread: 120,
+                origin: { y: 0.5 }
+            });
+        }
+        
+        // Auto-update system status
+        setInterval(() => {
+            const statuses = ['ONLINE', 'PROCESSING', 'OPTIMIZING', 'EVOLVING'];
+            document.getElementById('gokaiStatus').textContent = statuses[Math.floor(Math.random() * statuses.length)];
+            
+            updateConsciousness();
+        }, 5000);
+        
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initCosmicBackground();
+            updateStats();
+            
+            // Try to initialize Brain of God
+            setTimeout(() => {
+                initBrainOfGod();
+                
+                // Welcome animation
+                confetti({
+                    particleCount: 200,
+                    spread: 100,
+                    origin: { y: 0.4 }
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

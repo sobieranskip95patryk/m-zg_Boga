@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administratora - Rocket Fuell Girls</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            /* Ultra-modern color palette */
+            --neon-pink: #ff0080;
+            --electric-purple: #8a2be2;
+            --cyber-blue: #00d4ff;
+            --matrix-green: #00ff88;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050508;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --success: #00ff88;
+            --danger: #ff0040;
+            --warning: #ffaa00;
+            --muted: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Roboto', system-ui, sans-serif;
+            background: 
+                linear-gradient(135deg, var(--dark-bg), var(--darker-bg)),
+                radial-gradient(circle at 20% 80%, rgba(255, 0, 128, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            min-height: 100vh;
+            font-size: 14px;
+        }
+
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            background: linear-gradient(45deg, var(--neon-pink), var(--cyber-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8em;
+            font-weight: 700;
+            text-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--cyber-blue), var(--matrix-green));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(255, 0, 128, 0.2);
+            border-color: var(--neon-pink);
+        }
+
+        .stat-card h3 {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-pink), var(--cyber-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(255, 0, 128, 0.3);
+        }
+
+        .pending-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, var(--neon-pink), var(--cyber-blue)) 1;
+        }
+
+        .section-header h2 {
+            background: linear-gradient(45deg, var(--neon-pink), var(--electric-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(45deg, var(--cyber-blue), var(--electric-purple));
+            color: var(--text-primary);
+            border: 2px solid var(--glass-border);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .refresh-btn:hover {
+            background: linear-gradient(45deg, var(--neon-pink), var(--cyber-blue));
+            border-color: var(--neon-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 0, 128, 0.3);
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .photo-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--cyber-blue), var(--matrix-green));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 48px rgba(255, 0, 128, 0.2);
+            border-color: var(--neon-pink);
+        }
+
+        .photo-card:hover::before {
+            opacity: 1;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .photo-card:hover img {
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        .photo-info {
+            padding: 1.5rem;
+        }
+
+        .photo-info h4 {
+            background: linear-gradient(45deg, var(--neon-pink), var(--cyber-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.8rem;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .photo-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+
+        .photo-meta div {
+            margin-bottom: 0.4rem;
+            padding: 0.2rem 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-approve {
+            background: linear-gradient(45deg, var(--matrix-green), #00cc70);
+            color: var(--text-primary);
+            border-color: var(--matrix-green);
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.2);
+        }
+
+        .btn-approve:hover {
+            background: linear-gradient(45deg, #00ff88, var(--matrix-green));
+            border-color: var(--matrix-green);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
+            text-shadow: 0 0 10px var(--matrix-green);
+        }
+
+        .btn-reject {
+            background: linear-gradient(45deg, var(--danger), #ff1060);
+            color: var(--text-primary);
+            border-color: var(--danger);
+            box-shadow: 0 4px 15px rgba(255, 0, 64, 0.2);
+        }
+
+        .btn-reject:hover {
+            background: linear-gradient(45deg, #ff0040, var(--danger));
+            border-color: var(--danger);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 0, 64, 0.3);
+            text-shadow: 0 0 10px var(--danger);
+        }
+
+        .btn-view {
+            background: linear-gradient(45deg, var(--neon-pink), var(--electric-purple));
+            color: var(--text-primary);
+            border-color: var(--neon-pink);
+            flex: 1;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 0, 128, 0.2);
+        }
+
+        .btn-view:hover {
+            background: linear-gradient(45deg, var(--electric-purple), var(--cyber-blue));
+            border-color: var(--electric-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+            text-shadow: 0 0 10px var(--electric-purple);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--muted);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            background: var(--card);
+            border-radius: 10px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
+        .modal img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem;
+            border-radius: 5px;
+            color: white;
+            z-index: 1001;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success { background: var(--success); }
+        .notification.error { background: var(--danger); }
+        .notification.info { background: var(--accent); }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .photos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-rocket"></i> Panel Administratora - Rocket Fuell Girls</h1>
+    </div>
+
+    <div class="container">
+        <!-- Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Oczekujące na moderację</h3>
+                <div class="number" id="pending-count">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Zatwierdzone zdjęcia</h3>
+                <div class="number" id="approved-count">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Łączne wyświetlenia</h3>
+                <div class="number" id="total-views">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Zarejestrowani użytkownicy</h3>
+                <div class="number" id="total-users">-</div>
+            </div>
+        </div>
+
+        <!-- Pending Photos Section -->
+        <div class="pending-section">
+            <div class="section-header">
+                <h2><i class="fas fa-clock"></i> Zdjęcia oczekujące na moderację</h2>
+                <button class="refresh-btn" onclick="loadPendingPhotos()">
+                    <i class="fas fa-sync-alt"></i> Odśwież
+                </button>
+            </div>
+            
+            <div id="photos-container">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Ładowanie...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Modal -->
+    <div id="photo-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        let pendingPhotos = [];
+
+        // Load initial data
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStats();
+            loadPendingPhotos();
+            
+            // Setup modal
+            const modal = document.getElementById('photo-modal');
+            const closeBtn = document.querySelector('.modal-close');
+            
+            closeBtn.onclick = () => modal.style.display = 'none';
+            window.onclick = (e) => {
+                if (e.target === modal) modal.style.display = 'none';
+            };
+        });
+
+        async function loadStats() {
+            try {
+                // Load pending count
+                const pendingResponse = await fetch('/api/admin/pending');
+                const pendingData = await pendingResponse.json();
+                document.getElementById('pending-count').textContent = pendingData.length;
+
+                // Load approved photos count
+                const approvedResponse = await fetch('/api/photos?limit=1');
+                const approvedData = await approvedResponse.json();
+                document.getElementById('approved-count').textContent = approvedData.total || 0;
+
+                // Calculate total views (would need separate API endpoint)
+                document.getElementById('total-views').textContent = '—';
+                document.getElementById('total-users').textContent = '—';
+
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        async function loadPendingPhotos() {
+            const container = document.getElementById('photos-container');
+            container.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Ładowanie...</div>';
+
+            try {
+                const response = await fetch('/api/admin/pending');
+                const photos = await response.json();
+                pendingPhotos = photos;
+
+                if (photos.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>Brak zdjęć do moderacji</h3>
+                            <p>Wszystkie przesłane zdjęcia zostały zmoderowane.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const photosGrid = document.createElement('div');
+                photosGrid.className = 'photos-grid';
+
+                photos.forEach(photo => {
+                    const photoCard = createPhotoCard(photo);
+                    photosGrid.appendChild(photoCard);
+                });
+
+                container.innerHTML = '';
+                container.appendChild(photosGrid);
+
+                // Update pending count
+                document.getElementById('pending-count').textContent = photos.length;
+
+            } catch (error) {
+                console.error('Error loading pending photos:', error);
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Błąd ładowania</h3>
+                        <p>Nie udało się załadować zdjęć do moderacji.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function createPhotoCard(photo) {
+            const card = document.createElement('div');
+            card.className = 'photo-card';
+            card.innerHTML = `
+                <img src="${photo.thumb}" alt="${photo.caption || 'Brak opisu'}" loading="lazy">
+                <div class="photo-info">
+                    <h4>${escapeHtml(photo.author || 'Anonymous')}</h4>
+                    <div class="photo-meta">
+                        <div><i class="fas fa-quote-left"></i> ${escapeHtml(photo.caption || 'Brak opisu')}</div>
+                        <div><i class="fas fa-envelope"></i> ${escapeHtml(photo.author_email || 'Brak email')}</div>
+                        ${photo.height ? `<div><i class="fas fa-ruler-vertical"></i> Wzrost: ${photo.height}cm</div>` : ''}
+                        ${photo.location ? `<div><i class="fas fa-map-marker-alt"></i> ${escapeHtml(photo.location)}</div>` : ''}
+                        <div><i class="fas fa-calendar"></i> ${new Date(photo.created_at).toLocaleString()}</div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-view" onclick="viewPhoto(${photo.id})">
+                            <i class="fas fa-eye"></i> Zobacz
+                        </button>
+                        <button class="btn btn-approve" onclick="approvePhoto(${photo.id})">
+                            <i class="fas fa-check"></i> Zatwierdź
+                        </button>
+                        <button class="btn btn-reject" onclick="rejectPhoto(${photo.id})">
+                            <i class="fas fa-times"></i> Odrzuć
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        function viewPhoto(photoId) {
+            const photo = pendingPhotos.find(p => p.id === photoId);
+            if (!photo) return;
+
+            const modal = document.getElementById('photo-modal');
+            const modalBody = document.getElementById('modal-body');
+            
+            modalBody.innerHTML = `
+                <img src="${photo.url}" alt="${photo.caption || 'Brak opisu'}">
+                <h3>${escapeHtml(photo.author || 'Anonymous')}</h3>
+                <p><strong>Email:</strong> ${escapeHtml(photo.author_email || 'Brak email')}</p>
+                ${photo.caption ? `<p><strong>Opis:</strong> ${escapeHtml(photo.caption)}</p>` : ''}
+                ${photo.height ? `<p><strong>Wzrost:</strong> ${photo.height}cm</p>` : ''}
+                ${photo.location ? `<p><strong>Lokalizacja:</strong> ${escapeHtml(photo.location)}</p>` : ''}
+                <p><strong>Data przesłania:</strong> ${new Date(photo.created_at).toLocaleString()}</p>
+                <div style="margin-top: 1rem;">
+                    <button class="btn btn-approve" onclick="approvePhoto(${photo.id}); document.getElementById('photo-modal').style.display='none';">
+                        <i class="fas fa-check"></i> Zatwierdź
+                    </button>
+                    <button class="btn btn-reject" onclick="rejectPhoto(${photo.id}); document.getElementById('photo-modal').style.display='none';">
+                        <i class="fas fa-times"></i> Odrzuć
+                    </button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        async function approvePhoto(photoId) {
+            try {
+                const response = await fetch(`/api/admin/approve/${photoId}`, {
+                    method: 'POST'
+                });
+                const result = await response.json();
+
+                if (response.ok) {
+                    showNotification('Zdjęcie zostało zatwierdzone', 'success');
+                    loadPendingPhotos();
+                    loadStats();
+                } else {
+                    showNotification(result.error || 'Błąd podczas zatwierdzania', 'error');
+                }
+            } catch (error) {
+                console.error('Error approving photo:', error);
+                showNotification('Błąd połączenia z serwerem', 'error');
+            }
+        }
+
+        async function rejectPhoto(photoId) {
+            if (!confirm('Czy na pewno chcesz odrzucić to zdjęcie? Zostanie ono trwale usunięte.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/admin/reject/${photoId}`, {
+                    method: 'DELETE'
+                });
+                const result = await response.json();
+
+                if (response.ok) {
+                    showNotification('Zdjęcie zostało odrzucone i usunięte', 'success');
+                    loadPendingPhotos();
+                    loadStats();
+                } else {
+                    showNotification(result.error || 'Błąd podczas odrzucania', 'error');
+                }
+            } catch (error) {
+                console.error('Error rejecting photo:', error);
+                showNotification('Błąd połączenia z serwerem', 'error');
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check' : type === 'error' ? 'fa-times' : 'fa-info'}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            loadPendingPhotos();
+            loadStats();
+        }, 30000);
+    </script>
+</body>
+</html>

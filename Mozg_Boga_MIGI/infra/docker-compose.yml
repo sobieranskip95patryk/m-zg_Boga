@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ../core
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ../core:/app
+    networks:
+      - app-network
+
+  vector_db:
+    image: qdrant/qdrant
+    ports:
+      - "6333:6333"
+    networks:
+      - app-network
+
+  knowledge_graph:
+    build:
+      context: ../knowledge_graph
+      dockerfile: Dockerfile
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local

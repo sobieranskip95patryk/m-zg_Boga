@@ -1,0 +1,13 @@
+MIT License
+
+Copyright (c) 2025 Patryk Sobierański Meta-Geniusz-GOK
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction...
+
+[Pełna treść licencji MIT dostępna na https://opensource.org/licenses/MIT]
+
+Ważne uwagi
+
+Obraz MIGI_Command_Center_UI.png: Jeśli nie masz wygenerowanego obrazu, pobierz placeholder (np. z https://via.placeholder.com/800x400) i nazwij go MIGI_Command_Center_UI.png, wstawiając do assets/images/. Idealnie, użyj wcześniej wygenerowanego obrazu z promptu.
+Konfiguracja generate.py: Aby skrypt działał, skonfiguruj poświadczenia Google Cloud (np. plik service-account.json w folderze projektu i zmienna środowiskowa GOOGLE_APPLICATION_CREDENTIALS).
+Testowanie: Uruchom index.html w przeglądarce, aby zweryfikować działanie. Skrypt generate.py wymaga środowiska Pythona z biblioteką google-generative-ai.

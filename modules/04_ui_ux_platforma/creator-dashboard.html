@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hip-Hop Universe - Creator Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/creator-dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="creator-dashboard">
+    <!-- Sidebar Navigation -->
+    <aside class="creator-sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">🧠 HHU</h2>
+            <span class="creator-badge">Creator Zone</span>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#dashboard" class="sidebar-link active">
+                <span class="link-icon">📊</span>
+                Dashboard
+            </a>
+            <a href="#profile" class="sidebar-link">
+                <span class="link-icon">👤</span>
+                Mój Profil
+            </a>
+            <a href="#creative-rooms" class="sidebar-link">
+                <span class="link-icon">🎵</span>
+                Kreatywne Pokoje
+            </a>
+            <a href="#marketplace" class="sidebar-link">
+                <span class="link-icon">💎</span>
+                Marketplace
+            </a>
+            <a href="#analytics" class="sidebar-link">
+                <span class="link-icon">📈</span>
+                Analityka
+            </a>
+            <a href="#collaborations" class="sidebar-link">
+                <span class="link-icon">🤝</span>
+                Współprace
+            </a>
+            <a href="#tokens" class="sidebar-link">
+                <span class="link-icon">🪙</span>
+                Moje Tokeny
+            </a>
+            <a href="#learning" class="sidebar-link">
+                <span class="link-icon">🎓</span>
+                Centrum Nauki
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="creator-info">
+                <div class="creator-avatar">
+                    <img src="../assets/images/default-avatar.jpg" alt="Creator Avatar" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM4QjVDRjYiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSI4IiB5PSI4Ij4KPHBhdGggZD0iTTEyIDEyQzE0LjIwOTEgMTIgMTYgMTAuMjA5MSAxNiA4QzE2IDUuNzkwODYgMTQuMjA5MSA0IDEyIDRDOS43OTA4NiA0IDggNS43OTA4NiA4IDhDOCAxMC4yMDkxIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMTRDOC42ODYyOSAxNCAwIDEzLjMxMzcgMCAyMEMwIDIwIDQgMjAgMTIgMjBDMjAgMjAgMjQgMjAgMjQgMjBDMjQgMTMuMzEzNyAxNS4zMTM3IDE0IDEyIDE0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo='">
+                </div>
+                <div class="creator-details">
+                    <span class="creator-name">MC Creator</span>
+                    <span class="creator-type">Rapper / Producer</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="creator-main">
+        <!-- Top Header -->
+        <header class="creator-header">
+            <div class="header-left">
+                <h1 class="page-title">Dashboard</h1>
+                <p class="page-subtitle">Zarządzaj swoją karierą hip-hopową</p>
+            </div>
+            <div class="header-right">
+                <button class="btn-secondary" onclick="togglePublicView()">
+                    <span class="btn-icon">👁️</span>
+                    Widok Publiczny
+                </button>
+                <button class="btn-primary" onclick="createNewProject()">
+                    <span class="btn-icon">➕</span>
+                    Nowy Projekt
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            
+            <!-- Stats Cards -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">2,847</h3>
+                            <p class="stat-label">Obserwujący</p>
+                            <span class="stat-change positive">+12% tym miesiącu</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">🪙</div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">156</h3>
+                            <p class="stat-label">Tokeny w Obiegu</p>
+                            <span class="stat-change positive">+8% tym tygodniu</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">$3,240</h3>
+                            <p class="stat-label">Miesięczny Dochód</p>
+                            <span class="stat-change positive">+25% vs. poprzedni</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">🎵</div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">43</h3>
+                            <p class="stat-label">Utwory w Portfolio</p>
+                            <span class="stat-change neutral">3 w tym miesiącu</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Content Grid -->
+            <div class="content-grid">
+                
+                <!-- Active Projects -->
+                <section class="content-card projects-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Aktywne Projekty</h2>
+                        <button class="btn-ghost">Zobacz wszystkie</button>
+                    </div>
+                    <div class="projects-list">
+                        <div class="project-item">
+                            <div class="project-info">
+                                <h3 class="project-title">Nowy Album "Urban Dreams"</h3>
+                                <p class="project-status">W trakcie nagrań</p>
+                                <div class="project-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%"></div>
+                                    </div>
+                                    <span class="progress-text">65% ukończenia</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <button class="btn-small">Otwórz</button>
+                            </div>
+                        </div>
+                        
+                        <div class="project-item">
+                            <div class="project-info">
+                                <h3 class="project-title">Teledysk "City Lights"</h3>
+                                <p class="project-status">Post-produkcja</p>
+                                <div class="project-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 80%"></div>
+                                    </div>
+                                    <span class="progress-text">80% ukończenia</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <button class="btn-small">Otwórz</button>
+                            </div>
+                        </div>
+                        
+                        <div class="project-item">
+                            <div class="project-info">
+                                <h3 class="project-title">Kolaboracja z DJ Storm</h3>
+                                <p class="project-status">Planowanie</p>
+                                <div class="project-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 25%"></div>
+                                    </div>
+                                    <span class="progress-text">25% ukończenia</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <button class="btn-small">Otwórz</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Activity -->
+                <section class="content-card activity-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Ostatnia Aktywność</h2>
+                        <button class="btn-ghost">Historia</button>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">🎵</div>
+                            <div class="activity-content">
+                                <p class="activity-text">Dodano nowy track "Midnight Flow"</p>
+                                <span class="activity-time">2 godziny temu</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">🪙</div>
+                            <div class="activity-content">
+                                <p class="activity-text">Sprzedano 15 tokenów artysty</p>
+                                <span class="activity-time">5 godzin temu</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">👥</div>
+                            <div class="activity-content">
+                                <p class="activity-text">Nowa propozycja współpracy od BeatMaker Pro</p>
+                                <span class="activity-time">1 dzień temu</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">💎</div>
+                            <div class="activity-content">
+                                <p class="activity-text">NFT "Street Art #001" sprzedane za 0.5 ETH</p>
+                                <span class="activity-time">2 dni temu</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">📈</div>
+                            <div class="activity-content">
+                                <p class="activity-text">Track "Urban Legends" osiągnął 10k odtworzeń</p>
+                                <span class="activity-time">3 dni temu</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Actions -->
+                <section class="content-card quick-actions-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Szybkie Akcje</h2>
+                    </div>
+                    <div class="quick-actions-grid">
+                        <button class="quick-action-btn" onclick="openStudio()">
+                            <div class="action-icon">🎤</div>
+                            <span class="action-label">Otwórz Studio</span>
+                        </button>
+                        
+                        <button class="quick-action-btn" onclick="uploadTrack()">
+                            <div class="action-icon">⬆️</div>
+                            <span class="action-label">Upload Track</span>
+                        </button>
+                        
+                        <button class="quick-action-btn" onclick="createNFT()">
+                            <div class="action-icon">💎</div>
+                            <span class="action-label">Mint NFT</span>
+                        </button>
+                        
+                        <button class="quick-action-btn" onclick="findCollaborators()">
+                            <div class="action-icon">🤝</div>
+                            <span class="action-label">Znajdź Zespół</span>
+                        </button>
+                        
+                        <button class="quick-action-btn" onclick="scheduleEvent()">
+                            <div class="action-icon">📅</div>
+                            <span class="action-label">Zaplanuj Event</span>
+                        </button>
+                        
+                        <button class="quick-action-btn" onclick="viewAnalytics()">
+                            <div class="action-icon">📊</div>
+                            <span class="action-label">Zobacz Stats</span>
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/creator-dashboard.js"></script>
+</body>
+</html>

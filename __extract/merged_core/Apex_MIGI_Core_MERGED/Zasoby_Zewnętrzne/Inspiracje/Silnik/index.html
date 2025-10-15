@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NHQ3Q8Q4');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Infiniti - UI Prototype</title>
+    <!-- JSON-LD dla widoczności w wyszukiwarkach -->
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "Apex Infiniti",
+      "url": "https://mtaquestwebsidex.com",
+      "logo": "https://mtaquestwebsidex.com/assets/logo.png",
+      "sameAs": [
+        "https://www.facebook.com/apexinfiniti",
+        "https://www.instagram.com/apexinfiniti",
+        "https://www.youtube.com/@apexinfiniti"
+      ],
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": "+48-123-456-789",
+        "contactType": "customer service",
+        "areaServed": "Global",
+        "availableLanguage": ["Polish", "English"]
+      }]
+    }
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f0f0f0; }
+        .container { max-width: 800px; margin: auto; }
+        .card { background: #ffffff; padding: 15px; margin-bottom: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .phase { font-weight: bold; color: #1E90FF; }
+        .matrix { font-style: italic; }
+        .button { padding: 10px 20px; background: #32CD32; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .button:hover { background: #228B22; }
+        #loading { display: none; color: #FF4500; }
+        #error { display: none; color: #FF0000; }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHQ3Q8Q4"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="container">
+        <h1>Apex Infiniti - UI Prototype</h1>
+        <div class="card">
+            <h2>Status Systemu</h2>
+            <p><span class="phase">Faza:</span> <span id="phase">Ładowanie...</span></p>
+            <p><span class="phase">Matryca &lt;369963&gt;:</span> <span class="matrix" id="matrix">Ładowanie...</span></p>
+            <p><span class="phase">Energia (E):</span> <span id="energy">Ładowanie...</span></p>
+            <p><span class="phase">Prawdopodobieństwo Sukcesu (P(S)):</span> <span id="probability">Ładowanie...</span></p>
+            <p id="loading">Ładowanie danych z Google Cloud...</p>
+            <p id="error"></p>
+        </div>
+        <div class="card">
+            <h2>Sterowanie</h2>
+            <button class="button" onclick="updateStatus()">Odśwież Status</button>
+            <button class="button" onclick="generateAIContent()">Generuj Treść AI</button>
+            <button class="button" onclick="optimizeWithVertexAI()">Optymalizuj z Vertex AI</button>
+        </div>
+    </div>
+
+    <script>
+        // Twój klucz API Google z Google Cloud (przechowuj bezpiecznie, np. w .env w produkcji)
+        const GEMINI_API_KEY = 'AIzaSyAQoN7OQhHZ4DKL3dbKkZrBDp7frWxGpyQ'; // Twój rzeczywisty klucz API
+        const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+        const VERTEX_AI_URL = 'https://us-central1-aiplatform.googleapis.com/v1/projects/turbo-apex-123/locations/us-central1/endpoints/456789:predict'; // Przykładowy URL – dostosuj w GCP
+
+        // Funkcja aktualizująca status z API Google
+        async function updateStatus() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-goog-api-key': GEMINI_API_KEY
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: 'Podaj aktualny status Apex Infiniti: faza, matryca <369963>, energia (E), prawdopodobieństwo sukcesu (P(S)) w formacie JSON.'
+                            }]
+                        }]
+                    })
+                });
+                if (!response.ok) throw new Error('Błąd odpowiedzi API');
+                const data = await response.json();
+                const status = JSON.parse(data.candidates[0].content.parts[0].text);
+                document.getElementById('phase').textContent = status.phase;
+                document.getElementById('matrix').textContent = JSON.stringify(status.matrix);
+                document.getElementById('energy').textContent = status.energy;
+                document.getElementById('probability').textContent = status.probability.toFixed(2);
+                alert('Status zaktualizowany z Google Cloud!');
+            } catch (error) {
+                document.getElementById('error').textContent = 'Błąd: ' + error.message;
+                document.getElementById('error').style.display = 'block';
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Funkcja generowania treści AI
+        async function generateAIContent() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-goog-api-key': GEMINI_API_KEY
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: 'Explain how AI works in a few words for Apex Infiniti users.'
+                            }]
+                        }]
+                    })
+                });
+                if (!response.ok) throw new Error('Błąd odpowiedzi API');
+                const data = await response.json();
+                const content = data.candidates[0].content.parts[0].text;
+                alert('Treść AI: ' + content);
+            } catch (error) {
+                document.getElementById('error').textContent = 'Błąd: ' + error.message;
+                document.getElementById('error').style.display = 'block';
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Funkcja optymalizacji z Vertex AI
+        async function optimizeWithVertexAI() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            try {
+                const response = await fetch(VERTEX_AI_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': Bearer ${GEMINI_API_KEY} // Użyj klucza jako tokenu Bearer dla Vertex AI
+                    },
+                    body: JSON.stringify({
+                        instances: [{
+                            "input": "Optimize Apex Infiniti strategy based on phase and matrix <369963>"
+                        }],
+                        parameters: {
+                            "temperature": 0.7,
+                            "maxOutputTokens": 256
+                        }
+                    })
+                });
+                if (!response.ok) throw new Error('Błąd Vertex AI');
+                const data = await response.json();
+                const optimization = data.predictions[0];
+                alert('Optymalizacja Vertex AI: ' + optimization);
+            } catch (error) {
+                document.getElementById('error').textContent = 'Błąd: ' + error.message;
+                document.getElementById('error').style.display = 'block';
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Inicjalizacja
+        window.onload = updateStatus;
+    </script>
+</body>
+</html>

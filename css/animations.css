@@ -1,0 +1,13 @@
+/*
+Copyright © 2025 Patryk Sobierański. All rights reserved.
+Ten plik jest częścią projektu "MTA Quest Webside X" (PinkMan-AI, GOK:AI).
+Wszelkie kopiowanie, modyfikowanie i dystrybucja bez pisemnej zgody autora zabronione.
+*/
+/*
+Copyright © 2025 Patryk Sobierański. All rights reserved.
+Ten plik jest częścią projektu "MTA Quest Webside X" (PinkMan-AI, GOK:AI).
+Wszelkie kopiowanie, modyfikowanie i dystrybucja bez pisemnej zgody autora zabronione.
+*/
+
+@keyframes floatY { 0%{transform:translateY(0)} 50%{transform:translateY(-6px)} 100%{transform:translateY(0)} }
+.floaty { animation: floatY 6s ease-in-out infinite; }

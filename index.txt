@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MTA Quest Webside X — PinkMan-AI Prototype</title>
+    <meta name="description" content="MTA Quest Webside X: Transformacja Ziemi i Internetu. Awatary, AI, Drift Monety, Hip Hop Universe, GOK:AI." />
+
+    <!-- Favicon + logo -->
+    <link rel="icon" type="image/png" href="assets/img/pinkman-logo.png">
+    <meta property="og:image" content="assets/img/pinkman-logo.png">
+
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- QR generator (no tracking, small) -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js" integrity="sha256-qN0h7H3pQca20wn9ATWPr8sU9k5jYv0nqUNe2aVfK1w=" crossorigin="anonymous"></script>
+
+    <style>
+      /* Subtelne animacje */
+      @keyframes floatY { 0%{transform:translateY(0)} 50%{transform:translateY(-6px)} 100%{transform:translateY(0)} }
+      .floaty { animation: floatY 6s ease-in-out infinite; }
+      .glass { backdrop-filter: blur(10px); background: linear-gradient(180deg, rgba(30,41,59,.45), rgba(2,6,23,.45)); }
+    </style>
+  </head>
+
+  <body class="bg-gray-950 text-white font-sans selection:bg-blue-600/30 selection:text-blue-100">
+    <!-- Nagłówek -->
+    <header class="sticky top-0 z-50 glass border-b border-gray-800/60">
+      <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
+        <h1 class="text-xl sm:text-2xl font-bold text-blue-400 tracking-tight">MTA Quest Webside X</h1>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#start" class="hover:text-blue-300">Start</a>
+          <a href="#o-projekcie" class="hover:text-blue-300">O projekcie</a>
+          <a href="#moduly" class="hover:text-blue-300">Moduły</a>
+          <a href="#kontakt" class="hover:text-blue-300">Kontakt</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <button id="btnTheme" class="px-3 py-1.5 rounded-lg border border-gray-700 text-xs hover:border-blue-600/60 hover:text-blue-300" aria-label="Przełącz motyw">☯ Motyw</button>
+          <button id="btnLang" class="px-3 py-1.5 rounded-lg border border-gray-700 text-xs hover:border-blue-600/60 hover:text-blue-300" aria-label="Przełącz język">PL</button>
+          <button id="btnMenu" class="md:hidden px-3 py-1.5 rounded-lg border border-gray-700 text-xs">☰</button>
+        </div>
+      </div>
+      <nav id="menuMobile" class="md:hidden hidden border-t border-gray-800/60 p-3 text-sm">
+        <div class="max-w-7xl mx-auto flex flex-col gap-2">
+          <a href="#start" class="hover:text-blue-300">Start</a>
+          <a href="#o-projekcie" class="hover:text-blue-300">O projekcie</a>
+          <a href="#moduly" class="hover:text-blue-300">Moduły</a>
+          <a href="#kontakt" class="hover:text-blue-300">Kontakt</a>
+        </div>
+      </nav>
+    </header><!-- Hero -->
+<section class="relative text-center py-24 bg-gradient-to-b from-gray-950 to-gray-900 overflow-hidden">
+  <div class="absolute inset-0 opacity-20 pointer-events-none" aria-hidden="true">
+    <div class="w-[50rem] h-[50rem] bg-blue-700/20 rounded-full blur-3xl absolute -top-44 -left-20"></div>
+    <div class="w-[30rem] h-[30rem] bg-fuchsia-700/10 rounded-full blur-3xl absolute bottom-[-6rem] right-[-6rem]"></div>
+  </div>
+  <div class="relative max-w-4xl mx-auto px-6">
+    <h2 class="text-4xl sm:text-6xl font-extrabold mb-4 leading-tight floaty">Transformacja Ziemi i Internetu</h2>
+    <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">Platforma przyszłości. Awatary. Sztuka. AI. Drift Monety. Hip Hop. Duchowa ewolucja.</p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#start" class="inline-block px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-500 transition">🔮 Rozpocznij podróż</a>
+      <button id="openAI" class="inline-block px-6 py-3 bg-gray-800 border border-gray-700 rounded-xl hover:bg-gray-700 transition">🤖 Uruchom PinkMan‑AI</button>
+    </div>
+  </div>
+</section>
+
+<!-- O projekcie -->
+<section id="o-projekcie" class="py-16 px-6 bg-gray-900">
+  <div class="max-w-6xl mx-auto text-center">
+    <h3 class="text-3xl font-bold mb-10 text-blue-300">Filar 4: Czym jest MTA Quest Webside X?</h3>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <article class="p-5 bg-gray-800/70 rounded-xl border border-gray-700">
+        <h4 class="text-lg font-semibold mb-2">🎤 Hip Hop Universe</h4>
+        <p class="text-sm text-gray-300">Wirtualne bitwy, twórczość, styl i duchowa ekspresja awatarów.</p>
+      </article>
+      <article class="p-5 bg-gray-800/70 rounded-xl border border-gray-700">
+        <h4 class="text-lg font-semibold mb-2">🖼 Portfolio+</h4>
+        <p class="text-sm text-gray-300">Przestrzeń prezentacji wizji, AI, projektów, kodu i sztuki.</p>
+      </article>
+      <article class="p-5 bg-gray-800/70 rounded-xl border border-gray-700">
+        <h4 class="text-lg font-semibold mb-2">💰 Drift Monety</h4>
+        <p class="text-sm text-gray-300">Ekonomia inspiracji – nagrody za rozwój i twórczość.</p>
+      </article>
+      <article class="p-5 bg-gray-800/70 rounded-xl border border-gray-700">
+        <h4 class="text-lg font-semibold mb-2">🧠 GOK:AI</h4>
+        <p class="text-sm text-gray-300">Kalkulator sukcesu, decyzji i duchowego kierunku.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- START — interaktywny rozruch -->
+<section id="start" class="py-16 px-6 bg-gray-950">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8">
+    <!-- Launcher PinkMan-AI (offline proto) -->
+    <div class="p-6 rounded-2xl bg-gray-900 border border-gray-800">
+      <header class="flex items-center justify-between mb-4">
+        <h3 class="text-2xl font-bold text-blue-300">PinkMan‑AI — Launcher</h3>
+        <span class="text-[10px] px-2 py-1 rounded bg-gray-800 border border-gray-700">tryb prototypu offline</span>
+      </header>
+      <div class="space-y-4">
+        <label class="block text-sm text-gray-300">Pytanie / komenda</label>
+        <textarea id="pmInput" rows="3" class="w-full rounded-lg bg-gray-800 border border-gray-700 p-3 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="Zadaj pytanie…"></textarea>
+        <div class="grid sm:grid-cols-3 gap-3">
+          <button id="pmAsk" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500">Odpowiedz</button>
+          <button id="pmClear" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 hover:bg-gray-700">Wyczyść</button>
+          <button id="pmHint" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 hover:bg-gray-700">Podpowiedź 369</button>
+        </div>
+        <div id="pmOut" class="min-h-[92px] rounded-lg bg-gray-800/70 border border-gray-700 p-3 text-sm text-gray-200"></div>
+        <p class="text-xs text-gray-400">Uwaga: To nie jest jeszcze połączenie z modelem w chmurze. Logika odpowiedzi poniżej.</p>
+      </div>
+    </div>
+
+    <!-- QR + Deep link -->
+    <div class="p-6 rounded-2xl bg-gray-900 border border-gray-800">
+      <h3 class="text-2xl font-bold text-blue-300 mb-4">QR do Twojego AI</h3>
+      <p class="text-sm text-gray-300 mb-4">Utwórz naklejkę: QR otwiera ten interfejs lub dowolny adres (np. produkcyjny link na domenie).</p>
+      <label class="block text-sm text-gray-300 mb-2" for="qrUrl">Adres URL</label>
+      <div class="flex gap-2 mb-3">
+        <input id="qrUrl" class="flex-1 rounded-lg bg-gray-800 border border-gray-700 p-2" placeholder="https://www.mtaquestwebsidex.com/ai" />
+        <button id="qrMake" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500">Generuj</button>
+      </div>
+      <div id="qrCanvasWrap" class="rounded-xl bg-gray-800 border border-gray-700 p-4 flex items-center justify-center min-h-[220px]"></div>
+      <div class="mt-3 flex gap-2">
+        <button id="qrDownload" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 hover:bg-gray-700">Pobierz PNG</button>
+        <button id="qrUseHere" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 hover:bg-gray-700">Ustaw na ten adres</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODUŁY -->
+<section id="moduly" class="py-16 px-6 bg-gray-900">
+  <div class="max-w-6xl mx-auto">
+    <h3 class="text-3xl font-bold mb-8 text-blue-300">Moduły</h3>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- GOK:AI Lab -->
+      <article class="p-6 rounded-2xl bg-gray-800/70 border border-gray-700">
+        <h4 class="text-xl font-semibold mb-4">🧪 GOK:AI — Lab równania</h4>
+        <div class="space-y-3 text-sm">
+          <div class="grid grid-cols-2 gap-3">
+            <label class="text-gray-300">n (Fibonacci)</label>
+            <input id="gokN" type="number" min="0" value="10" class="w-full rounded bg-gray-900 border border-gray-700 p-2" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="text-gray-300">F(n)</div>
+            <div id="gokFn" class="text-gray-100">—</div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="text-gray-300">9·π + F(n)</div>
+            <div id="gokS" class="text-gray-100">—</div>
+          </div>
+          <button id="gokEval" class="mt-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500">Oblicz WYNIK</button>
+          <p class="text-xs text-gray-400">Równanie symboliczne: <span class="font-mono">S(GOK:AI) = 9π + F(n) = F(n−1)+F(n−2) = WYNIK</span></p>
+        </div>
+      </article>
+
+      <!-- Linear Core (a*x+b) -->
+      <article class="p-6 rounded-2xl bg-gray-800/70 border border-gray-700">
+        <h4 class="text-xl font-semibold mb-4">⚙ Rdzeń liniowy: y = a·x + b</h4>
+        <div class="grid sm:grid-cols-2 gap-3 text-sm">
+          <label class="self-center">a</label>
+          <input id="coreA" type="number" value="1" class="rounded bg-gray-900 border border-gray-700 p-2" />
+          <label class="self-center">b</label>
+          <input id="coreB" type="number" value="0" class="rounded bg-gray-900 border border-gray-700 p-2" />
+          <label class="self-center">x</label>
+          <input id="coreX" type="number" value="3" class="rounded bg-gray-900 border border-gray-700 p-2" />
+        </div>
+        <div class="mt-3 flex gap-3">
+          <button id="coreCalc" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500">Policz y</button>
+          <button id="coreSave" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 hover:bg-gray-700">Zapisz parametry</button>
+        </div>
+        <output id="coreY" class="block mt-3 text-lg font-mono">y = —</output>
+        <p class="text-xs text-gray-400 mt-2">Parametry <span class="font-mono">a</span> i <span class="font-mono">b</span> są przechowywane lokalnie (localStorage).</p>
+      </article>
+
+      <!-- 369 Navigator -->
+      <article class="p-6 rounded-2xl bg-gray-800/70 border border-gray-700">
+        <h4 class="text-xl font-semibold mb-4">🔁 369 — Navigator cykli</h4>
+        <div class="space-y-3 text-sm">
+          <label class="block">Wpisz dowolny ciąg liczb/tekst:</label>
+          <input id="n369in" class="w-full rounded bg-gray-900 border border-gray-700 p-2" placeholder="np. 12345678910" />
+          <button id="n369go" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500">Przetwórz</button>
+          <div id="n369out" class="mt-2 text-gray-200"></div>
+          <p class="text-xs text-gray-400">Heurystyka pokazuje redukcje cyfrowe (mod 9), segmenty 3‑6‑9 i wskazówki „następnego cyklu”.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Kontakt -->
+<section id="kontakt" class="py-16 px-6 bg-gray-950">
+  <div class="max-w-4xl mx-auto text-center">
+    <h3 class="text-3xl font-bold mb-4 text-blue-300">Kontakt</h3>
+    <p class="text-gray-300 mb-6">Masz pomysł, chcesz współtworzyć lub wpiąć API Google? Napisz — dołącz krótki opis celu.</p>
+    <a href="mailto:contact@mtaquestwebsidex.com" class="inline-block px-6 py-3 bg-blue-600 rounded-xl hover:bg-blue-500">✉ contact@mtaquestwebsidex.com</a>
+    <p class="text-xs text-gray-500 mt-4">Docelowo: panel kluczy API i uprawnień (Google Developers, itd.).</p>
+  </div>
+</section>
+
+<!-- Stopka -->
+<footer class="text-center text-xs text-gray-500 py-8 border-t border-gray-800">
+  &copy; 2025 Patryk Sobierański — MTA Quest Webside X. Wszystkie prawa zastrzeżone.
+</footer>
+
+<!-- Modal PinkMan-AI (prosty, bez backendu) -->
+<dialog id="aiModal" class="backdrop:bg-black/60 rounded-2xl w-[96%] max-w-2xl p-0">
+  <form method="dialog" class="p-0">
+    <header class="flex items-center justify-between p-4 border-b border-gray-800 bg-gray-900 rounded-t-2xl">
+      <h4 class="font-semibold">PinkMan‑AI — Prototype</h4>
+      <button class="px-2 py-1 rounded bg-gray-800 border border-gray-700">✕</button>
+    </header>
+    <div class="p-4 bg-gray-950">
+      <div id="aiLog" class="h-64 overflow-auto rounded-lg bg-gray-900 border border-gray-800 p-3 text-sm"></div>
+      <div class="mt-3 flex gap-2">
+        <input id="aiMsg" class="flex-1 rounded bg-gray-900 border border-gray-700 p-2" placeholder="Zadaj pytanie…" />
+        <button id="aiSend" type="button" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500">Wyślij</button>
+      </div>
+      <p class="text-[11px] text-gray-500 mt-2">To okno używa lokalnych heurystyk (Fibonacci/369/y=ax+b). Połączenie z chmurą dodamy później.</p>
+    </div>
+  </form>
+</dialog>
+
+<script>
+  // ---------- Utilities ----------
+  const $ = (s, p=document) => p.querySelector(s);
+  const $$ = (s, p=document) => Array.from(p.querySelectorAll(s));
+  const store = {
+    get: (k, d=null) => { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } },
+    set: (k, v) => localStorage.setItem(k, JSON.stringify(v))
+  };
+
+  // ---------- Theme & Lang ----------
+  const btnTheme = $('#btnTheme');
+  btnTheme?.addEventListener('click', () => {
+    document.documentElement.classList.toggle('invert');
+    document.body.classList.toggle('bg-white');
+  });
+  const btnLang = $('#btnLang');
+  btnLang?.addEventListener('click', () => {
+    btnLang.textContent = btnLang.textContent.trim() === 'PL' ? 'EN' : 'PL';
+    // miejsce na prosty i18n; na razie tylko znacznik
+  });
+  $('#btnMenu')?.addEventListener('click', () => $('#menuMobile').classList.toggle('hidden'));
+
+  // ---------- QR ----------
+  const qrUrl = $('#qrUrl');
+  const qrWrap = $('#qrCanvasWrap');
+  const makeQR = async (url) => {
+    qrWrap.innerHTML = '';
+    const canvas = document.createElement('canvas');
+    qrWrap.appendChild(canvas);
+    await QRCode.toCanvas(canvas, url, { width: 220, margin: 1 });
+    canvas.id = 'qrCanvas';
+  };
+  $('#qrUseHere')?.addEventListener('click', () => { qrUrl.value = location.href; });
+  $('#qrMake')?.addEventListener('click', () => makeQR(qrUrl.value || location.href));
+  $('#qrDownload')?.addEventListener('click', () => {
+    const c = $('#qrCanvas');
+    if (!c) return;
+    const link = document.createElement('a');
+    link.download = 'PinkManAI_QR.png';
+    link.href = c.toDataURL('image/png');
+    link.click();
+  });
+  // auto init
+  qrUrl.value = location.href;
+  makeQR(qrUrl.value);
+
+  // ---------- GOK:AI Lab ----------
+  const fib = (n) => {
+    n = Math.max(0, Math.floor(n));
+    let a=0, b=1; // F(0)=0, F(1)=1
+    for (let i=0; i<n; i++) [a,b] = [b,a+b];
+    return a;
+  };
+  const sGOK = (n) => 9*Math.PI + fib(n);
+  const gokN = $('#gokN');
+  const gokFn = $('#gokFn');
+  const gokS  = $('#gokS');
+  const evalGOK = () => {
+    const n = Number(gokN.value || 0);
+    const Fn = fib(n);
+    gokFn.textContent = Fn.toString();
+    gokS.textContent = (9*Math.PI + Fn).toFixed(6);
+  };
+  $('#gokEval')?.addEventListener('click', evalGOK);
+  evalGOK();
+
+  // ---------- Linear core y = a*x+b ----------
+  const coreA = $('#coreA'), coreB = $('#coreB'), coreX = $('#coreX'), coreY = $('#coreY');
+  // load saved params
+  (() => {
+    const saved = store.get('coreParams');
+    if (saved) { coreA.value = saved.a; coreB.value = saved.b; }
+  })();
+  $('#coreSave')?.addEventListener('click', () => {
+    const a = Number(coreA.value||0), b = Number(coreB.value||0);
+    store.set('coreParams', { a, b });
+  });
+  $('#coreCalc')?.addEventListener('click', () => {
+    const a = Number(coreA.value||0), b = Number(coreB.value||0), x = Number(coreX.value||0);
+    const y = a*x + b;
+    coreY.textContent = y = ${y};
+  });
+
+  // ---------- 369 Navigator ----------
+  const reduce9 = (s) => {
+    const digits = (s.match(/\d/g)||[]).map(Number);
+    if (!digits.length) return { sum:0, mod9:0 };
+    const sum = digits.reduce((a,b)=>a+b,0);
+    const mod9 = sum % 9 || 9; // 9 zamiast 0 dla pełnego cyklu
+    return { sum, mod9 };
+  };
+  $('#n369go')?.addEventListener('click', () => {
+    const val = $('#n369in').value || '';
+    const { sum, mod9 } = reduce9(val);
+    const bands = [3,6,9].map(k => ({ k, hit: (mod9===k) }));
+    $('#n369out').innerHTML = `
+      <div class="font-mono">Σ(digits) = ${sum}, Σ mod 9 → <b>${mod9}</b></div>
+      <div class="mt-1 text-xs text-gray-400">Faza: ${bands.map(b=> b.hit?<b>${b.k}</b>:b.k).join(' → ')}</div>
+      <div class="mt-2">Interpretacja: ${mod9===9? 'Zamknięcie cyklu i skok na nowy poziom (9→1).':'W trakcie cyklu — dążenie do 9.'}</div>
+    `;
+  });
+
+  // ---------- PinkMan‑AI Prototype (modal + local heuristics) ----------
+  const aiModal = $('#aiModal');
+  $('#openAI')?.addEventListener('click', () => aiModal.showModal());
+  const logAI = (role, text) => {
+    const node = document.createElement('div');
+    node.className = p-2 my-1 rounded ${role==='you'?'bg-gray-800':'bg-gray-800/60'};
+    node.innerHTML = <span class="text-[11px] uppercase text-gray-400">${role==='you'?'Ty':'PM‑AI'}</span><div class="mt-1">${text}</div>;
+    $('#aiLog').appendChild(node);
+    $('#aiLog').scrollTop = $('#aiLog').scrollHeight;
+  };
+  const aiAnswer = (q) => {
+    // Heurystyka: jeśli pytanie zawiera liczby, spróbuj y=ax+b albo GOK
+    const nums = (q.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
+    const a = Number(coreA.value||0), b = Number(coreB.value||0);
+    let out = '';
+    if (nums.length){
+      const x = nums[0];
+      const y = a*x + b;
+      out += Z rdzenia liniowego: y=a·x+b → y=${a}·${x}+${b} = <b>${y}</b>.<br/>;
+    }
+    const n = Math.max(0, Math.floor(nums[1] ?? 10));
+    const Fn = fib(n);
+    out += Równanie S(GOK:AI): 9π + F(${n}) = ${(9*Math.PI + Fn).toFixed(6)} (F(${n})=${Fn}).<br/>;
+    const { mod9 } = reduce9(q);
+    out += Kontekst 369: Σmod9 = <b>${mod9}</b>.;
+    return out || 'Pytanie zapisane. W trybie offline odpowiadam heurystykami 369/Fibonacci/ax+b.';
+  };
+  $('#aiSend')?.addEventListener('click', () => {
+    const msg = $('#aiMsg').value.trim();
+    if (!msg) return;
+    logAI('you', msg);
+    const res = aiAnswer(msg);
+    logAI('ai', res);
+    $('#aiMsg').value='';
+  });
+  $('#pmAsk')?.addEventListener('click', () => {
+    const q = $('#pmInput').value.trim();
+    if (!q) return;
+    $('#pmOut').innerHTML = aiAnswer(q);
+  });
+  $('#pmClear')?.addEventListener('click', () => { $('#pmInput').value=''; $('#pmOut').innerHTML=''; });
+  $('#pmHint')?.addEventListener('click', () => {
+    $('#pmInput').value = 'Policz y dla x=7 i pokaż S(GOK:AI) dla n=12. 12345678910';
+  });
+</script>
+
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/main.css">
+
+<script src="js/main.js"></script>
+<script src="js/qr.js"></script>
+<script src="js/gokai.js"></script>
+<script src="js/linear-core.js"></script>
+<script src="js/n369.js"></script>
+<script src="js/pinkman-ai.js"></script>
+
+  </body>
+</html>

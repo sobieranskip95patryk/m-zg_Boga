@@ -1,0 +1,167 @@
+/* Styl dla MIGI Command Center UI */
+.command-center-image {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(30, 144, 255, 0.3); /* Neonowy niebieski cień */
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.command-center-image:hover {
+    transform: scale(1.02); /* Lekkie powiększenie przy najechaniu */
+    transition: transform 0.3s ease;
+}
+/* style.css dla 3_UI_Prototype/index.html */
+/* Ogólne ustawienia */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0f4f8; /* Lekki niebieski odcień dla spokoju i harmonii */
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Kontener główny */
+.container {
+    max-width: 900px; /* Nieco szerszy dla lepszej czytelności */
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+/* Nagłówek */
+h1 {
+    text-align: center;
+    color: #1E90FF; /* Dodatkowy niebieski dla "Apex Infiniti" */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Karty (card) */
+.card {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border-left: 5px solid #32CD32; /* Zielony pasek dla harmonii i wzrostu (Fibonacci) */
+}
+
+h2 {
+    color: #228B22;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+/* Elementy statusu */
+.phase {
+    font-weight: bold;
+    color: #1E90FF;
+}
+
+.matrix {
+    font-style: italic;
+    color: #FF4500; /* Pomarańczowy dla matrycy <369963>, symbolizujący energię */
+}
+
+#loading {
+    display: none;
+    color: #FF4500;
+    font-style: italic;
+}
+
+#error {
+    display: none;
+    color: #FF0000;
+    font-weight: bold;
+}
+
+/* Przyciski */
+.button {
+    padding: 12px 25px;
+    background: #32CD32; /* Zielony dla aktywacji i wzrostu */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-right: 10px;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background: #228B22; /* Ciemniejszy odcień po najechaniu */
+}
+
+.button:active {
+    background: #1A5E1A; /* Jeszcze ciemniejszy przy kliknięciu */
+}
+
+/* Mapa (jeśli dodana) */
+#map {
+    height: 400px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #map {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .card {
+        padding: 15px;
+    }
+}
+
+/* Dodatkowe style dla filozoficznego charakteru */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.phase, .matrix {
+    animation: pulse 2s infinite;
+}
+
+/* Styl dla JSON-LD (jeśli widoczny) */
+script[type="application/ld+json"] {
+    display: none; /* Ukryte, ale funkcjonalne dla SEO */
+}

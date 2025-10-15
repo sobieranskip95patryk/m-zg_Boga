@@ -1,0 +1,121 @@
+<!DOCTYPE html> 
+<html lang="pl"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>MTAQuestWebsideX - Mózg Boga</title> 
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <link rel="stylesheet" href="assets/styles.css">
+</head> 
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4"> 
+ 
+<div class="container mx-auto"> 
+     
+    <!-- Lewy Panel --> 
+    <div class="left-panel panel"> 
+        <div class="text-center mb-4"> 
+            <h1 class="text-2xl md:text-4xl font-bold mb-2">Mózg Boga</h1> 
+            <p class="text-lg">Unified AI Ecosystem</p> 
+        </div> 
+ 
+        <!-- Sekcja logo --> 
+        <div class="flex flex-col items-center justify-center p-4"> 
+            <svg class="logo w-32 h-32 md:w-48 md:h-48" viewBox="0 0 100 100" fill="none" 
+xmlns="http://www.w3.org/2000/svg"> 
+                <defs> 
+                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%"> 
+                        <stop offset="0%" style="stop-color:#b3b3e6;stop-opacity:1" /> 
+                        <stop offset="100%" style="stop-color:#8a2be2;stop-opacity:1" /> 
+                    </linearGradient> 
+                    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%"> 
+                        <stop offset="0%" style="stop-color:#00ffff;stop-opacity:1" /> 
+                        <stop offset="100%" style="stop-color:#b3b3e6;stop-opacity:1" /> 
+                    </linearGradient> 
+                </defs> 
+                <circle cx="50" cy="50" r="45" stroke="url(#gradient1)" stroke-width="3" /> 
+                <path d="M50 5C74.8528 5 95 25.1472 95 50C95 74.8528 74.8528 95 50 
+95C25.1472 95 5 74.8528 5 50" stroke="url(#gradient2)" stroke-width="3" 
+stroke-linecap="round" /> 
+                <text x="50" y="55" font-size="20" font-weight="bold" fill="url(#gradient1)" 
+text-anchor="middle" alignment-baseline="middle">∞</text> 
+            </svg> 
+            <p id="status-message" class="mt-4 text-center text-sm md:text-base 
+text-neon">Uruchamianie reaktora...</p> 
+        </div> 
+ 
+        <!-- Sekcja Reaktor Paliwowy (wybór silnika + strumień danych) --> 
+        <h2 class="text-lg font-bold text-center mb-2">Reaktor Paliwowy</h2> 
+        
+        <!-- Wybór Silnika AI -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-2">Wybierz Silnik AI:</label>
+            <select id="engine-selector" class="w-full p-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-purple-500">
+                <option value="spiralmind">SpiralMind-Nexus (GOK:AI)</option>
+                <option value="migi">Apex Infinity MIGI Core</option>
+                <option value="simulation">Symulacja (Demo)</option>
+            </select>
+        </div>
+        
+        <div id="data-stream" class="stream-container text-sm"></div> 
+    </div> 
+ 
+    <!-- Prawy Panel --> 
+    <div class="right-panel panel"> 
+        <h2 class="text-xl md:text-2xl font-bold text-center mb-4">Reaktor Termiczny - 
+Interfejs</h2> 
+ 
+        <!-- Sekcja wprowadzania i wyjścia --> 
+        <div class="flex-grow flex flex-col justify-between"> 
+            <div class="mb-4"> 
+                <textarea id="prompt-input" class="w-full h-32 p-4 bg-gray-800 border-2 
+border-gray-600 rounded-xl resize-none focus:outline-none focus:border-purple-500 text-sm 
+md:text-base text-neon" placeholder="Wpisz swoje zapytanie... (np. 'Jakie są najnowsze 
+trendy w kosmicznych technologiach?')"></textarea> 
+            </div> 
+            
+            <!-- Status Silnika -->
+            <div id="engine-status" class="mb-2 p-2 bg-gray-800 rounded-lg border border-gray-600">
+                <p class="text-sm"><span class="text-purple-400">Aktywny silnik:</span> <span id="current-engine">SpiralMind-Nexus (GOK:AI)</span></p>
+                <p class="text-sm"><span class="text-blue-400">Status:</span> <span id="engine-connection">Gotowy</span></p>
+            </div>
+            
+            <div id="output-container" class="flex flex-col flex-grow"> 
+                <p class="text-lg font-bold mb-2 text-neon">Odpowiedź jądrowego silnika:</p> 
+                <div id="output-display" class="stream-container flex-grow text-sm md:text-base"> 
+                    <p class="text-gray-400">Czekam na zapytanie...</p> 
+                </div> 
+            </div> 
+        </div> 
+         
+        <!-- Sekcja przycisków --> 
+        <div class="flex flex-col md:flex-row gap-4 mt-4"> 
+            <button id="send-btn" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white 
+font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg 
+hover:shadow-purple-500/50"> 
+                <span class="flex items-center justify-center"> 
+                    <span class="mr-2">Zasil reaktor</span> 
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" 
+xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" 
+stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> 
+                </span> 
+            </button> 
+            <button id="explore-btn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white 
+font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg 
+hover:shadow-blue-500/50"> 
+                <span class="flex items-center justify-center"> 
+                    <span class="mr-2">Test Silników</span> 
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" 
+xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" 
+stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg> 
+                </span> 
+            </button> 
+        </div> 
+    </div> 
+</div> 
+
+<script src="js/config.js"></script>
+<script src="js/engines.js"></script>
+<script src="js/main.js"></script>
+ 
+</body> 
+</html>

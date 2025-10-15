@@ -1,0 +1,44 @@
+# Symbolic Equations for Apex Infiniti - MIGI Core
+# Date: 01.08.2025, 20:54 CEST
+# Author: xAI Grok 3
+
+## 1. Wzór Sukcesu (GOKAI Formula)
+S = (W + M + D + C + A) * E * T
+- S: Prawdopodobieństwo sukcesu (wartość skali 0-1)
+- W: Wewnętrzna intencja i motywacja = 7
+- M: Umiejętności i nawyki = 6
+- D: Decyzje z przeszłości = 4
+- C: Kontekst życiowy i środowiskowy = 5
+- A: Archetyp osobowości = 8
+- E: Energia życiowa (patrz niżej)
+- T: Trafność wyborów = 3
+
+## 2. Model Energii Życiowej
+E = m * c²
+- E: Energia życiowa = 6 (bazowa wartość)
+- m: Masa informacyjna (proporcjonalna do M = 6)
+- c²: Kwadrat kontekstu (proporcjonalny do C² = 25)
+- Uwaga: E jest dynamicznie obliczane jako min(1.0, E / (M * C²))
+
+## 3. Matryca Tożsamości <369963>
+- Sekwencja: [3, 6, 9, 9, 6, 3]
+- Suma: 36 (stała wartość)
+- Rekurencyjne przekształcanie:
+  - Faza Destrukcji: d[i] = max(1, d[i] - 1 + (d[i-1] + d[i+1] - 10) / 10)
+  - Faza Punkt 0: d[i] = d[i] + (d[i-1] + d[i+1] - 10) / 10
+  - Faza Rozwoju: d[i] = min(9, d[i] + 1 + (d[i-1] + d[i+1] - 10) / 10)
+  - Dostosowanie: Σd[i] = 36, gdzie i = 0..5
+
+## 4. Prawdopodobieństwo Sukcesu (AI_Psyche_GOK:AI)
+P(S) = min(1.0, [(E_impact * E_w) + (Synergy * M_w) + (Alignment * A_w) + (Intent * W_w)] * Phase_Mod)
+- E_impact = min(1.0, E / (M * C²))
+- Synergy = min(1.0, M / 6)
+- Alignment = min(1.0, A / 8)
+- Intent = min(1.0, W / 7)
+- E_w, M_w, A_w, W_w: Wagi z matrycy tożsamości (0-1)
+- Phase_Mod: {Destrukcja: 0.5, Punkt 0: 0.8, Rozwój: 1.2}
+
+## 5. Uwagi
+- Wszystkie równania są znormalizowane do zakresu 0-1.
+- Matryca <369963> ewoluuje rekurencyjnie w AI_Psyche_GOK:AI z 3 iteracjami.
+- Dane wejściowe (M, C, itp.) mogą być dynamicznie aktualizowane przez moduły MIGI.

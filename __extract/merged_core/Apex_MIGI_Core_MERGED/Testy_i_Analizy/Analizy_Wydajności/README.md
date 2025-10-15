@@ -1,0 +1,1 @@
+# Analizy wydajności – wyniki benchmarków.

@@ -1,0 +1,19 @@
+# Konfiguracja Mózgu Boga
+core_params:
+  matrix_weights: [3, 4, 7, 7, 4, 3] # Matryca wag <347743>
+  base_alpha: 0.9                    # Podstawowa waga dla kreatywności (GOK:AI)
+  max_iterations: 100                # Maksymalna liczba iteracji w pętli spiralnej
+  risk_tolerance: 0.15               # Tolerancja ryzyka w trybie weryfikacji
+
+synergy_config:
+  entropy_threshold: 0.8             # Próg złożoności
+  creative_keywords: ["zaprojektuj", "napisz", "stworz"]
+  verification_keywords: ["analiza", "weryfikacja", "sprawdz"]
+
+migi_7g:
+  dev_pool_size: 90000000            # Liczba deweloperów w puli
+  connection_protocol: "MIGI_QUANTUM" # Protokół połączenia
+  active_connection: True            # Czy połączenie z pulą jest aktywne
+  response_delay: 0.5                # Symulowany czas odpowiedzi sieci (sekundy)
+  max_contributors: 1000             # Maksymalna liczba aktywnych deweloperów na zadanie
+  kafka_servers: "localhost:9092"    # Serwery Kafka dla MIGI 7G

@@ -1,0 +1,17 @@
+{
+  "name": "@metageniusz/xai",
+  "version": "1.0.0",
+  "main": "src/grokClient.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "typescript": "^5.0.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0"
+  }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MTA Quest — Hip Hop Universe</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-white min-h-screen">
+<main class="max-w-6xl mx-auto p-6">
+<header class="flex items-center justify-between mb-8">
+  <h1 class="text-2xl font-bold text-blue-400">Hip Hop Universe</h1>
+  <nav class="text-sm space-x-4">
+    <a href="index.html" class="hover:text-blue-300">Home</a>
+    <a href="drift.html" class="hover:text-blue-300">Drift Monety</a>
+  </nav>
+</header>
+
+<section class="grid lg:grid-cols-2 gap-6">
+  <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+    <h3 class="text-lg font-semibold mb-2">🎵 Upload tracka</h3>
+    <form id="frmUp" class="space-y-3">
+      <input id="author" placeholder="Autor / ksywa" class="w-full bg-gray-800 border border-gray-700 p-2 rounded"/>
+      <input id="file" type="file" accept="audio/*" class="w-full bg-gray-800 border border-gray-700 p-2 rounded"/>
+      <button id="btnUp" type="button" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-500">Wyślij</button>
+    </form>
+    <pre id="upOut" class="mt-3 bg-gray-900 p-2 rounded border border-gray-800 text-sm"></pre>
+  </div>
+
+  <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+    <h3 class="text-lg font-semibold mb-2">📜 Twoje tracki</h3>
+    <button id="btnList" class="px-3 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700">Odśwież listę</button>
+    <ul id="list" class="mt-3 text-sm space-y-2"></ul>
+  </div>
+</section>
+</main>
+<script>
+ const API = (localStorage.getItem('cfg_api') && JSON.parse(localStorage.getItem('cfg_api'))) || 'http://localhost:8787';
+ document.getElementById('btnUp').onclick = async () => {
+   const f = document.getElementById('file').files[0];
+   if (!f) return alert('Wybierz plik audio');
+   const fd = new FormData();
+   fd.append('file', f);
+   fd.append('author', document.getElementById('author').value||'');
+   const r = await fetch(API + '/api/hiphop/upload', { method:'POST', body: fd });
+   const data = await r.json();
+   document.getElementById('upOut').textContent = JSON.stringify(data, null, 2);
+ };
+ document.getElementById('btnList').onclick = async () => {
+   const r = await fetch(API + '/api/hiphop/list');
+   const data = await r.json();
+   const ul = document.getElementById('list'); ul.innerHTML='';
+   data.tracks.forEach(t => {
+     const li = document.createElement('li');
+     li.innerHTML = `<a class="text-blue-400 underline" href="${API}/api/hiphop/download/${t.name}" target="_blank">${t.name}</a> <span class="text-xs text-gray-400">(${t.size} B)</span>`;
+     ul.appendChild(li);
+   });
+ };
+</script>
+</body></html>

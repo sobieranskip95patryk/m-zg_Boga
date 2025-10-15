@@ -1,0 +1,46 @@
+{
+  "name": "hip-hop-universe",
+  "version": "1.0.0",
+  "description": "Hip-Hop Universe - Consciousness-driven creative platform with Web3 integration",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@hip-hop-universe/web",
+    "build": "npm run build --workspace=@hip-hop-universe/web",
+    "build:contracts": "npm run compile --workspace=@hip-hop-universe/contracts",
+    "deploy:mumbai": "npm run deploy:mumbai --workspace=@hip-hop-universe/contracts",
+    "deploy:polygon": "npm run deploy:polygon --workspace=@hip-hop-universe/contracts",
+    "test:contracts": "npm run test --workspace=@hip-hop-universe/contracts",
+    "lint": "npm run lint --workspace=@hip-hop-universe/web",
+    "type-check": "npm run type-check --workspace=@hip-hop-universe/web",
+    "clean": "rm -rf node_modules && rm -rf apps/*/node_modules && rm -rf packages/*/node_modules",
+    "install:all": "npm install && npm install --workspace=@hip-hop-universe/web && npm install --workspace=@hip-hop-universe/contracts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.6",
+    "typescript": "^5.2.2"
+  },
+  "keywords": [
+    "hip-hop",
+    "web3",
+    "blockchain",
+    "polygon",
+    "consciousness",
+    "nft",
+    "drt-token",
+    "cultural-tech"
+  ],
+  "author": "Hip-Hop Universe Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sobieranskip95patryk/hip_hop_universe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sobieranskip95patryk/hip_hop_universe/issues"
+  },
+  "homepage": "https://sobieranskip95patryk.github.io/hip_hop_universe/"
+}
