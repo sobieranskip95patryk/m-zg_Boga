@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  html {
+    @apply bg-dark-bg text-white;
+  }
+  
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@layer components {
+  .glassmorphism {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-main bg-clip-text text-transparent;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-main text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-all duration-200 hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply glassmorphism text-white font-semibold py-3 px-6 rounded-lg hover:bg-white/20 transition-all duration-200;
+  }
+  
+  .card {
+    @apply glassmorphism rounded-xl p-6 hover:bg-white/15 transition-all duration-300;
+  }
+  
+  .input {
+    @apply glassmorphism rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-purple/50 transition-all duration-200;
+  }
+}

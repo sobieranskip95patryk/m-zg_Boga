@@ -1,0 +1,103 @@
+{
+  "id": "patryk-sobieranski",
+  "displayName": "Patryk Sobierański",
+  "alias": "Meta-Geniusz® / PinkMan",
+  "roleTags": ["Visionary", "Creator", "System Architect", "Curator"],
+  "shortBio": "Twórca Meta-Geniusz, autor projektu MIGI / GOK:AI. Łączę technologię, duchowość i kulturę w transformacyjnych projektach.",
+  "manifestShort": "Tworzę technologie i narracje które podnoszą świadomość — planety i ludzi.",
+  "avatarUrl": "/assets/avatars/patryk_avatar.png",
+  "coverUrl": "/assets/covers/patryk_cover.webp",
+  "contact": {
+    "email": "kontakt@twojadomena.pl",
+    "website": "https://mtaquestwebsidex.com",
+    "location": "Poland"
+  },
+  "social": {
+    "twitter": "sobieranskip95patryk",
+    "instagram": "meta_geniusz",
+    "github": "sobieranskip95patryk"
+  },
+  "wallets": {
+    "ethereum": null,
+    "polygon": null,
+    "preferred": "polygon"
+  },
+  "tokens": {
+    "creatorToken": {
+      "symbol": "SELPH",
+      "contractAddress": null,
+      "notes": "SelphToken / Consciousness token (mintable)"
+    },
+    "platformToken": {
+      "symbol": "DRT",
+      "contractAddress": null,
+      "notes": "Drift Token (ERC20)"
+    }
+  },
+  "projects": [
+    {
+      "id": "gok-ai",
+      "title": "GOK:AI — Future Creator",
+      "type": "Platform",
+      "description": "Rdzeń świadomości MIGI. Kalkulatory, algorytmy, UI jedno-okienne.",
+      "status": "production-ready"
+    },
+    {
+      "id": "drift-money",
+      "title": "Drift Money",
+      "type": "Economy",
+      "description": "Ekonomia platformy — tokeny, marketplace, royalty.",
+      "status": "testnet-ready"
+    },
+    {
+      "id": "rocket-fuel-girls",
+      "title": "Rocket Fuell Girls",
+      "type": "Community",
+      "description": "Platforma showcase dla twórczyń/modelingu powiązana z HHU.",
+      "status": "integrated"
+    }
+  ],
+  "creativeRoom": {
+    "publicView": true,
+    "sections": ["Projects", "Manifest", "Tokens", "Diagrams", "Releases"],
+    "quickActions": ["mintNFT", "startDrop", "featureProject", "createManifest"]
+  },
+  "stats": {
+    "respectPoints": 12450,
+    "followers": 18200,
+    "activeProjects": 7,
+    "tokensMinted": 312
+  },
+  "consciousnessProfile": {
+    "vector": [2.47099, 6.14235, 9.0, 9.0, 6.14235, 2.47099],
+    "stage": "Apex-Infiniti:Phase0",
+    "metadataUri": "ipfs://Qm...placeholder"
+  },
+  "aiAgent": {
+    "agentId": "hiphop-agent-v1",
+    "agentScript": "HipHopAgent.ts",
+    "capabilities": ["curation", "matchmaking", "autoManifest", "styleTransfer"]
+  },
+  "monetization": {
+    "preferredPayout": ["stripe", "polygon"],
+    "revenueSplit": {
+      "creator": 0.7,
+      "platform": 0.2,
+      "treasury": 0.1
+    },
+    "drops": [
+      {
+        "type": "exclusive-nft",
+        "expectedPriceDRT": 500,
+        "royaltyPercent": 7.5
+      }
+    ]
+  },
+  "permissions": {
+    "profilePublic": true,
+    "allowDM": true,
+    "allowCollabRequests": true
+  },
+  "createdAt": "2025-10-15T10:00:00+02:00",
+  "updatedAt": "2025-10-15T10:00:00+02:00"
+}

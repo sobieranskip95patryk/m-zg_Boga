@@ -1,0 +1,12 @@
+{
+  "name": "spiralmind-adapter",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "fastify": "^4.27.0",
+    "@fastify/cors": "^9.0.1"
+  },
+  "scripts": { 
+    "start": "node server.js"
+  }
+}

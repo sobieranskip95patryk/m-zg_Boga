@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hip-Hop Universe Ecosystem - Cyfrowa Fuzja Kultury, Finansów i Ekspresji</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/ecosystem.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="assets/js/ecosystem.js" defer></script>
+</head>
+<body>
+    <div class="ecosystem-container">
+        <!-- Hero Section -->
+        <section class="ecosystem-hero">
+            <div class="hero-background">
+                <div class="floating-particles"></div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">🧠 HIP-HOP UNIVERSE</span>
+                    <span class="title-line ecosystem">ECOSYSTEM</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Cyfrowa Fuzja Kultury, Finansów i Ekspresji
+                </p>
+                <p class="hero-description">
+                    Pierwszy na świecie zintegrowany ekosystem łączący Hip-Hop Universe, 
+                    Drift Money, Portfolio+ i Rocket Fuell Girls w jedną rewolucyjną platformę.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn-primary" onclick="startJourney()">
+                        <span class="btn-icon">🚀</span>
+                        Rozpocznij Podróż
+                    </button>
+                    <button class="btn-secondary" onclick="exploreEcosystem()">
+                        <span class="btn-icon">🌐</span>
+                        Eksploruj Ekosystem
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Integration Overview -->
+        <section class="platform-integration">
+            <div class="section-container">
+                <h2 class="section-title">Zintegrowane Platformy</h2>
+                <p class="section-description">
+                    Cztery potężne platformy połączone w jeden ekosystem
+                </p>
+                
+                <div class="platforms-grid">
+                    <!-- Hip-Hop Universe -->
+                    <div class="platform-card hhu" data-platform="hhu">
+                        <div class="platform-icon">🎵</div>
+                        <h3 class="platform-title">Hip-Hop Universe</h3>
+                        <p class="platform-role">Rdzeń Kulturowy</p>
+                        <p class="platform-description">
+                            Twórcza przestrzeń dla raperów, producentów, DJ-ów, 
+                            tancerzy i grafficiarzy z AI matchmaking
+                        </p>
+                        <div class="platform-features">
+                            <span class="feature-tag">Profile Artystów</span>
+                            <span class="feature-tag">Kreatywne Pokoje</span>
+                            <span class="feature-tag">Style Battles</span>
+                            <span class="feature-tag">Mentoring</span>
+                        </div>
+                        <button class="platform-btn" onclick="explorePlatform('hhu')">
+                            Eksploruj
+                        </button>
+                    </div>
+
+                    <!-- Drift Money -->
+                    <div class="platform-card drift" data-platform="drift">
+                        <div class="platform-icon">💰</div>
+                        <h3 class="platform-title">Drift Money</h3>
+                        <p class="platform-role">Silnik Finansowy</p>
+                        <p class="platform-description">
+                            Tokenizacja aktywności, marketplace i inwestycje w talenty 
+                            z transparentnym systemem Drift Token
+                        </p>
+                        <div class="platform-features">
+                            <span class="feature-tag">Drift Token</span>
+                            <span class="feature-tag">Marketplace</span>
+                            <span class="feature-tag">Inwestycje</span>
+                            <span class="feature-tag">Smart Contracts</span>
+                        </div>
+                        <button class="platform-btn" onclick="explorePlatform('drift')">
+                            Eksploruj
+                        </button>
+                    </div>
+
+                    <!-- Portfolio+ -->
+                    <div class="platform-card portfolio" data-platform="portfolio">
+                        <div class="platform-icon">🎨</div>
+                        <h3 class="platform-title">Portfolio+</h3>
+                        <p class="platform-role">System Prezentacji</p>
+                        <p class="platform-description">
+                            Profesjonalne portfolio z AI analizą, community rating 
+                            i smart investing w talenty
+                        </p>
+                        <div class="platform-features">
+                            <span class="feature-tag">AI Analysis</span>
+                            <span class="feature-tag">Rating System</span>
+                            <span class="feature-tag">Talent Investment</span>
+                            <span class="feature-tag">Analytics</span>
+                        </div>
+                        <button class="platform-btn" onclick="explorePlatform('portfolio')">
+                            Eksploruj
+                        </button>
+                    </div>
+
+                    <!-- Rocket Fuell Girls -->
+                    <div class="platform-card rocket" data-platform="rocket">
+                        <div class="platform-icon">💎</div>
+                        <h3 class="platform-title">Rocket Fuell Girls</h3>
+                        <p class="platform-role">Estetyczna Siła</p>
+                        <p class="platform-description">
+                            Redefinicja kobiecej ekspresji w hip-hop z nowymi 
+                            archetypami Muse i Style NFT Collections
+                        </p>
+                        <div class="platform-features">
+                            <span class="feature-tag">Muse Archetypy</span>
+                            <span class="feature-tag">Style NFT</span>
+                            <span class="feature-tag">Collaborations</span>
+                            <span class="feature-tag">Visual Art</span>
+                        </div>
+                        <button class="platform-btn" onclick="explorePlatform('rocket')">
+                            Eksploruj
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integration Flow -->
+        <section class="integration-flow">
+            <div class="section-container">
+                <h2 class="section-title">Jak Działa Integracja</h2>
+                <p class="section-description">
+                    Przykład user journey: Digital Diva w ekosystemie
+                </p>
+                
+                <div class="flow-timeline">
+                    <div class="flow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-platform rocket">Rocket Fuell</div>
+                        <div class="step-content">
+                            <h4>Wybiera archetyp Digital Diva</h4>
+                            <p>Tworzy profil z unikalną estetykę i wizją</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-connector"></div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-platform portfolio">Portfolio+</div>
+                        <div class="step-content">
+                            <h4>Uploaduje stylizacje</h4>
+                            <p>Otrzymuje oceny społeczności i AI analysis</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-connector"></div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-platform hhu">Hip-Hop Universe</div>
+                        <div class="step-content">
+                            <h4>Łączy się z raperem</h4>
+                            <p>AI matchmaking znajduje idealnego partnera do kolaboracji</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-connector"></div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">4</div>
+                        <div class="step-platform drift">Drift Money</div>
+                        <div class="step-content">
+                            <h4>Otrzymuje DRT za sesję</h4>
+                            <p>Inwestuje tokeny w innych artystów i tworzy NFT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ecosystem Stats -->
+        <section class="ecosystem-stats">
+            <div class="section-container">
+                <h2 class="section-title">Siła Ekosystemu</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-number" data-target="50000">0</div>
+                        <div class="stat-label">Aktywnych Twórców</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🪙</div>
+                        <div class="stat-number" data-target="2500000">0</div>
+                        <div class="stat-label">Drift Tokenów w Obiegu</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💎</div>
+                        <div class="stat-number" data-target="15000">0</div>
+                        <div class="stat-label">NFT Utworzonych</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🌍</div>
+                        <div class="stat-number" data-target="120">0</div>
+                        <div class="stat-label">Krajów</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Types -->
+        <section class="user-types">
+            <div class="section-container">
+                <h2 class="section-title">Znajdź Swoją Rolę</h2>
+                <p class="section-description">
+                    Każdy znajdzie miejsce w Hip-Hop Universe Ecosystem
+                </p>
+                
+                <div class="user-types-grid">
+                    <div class="user-type-card creator" onclick="selectUserJourney('creator')">
+                        <div class="user-type-icon">🎤</div>
+                        <h3>Creator / Artist</h3>
+                        <p>Raper, producent, DJ, tancerz, grafficiar</p>
+                        <ul>
+                            <li>Tokenizuj swoją twórczość</li>
+                            <li>Znajdź collaboratorów</li>
+                            <li>Monetyzuj talent</li>
+                            <li>Buduj fanbase</li>
+                        </ul>
+                        <div class="user-journey-preview">
+                            <span class="platform-badge hhu">HHU</span>
+                            <span class="platform-badge drift">Drift</span>
+                            <span class="platform-badge portfolio">Portfolio+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="user-type-card muse" onclick="selectUserJourney('muse')">
+                        <div class="user-type-icon">💎</div>
+                        <h3>Muse / Model</h3>
+                        <p>Digital Diva, Street Oracle, Rhythm Rebel</p>
+                        <ul>
+                            <li>Redefiniuj kobiecą siłę</li>
+                            <li>Twórz Style NFT</li>
+                            <li>Współpracuj z artystami</li>
+                            <li>Inspiruj społeczność</li>
+                        </ul>
+                        <div class="user-journey-preview">
+                            <span class="platform-badge rocket">Rocket</span>
+                            <span class="platform-badge hhu">HHU</span>
+                            <span class="platform-badge portfolio">Portfolio+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="user-type-card fan" onclick="selectUserJourney('fan')">
+                        <div class="user-type-icon">❤️</div>
+                        <h3>Fan / Collector</h3>
+                        <p>Pasjonat kultury hip-hop i kolekcjoner</p>
+                        <ul>
+                            <li>Inwestuj w artystów</li>
+                            <li>Kolekcjonuj NFT</li>
+                            <li>Wpływaj na projekty</li>
+                            <li>Exclusive content</li>
+                        </ul>
+                        <div class="user-journey-preview">
+                            <span class="platform-badge drift">Drift</span>
+                            <span class="platform-badge portfolio">Portfolio+</span>
+                            <span class="platform-badge hhu">HHU</span>
+                        </div>
+                    </div>
+                    
+                    <div class="user-type-card investor" onclick="selectUserJourney('investor')">
+                        <div class="user-type-icon">💼</div>
+                        <h3>Investor / Mentor</h3>
+                        <p>Wspierasz rozwój talentów finansowo</p>
+                        <ul>
+                            <li>ROI z talentów</li>
+                            <li>Portfolio management</li>
+                            <li>Early access</li>
+                            <li>Mentoring programs</li>
+                        </ul>
+                        <div class="user-journey-preview">
+                            <span class="platform-badge drift">Drift</span>
+                            <span class="platform-badge portfolio">Portfolio+</span>
+                            <span class="platform-badge hhu">HHU</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section class="ecosystem-roadmap">
+            <div class="section-container">
+                <h2 class="section-title">Roadmapa Ekosystemu 2025</h2>
+                <div class="roadmap-timeline">
+                    <div class="roadmap-quarter">
+                        <div class="quarter-header">
+                            <h3>Q1 2025</h3>
+                            <span class="quarter-theme">Foundation Merge</span>
+                        </div>
+                        <div class="quarter-milestones">
+                            <div class="milestone">
+                                <span class="milestone-icon">🔐</span>
+                                <span class="milestone-text">Unified authentication system</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">👤</span>
+                                <span class="milestone-text">Cross-platform user profiles</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">🪙</span>
+                                <span class="milestone-text">Basic Drift Token integration</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">🎨</span>
+                                <span class="milestone-text">Shared design system</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-quarter">
+                        <div class="quarter-header">
+                            <h3>Q2 2025</h3>
+                            <span class="quarter-theme">Economic Layer</span>
+                        </div>
+                        <div class="quarter-milestones">
+                            <div class="milestone">
+                                <span class="milestone-icon">🏪</span>
+                                <span class="milestone-text">Full Drift Marketplace launch</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">📈</span>
+                                <span class="milestone-text">Artist tokenization system</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">💰</span>
+                                <span class="milestone-text">Investment platform beta</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">💎</span>
+                                <span class="milestone-text">NFT integration</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-quarter">
+                        <div class="quarter-header">
+                            <h3>Q3 2025</h3>
+                            <span class="quarter-theme">Social Features</span>
+                        </div>
+                        <div class="quarter-milestones">
+                            <div class="milestone">
+                                <span class="milestone-icon">🤖</span>
+                                <span class="milestone-text">Advanced matching algorithms</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">🤝</span>
+                                <span class="milestone-text">Collaborative tools</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">🗳️</span>
+                                <span class="milestone-text">Community governance</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">📱</span>
+                                <span class="milestone-text">Mobile app launch</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-quarter">
+                        <div class="quarter-header">
+                            <h3>Q4 2025</h3>
+                            <span class="quarter-theme">Global Expansion</span>
+                        </div>
+                        <div class="quarter-milestones">
+                            <div class="milestone">
+                                <span class="milestone-icon">🌍</span>
+                                <span class="milestone-text">International markets</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">🔗</span>
+                                <span class="milestone-text">Partnership integrations</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">🧠</span>
+                                <span class="milestone-text">AI personalization</span>
+                            </div>
+                            <div class="milestone">
+                                <span class="milestone-icon">📊</span>
+                                <span class="milestone-text">Analytics dashboard</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="ecosystem-cta">
+            <div class="section-container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Jesteś Gotowy na Rewolucję?</h2>
+                    <p class="cta-description">
+                        Dołącz do pierwszego na świecie ekosystemu łączącego kulturę, finanse i ekspresję. 
+                        Przyszłość jest zdecentralizowana. Przyszłość jest kreatywna. Przyszłość jest teraz.
+                    </p>
+                    <div class="cta-actions">
+                        <button class="btn-primary large" onclick="startOnboarding()">
+                            <span class="btn-icon">🚀</span>
+                            Dołącz do Ekosystemu
+                        </button>
+                        <button class="btn-secondary large" onclick="learnMore()">
+                            <span class="btn-icon">📖</span>
+                            Dowiedz Się Więcej
+                        </button>
+                    </div>
+                    <div class="cta-social">
+                        <a href="#" class="social-link">Discord</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">GitHub</a>
+                        <a href="#" class="social-link">YouTube</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="ecosystem-footer">
+            <div class="section-container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <h3>🧠 Hip-Hop Universe Ecosystem</h3>
+                        <p>Where Culture Meets Technology</p>
+                    </div>
+                    <div class="footer-links">
+                        <div class="link-group">
+                            <h4>Platformy</h4>
+                            <a href="#">Hip-Hop Universe</a>
+                            <a href="#">Drift Money</a>
+                            <a href="#">Portfolio+</a>
+                            <a href="#">Rocket Fuell Girls</a>
+                        </div>
+                        <div class="link-group">
+                            <h4>Społeczność</h4>
+                            <a href="#">Discord</a>
+                            <a href="#">Twitter</a>
+                            <a href="#">YouTube</a>
+                            <a href="#">Blog</a>
+                        </div>
+                        <div class="link-group">
+                            <h4>Zasoby</h4>
+                            <a href="#">Dokumentacja</a>
+                            <a href="#">API</a>
+                            <a href="#">Whitepaper</a>
+                            <a href="#">GitHub</a>
+                        </div>
+                        <div class="link-group">
+                            <h4>Wsparcie</h4>
+                            <a href="#">Help Center</a>
+                            <a href="#">Kontakt</a>
+                            <a href="#">Bezpieczeństwo</a>
+                            <a href="#">Status</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Hip-Hop Universe Ecosystem. Technology meets Culture.</p>
+                    <div class="footer-legal">
+                        <a href="#">Polityka Prywatności</a>
+                        <a href="#">Warunki Użytkowania</a>
+                        <a href="#">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ecosystem.js"></script>
+</body>
+</html>

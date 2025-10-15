@@ -1,0 +1,41 @@
+:root{
+  --bg: #0f172a;
+  --card: rgba(255,255,255,0.04);
+  --accent: #ff4d6d;
+  --muted: #9aa4b2;
+}
+html,body,#__next{
+  height:100%;
+}
+body{
+  margin:0;
+  font-family: Inter, Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, #071029 0%, #0f172a 100%);
+  color:#e6eef8;
+  -webkit-font-smoothing:antialiased;
+}
+.container{
+  max-width:1000px;
+  margin:32px auto;
+  padding:20px;
+}
+.card{
+  background:var(--card);
+  border-radius:12px;
+  padding:18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+h1,h2,h3{margin:0 0 12px 0;}
+button{
+  background:var(--accent);
+  color:white;
+  border:0;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+small{color:var(--muted)}
+.row{display:flex;gap:16px;align-items:flex-start}
+.col{flex:1}
+.profile-avatar{width:120px;height:120px;border-radius:12px;background:#0b1220;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted)}
+.nft-card{border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;margin:8px 0}

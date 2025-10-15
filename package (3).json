@@ -1,0 +1,1 @@
+{"name":"pinkplayevo-jazn","version":"0.1.0","description":"PinkPlayEvo Jaźń System","main":"dist/index.js","scripts":{"build":"tsc","start":"node dist/index.js","test":"ts-node quickTest.ts","dev":"ts-node src_index_example.ts"},"devDependencies":{"typescript":"^5.0.0","ts-node":"^10.9.0","@types/node":"^20.0.0"}}

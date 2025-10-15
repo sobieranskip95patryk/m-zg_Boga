@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hip-Hop Universe - Dołącz do Rewolucji</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/onboarding.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="onboarding-page">
+    
+    <!-- Onboarding Container -->
+    <div class="onboarding-container">
+        
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-text" id="progressText">Krok 1 z 4</span>
+        </div>
+
+        <!-- Step 1: Welcome -->
+        <div class="onboarding-step active" id="step1">
+            <div class="step-content">
+                <div class="step-icon">🧠</div>
+                <h1 class="step-title">Witaj w Hip-Hop Universe!</h1>
+                <p class="step-description">
+                    Pierwsza na świecie platforma łącząca całą kulturę hip-hop z technologią Web3. 
+                    Miejsce, gdzie twórcy zyskują niezależność, a fani stają się inwestorami.
+                </p>
+                
+                <div class="feature-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🎵</span>
+                        <span class="highlight-text">Kreatywne pokoje do współpracy</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🪙</span>
+                        <span class="highlight-text">Tokenizacja i monetyzacja</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🌍</span>
+                        <span class="highlight-text">Globalna społeczność</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🎓</span>
+                        <span class="highlight-text">Nauka od legend hip-hop</span>
+                    </div>
+                </div>
+                
+                <button class="step-button" onclick="nextStep()">Rozpocznij Podróż</button>
+            </div>
+        </div>
+
+        <!-- Step 2: User Type Selection -->
+        <div class="onboarding-step" id="step2">
+            <div class="step-content">
+                <div class="step-icon">👥</div>
+                <h1 class="step-title">Kim jesteś w świecie hip-hop?</h1>
+                <p class="step-description">
+                    Wybierz swoją rolę, aby dostosować platformę do Twoich potrzeb.
+                </p>
+                
+                <div class="user-types">
+                    <div class="user-type-card" data-type="artist" onclick="selectUserType('artist')">
+                        <div class="user-type-icon">🎤</div>
+                        <h3 class="user-type-title">Artysta / Twórca</h3>
+                        <p class="user-type-description">Raper, DJ, producent, tancerz, grafficiar</p>
+                        <ul class="user-type-benefits">
+                            <li>Własne tokeny i NFT</li>
+                            <li>Kreatywne pokoje</li>
+                            <li>Mentoring od legend</li>
+                            <li>Crowdfunding projektów</li>
+                        </ul>
+                        <span class="selection-indicator">✓</span>
+                    </div>
+                    
+                    <div class="user-type-card" data-type="fan" onclick="selectUserType('fan')">
+                        <div class="user-type-icon">❤️</div>
+                        <h3 class="user-type-title">Fan / Kolekcjoner</h3>
+                        <p class="user-type-description">Pasjonat kultury hip-hop</p>
+                        <ul class="user-type-benefits">
+                            <li>Inwestycje w artystów</li>
+                            <li>Exclusive content</li>
+                            <li>Kolekcje NFT</li>
+                            <li>Głosowanie w projektach</li>
+                        </ul>
+                        <span class="selection-indicator">✓</span>
+                    </div>
+                    
+                    <div class="user-type-card" data-type="investor" onclick="selectUserType('investor')">
+                        <div class="user-type-icon">💼</div>
+                        <h3 class="user-type-title">Inwestor / Mentor</h3>
+                        <p class="user-type-description">Wspierasz rozwój talentów</p>
+                        <ul class="user-type-benefits">
+                            <li>Portfolio artystów</li>
+                            <li>ROI z tokenów</li>
+                            <li>Mentoring platform</li>
+                            <li>Early access</li>
+                        </ul>
+                        <span class="selection-indicator">✓</span>
+                    </div>
+                </div>
+                
+                <button class="step-button" id="step2Button" onclick="nextStep()" disabled>Kontynuuj</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Profile Setup -->
+        <div class="onboarding-step" id="step3">
+            <div class="step-content">
+                <div class="step-icon">📝</div>
+                <h1 class="step-title">Stwórz swój profil</h1>
+                <p class="step-description">
+                    Opowiedz światu o sobie i swoich pasjach w hip-hop.
+                </p>
+                
+                <form class="profile-form" id="profileForm">
+                    <div class="form-group">
+                        <label for="username">Nazwa użytkownika *</label>
+                        <input type="text" id="username" name="username" placeholder="np. MC_YourName" required>
+                        <small class="form-hint">Będzie to Twoja unikalna nazwa w Hip-Hop Universe</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="displayName">Nazwa artystyczna</label>
+                        <input type="text" id="displayName" name="displayName" placeholder="Jak chcesz być znany?">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio">Bio / Opis</label>
+                        <textarea id="bio" name="bio" placeholder="Opowiedz o swojej pasji do hip-hop, inspiracjach, celach..." rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Lokalizacja</label>
+                        <input type="text" id="location" name="location" placeholder="Miasto, Kraj">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="skills">Umiejętności / Zainteresowania</label>
+                        <div class="skills-selector">
+                            <button type="button" class="skill-tag" data-skill="rap">Rap</button>
+                            <button type="button" class="skill-tag" data-skill="production">Produkcja</button>
+                            <button type="button" class="skill-tag" data-skill="djing">DJ-ing</button>
+                            <button type="button" class="skill-tag" data-skill="dance">Taniec</button>
+                            <button type="button" class="skill-tag" data-skill="graffiti">Graffiti</button>
+                            <button type="button" class="skill-tag" data-skill="beatbox">Beatbox</button>
+                            <button type="button" class="skill-tag" data-skill="writing">Teksty</button>
+                            <button type="button" class="skill-tag" data-skill="management">Management</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="socials">Social Media</label>
+                        <div class="social-inputs">
+                            <input type="url" name="instagram" placeholder="Instagram URL">
+                            <input type="url" name="twitter" placeholder="Twitter/X URL">
+                            <input type="url" name="youtube" placeholder="YouTube URL">
+                            <input type="url" name="spotify" placeholder="Spotify URL">
+                        </div>
+                    </div>
+                </form>
+                
+                <button class="step-button" onclick="nextStep()">Utwórz Profil</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Blockchain Setup -->
+        <div class="onboarding-step" id="step4">
+            <div class="step-content">
+                <div class="step-icon">🔗</div>
+                <h1 class="step-title">Podłącz swój portfel</h1>
+                <p class="step-description">
+                    Połącz portfel kryptowalut, aby w pełni korzystać z funkcji Web3 platformy.
+                </p>
+                
+                <div class="wallet-options">
+                    <div class="wallet-option" onclick="connectWallet('metamask')">
+                        <img src="../assets/images/metamask-logo.png" alt="MetaMask" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI0Y2ODUxQiIvPgo8dGV4dCB4PSIyMCIgeT0iMjgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk08L3RleHQ+Cjwvc3ZnPgo='">
+                        <div class="wallet-info">
+                            <h3>MetaMask</h3>
+                            <p>Najpopularniejszy portfel Ethereum</p>
+                        </div>
+                        <span class="wallet-status">Połącz</span>
+                    </div>
+                    
+                    <div class="wallet-option" onclick="connectWallet('walletconnect')">
+                        <img src="../assets/images/walletconnect-logo.png" alt="WalletConnect" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iIzM5ODlEQSIvPgo8dGV4dCB4PSIyMCIgeT0iMjgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlc8L3RleHQ+Cjwvc3ZnPgo='">
+                        <div class="wallet-info">
+                            <h3>WalletConnect</h3>
+                            <p>Obsługuje większość portfeli mobilnych</p>
+                        </div>
+                        <span class="wallet-status">Połącz</span>
+                    </div>
+                    
+                    <div class="wallet-option" onclick="connectWallet('coinbase')">
+                        <img src="../assets/images/coinbase-logo.png" alt="Coinbase Wallet" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iIzAwNTJGRiIvPgo8dGV4dCB4PSIyMCIgeT0iMjgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkM8L3RleHQ+Cjwvc3ZnPgo='">
+                        <div class="wallet-info">
+                            <h3>Coinbase Wallet</h3>
+                            <p>Bezpieczny portfel od Coinbase</p>
+                        </div>
+                        <span class="wallet-status">Połącz</span>
+                    </div>
+                </div>
+                
+                <div class="blockchain-benefits">
+                    <h3>Co daje połączenie portfela?</h3>
+                    <ul>
+                        <li>🪙 Tworzenie i handel tokenami artystów</li>
+                        <li>💎 Kupowanie i sprzedawanie NFT</li>
+                        <li>🤝 Bezpieczne smart kontrakty</li>
+                        <li>💰 Automatyczne rozliczenia royalties</li>
+                        <li>🗳️ Głosowanie w DAO governance</li>
+                    </ul>
+                </div>
+                
+                <div class="step-actions">
+                    <button class="step-button secondary" onclick="skipWallet()">Pomiń na razie</button>
+                    <button class="step-button" id="completeButton" onclick="completeOnboarding()" disabled>Zakończ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Step -->
+        <div class="onboarding-step" id="stepSuccess">
+            <div class="step-content success-content">
+                <div class="success-animation">🎉</div>
+                <h1 class="step-title">Witaj w Hip-Hop Universe!</h1>
+                <p class="step-description">
+                    Twój profil został utworzony. Gotowy na rozpoczęcie przygody w cyfrowym świecie hip-hop?
+                </p>
+                
+                <div class="next-steps">
+                    <h3>Następne kroki:</h3>
+                    <div class="next-step-item">
+                        <span class="step-number">1</span>
+                        <div class="step-info">
+                            <h4>Eksploruj platformę</h4>
+                            <p>Poznaj wszystkie funkcje i możliwości</p>
+                        </div>
+                    </div>
+                    <div class="next-step-item">
+                        <span class="step-number">2</span>
+                        <div class="step-info">
+                            <h4>Połącz się ze społecznością</h4>
+                            <p>Znajdź artystów o podobnych zainteresowaniach</p>
+                        </div>
+                    </div>
+                    <div class="next-step-item">
+                        <span class="step-number">3</span>
+                        <div class="step-info">
+                            <h4>Rozpocznij pierwszy projekt</h4>
+                            <p>Upload track, stwórz NFT lub zaplanuj kolaborację</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="success-actions">
+                    <button class="step-button" onclick="goToDashboard()">Przejdź do Dashboard</button>
+                    <button class="step-button secondary" onclick="explorePlatform()">Eksploruj Platformę</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="onboarding-navigation">
+            <button class="nav-button" id="backButton" onclick="previousStep()" disabled>← Wstecz</button>
+            <button class="nav-button skip" onclick="skipOnboarding()">Pomiń</button>
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/onboarding.js"></script>
+</body>
+</html>
