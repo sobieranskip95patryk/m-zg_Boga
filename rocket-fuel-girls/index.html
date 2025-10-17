@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/rocket-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🚀 Rocket Fuel Girls - Galaktyczne Bohaterki</title>
+    <meta name="description" content="Dołącz do zespołu Rocket Fuel Girls - galaktycznych bohaterek zarządzających paliwami wszechświata!" />
+    
+    <!-- Cosmic Theme Colors -->
+    <meta name="theme-color" content="#6c5ce7" />
+    <meta name="msapplication-TileColor" content="#6c5ce7" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Rocket Fuel Girls - Galaktyczne Bohaterki" />
+    <meta property="og:description" content="Poznaj 6 niezwykłych bohaterek kosmicznych i ich unikalne paliwa!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.png" />
+    
+    <!-- Preload Critical Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <style>
+        /* Critical CSS for fast loading */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #b3b3e6;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        
+        .rocket-loader {
+            font-size: 4rem;
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        .loading-text {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #6c5ce7;
+            text-align: center;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- Loading Screen -->
+        <div class="loading-screen" id="loading-screen">
+            <div class="rocket-loader">🚀</div>
+            <div class="loading-text">
+                Ładowanie Rocket Fuel Girls...<br>
+                <small>Przygotowywanie galaktycznej przygody</small>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="/src/main.jsx"></script>
+    
+    <script>
+        // Remove loading screen when page is loaded
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.style.opacity = '0';
+                    loadingScreen.style.transition = 'opacity 0.5s ease-out';
+                    setTimeout(() => {
+                        loadingScreen.remove();
+                    }, 500);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
