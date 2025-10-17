@@ -86,7 +86,9 @@
         <script src="../GlobalVision_Module/main.js"></script>
         <script>
     // Twój klucz API Google z Google Cloud (przechowuj bezpiecznie, np. w .env w produkcji)
-    const GEMINI_API_KEY = 'TU_WSTAW_KLUCZ_API'; // Wstaw swój klucz API jeśli chcesz używać w JS
+    // UWAGA: Nigdy nie umieszczaj kluczy API bezpośrednio w kodzie frontend!
+    // W produkcji użyj backend API lub zmiennych środowiskowych dla build process
+    const GEMINI_API_KEY = null; // Klucz API powinien być obsługiwany przez backend
     const VERTEX_AI_URL = 'https://us-central1-aiplatform.googleapis.com/v1/projects/turbo-apex-123/locations/us-central1/endpoints/456789:predict'; // Przykładowy URL – dostosuj w GCP
 
         // Funkcja aktualizująca status z API Google
@@ -158,6 +160,10 @@
             document.getElementById('loading').style.display = 'block';
             document.getElementById('error').style.display = 'none';
             try {
+                if (!GEMINI_API_KEY) {
+                    throw new Error('API key not configured. Use backend endpoint instead.');
+                }
+                
                 const response = await fetch(VERTEX_AI_URL, {
                     method: 'POST',
                     headers: {

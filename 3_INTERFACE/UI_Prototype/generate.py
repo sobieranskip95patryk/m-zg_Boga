@@ -1,14 +1,20 @@
 import json
-with open("../../2_MODULES/MetaGenius_AGI/Intent_Engine.json", "r", encoding="utf-8") as f:
-    config = json.load(f)
-print(config["intent_config"]["core_parameters"]["W"])  # Wyświetli 7
+import os
 from google.generativeai import GenerativeModel, types
 import google.generativeai as genai
 
+with open("../../2_MODULES/MetaGenius_AGI/Intent_Engine.json", "r", encoding="utf-8") as f:
+    config = json.load(f)
+print(config["intent_config"]["core_parameters"]["W"])  # Wyświetli 7
+
 def generate():
     # Konfiguracja klienta Vertex AI
+    api_key = os.getenv('GOOGLE_API_KEY')
+    if not api_key:
+        raise ValueError("GOOGLE_API_KEY environment variable is required")
+    
     genai.configure(
-        api_key='AIzaSyAQoN7OQhHZ4DKL3dbKkZrBDp7frWxGpyQ',  # Twój klucz API (dla testów; w produkcji użyj poświadczeń GCP)
+        api_key=api_key,  # Klucz API z zmiennej środowiskowej
         vertexai=True,
         project='turboprojekt',  # Twój projekt GCP
         location='global',       # Lokalizacja projektu
