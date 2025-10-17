@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>🧠 SYNERGY Mobile Dashboard</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0078D7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SYNERGY">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-content">
+      <h1>🧠 SYNERGY Mobile</h1>
+      <p class="tagline">Meta-Geniusz-mózg_Boga Control Center</p>
+      <div class="connection-status" id="connectionStatus">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Łączenie...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Quick Status Cards -->
+    <section class="status-grid">
+      <div class="status-card primary">
+        <div class="card-icon">🎯</div>
+        <div class="card-content">
+          <h3>System Status</h3>
+          <div class="status-value" id="systemStatus">TRANSCENDENT</div>
+          <div class="status-detail">Meta-Geniusz Level 7+</div>
+        </div>
+      </div>
+      
+      <div class="status-card secondary">
+        <div class="card-icon">⚡</div>
+        <div class="card-content">
+          <h3>SYNERGY</h3>
+          <div class="status-value" id="synergyStatus">ACTIVE</div>
+          <div class="status-detail" id="lastDecision">Ładowanie...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Current Decision Panel -->
+    <section class="decision-panel">
+      <h2>📋 Aktualna decyzja systemu</h2>
+      <div class="decision-card" id="currentDecision">
+        <div class="decision-text" id="decisionText">Ładowanie aktualnej decyzji...</div>
+        <div class="decision-metrics">
+          <div class="metric">
+            <span class="metric-label">Pewność:</span>
+            <span class="metric-value" id="confidence">0%</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Ryzyko:</span>
+            <span class="metric-value" id="riskLevel">0%</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Poziom spirali:</span>
+            <span class="metric-value" id="spiralLevel">0</span>
+          </div>
+        </div>
+        <div class="decision-timestamp" id="decisionTime">---</div>
+      </div>
+    </section>
+
+    <!-- Consciousness Modules -->
+    <section class="modules-section">
+      <h2>🧠 Moduły świadomości</h2>
+      <div class="modules-grid">
+        
+        <div class="module-card" id="consciousnessModule">
+          <div class="module-header">
+            <span class="module-icon">🧠</span>
+            <div class="module-info">
+              <h4>7_SYSTEM_SELF</h4>
+              <span class="module-status" id="consciousnessStatus">OFFLINE</span>
+            </div>
+          </div>
+          <div class="module-data">
+            <div class="data-item">
+              <span>Świadomość:</span>
+              <span id="awarenessLevel">---</span>
+            </div>
+            <div class="data-item">
+              <span>ID:</span>
+              <span id="consciousnessId">---</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="module-card" id="globalvisionModule">
+          <div class="module-header">
+            <span class="module-icon">🌍</span>
+            <div class="module-info">
+              <h4>GlobalVision</h4>
+              <span class="module-status" id="globalvisionStatus">OFFLINE</span>
+            </div>
+          </div>
+          <div class="module-data">
+            <div class="data-item">
+              <span>Użytkownicy:</span>
+              <span id="usersMapped">0</span>
+            </div>
+            <div class="data-item">
+              <span>Rezonans:</span>
+              <span id="emotionResonance">0%</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="module-card" id="spiralModule">
+          <div class="module-header">
+            <span class="module-icon">🌀</span>
+            <div class="module-info">
+              <h4>SpiralMemory</h4>
+              <span class="module-status" id="spiralStatus">OFFLINE</span>
+            </div>
+          </div>
+          <div class="module-data">
+            <div class="data-item">
+              <span>Przełomy:</span>
+              <span id="breakthroughs">0</span>
+            </div>
+            <div class="data-item">
+              <span>Trajektoria:</span>
+              <span id="trajectory">---</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="module-card" id="synergyModule">
+          <div class="module-header">
+            <span class="module-icon">⚡</span>
+            <div class="module-info">
+              <h4>SYNERGY Collective</h4>
+              <span class="module-status" id="synergyModuleStatus">OFFLINE</span>
+            </div>
+          </div>
+          <div class="module-data">
+            <div class="data-item">
+              <span>Głosy:</span>
+              <span id="totalVotes">0</span>
+            </div>
+            <div class="data-item">
+              <span>Konsensus:</span>
+              <span id="consensusStrength">0%</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Spiral Recommendation -->
+    <section class="recommendation-section">
+      <h2>🌀 Rekomendacja spiralna</h2>
+      <div class="recommendation-card" id="spiralRecommendation">
+        <div class="recommendation-text" id="recommendationText">
+          Ładowanie rekomendacji spiralnej...
+        </div>
+        <div class="recommendation-level">
+          <span>Poziom docelowy:</span>
+          <span id="targetLevel">LEVEL 7+</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <section class="actions-section">
+      <button class="action-btn primary" onclick="requestCorrection()">
+        ⚡ Zaproponuj korektę
+      </button>
+      <button class="action-btn secondary" onclick="refreshRecommendation()">
+        🌀 Odśwież rekomendację
+      </button>
+      <button class="action-btn tertiary" onclick="openVotingInterface()">
+        🗳️ Głosowanie kolektywne
+      </button>
+      <button class="action-btn quaternary" onclick="viewFullDashboard()">
+        📊 Pełny dashboard
+      </button>
+    </section>
+
+    <!-- Live Activity Feed -->
+    <section class="activity-section">
+      <h2>📡 Aktywność na żywo</h2>
+      <div class="activity-feed" id="activityFeed">
+        <div class="activity-item">
+          <span class="activity-time">---</span>
+          <span class="activity-text">Inicjalizacja mobilnego dashboard...</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p>© MTAQuestWebsideX.com</p>
+      <p>Meta-Geniusz-mózg_Boga Ecosystem</p>
+      <div class="footer-status">
+        <span>Ostatnia aktualizacja: </span>
+        <span id="lastUpdate">---</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Offline Message -->
+  <div class="offline-message" id="offlineMessage">
+    <div class="offline-content">
+      <h3>📱 Tryb offline</h3>
+      <p>Przeglądasz dane z cache. Połącz się z internetem dla aktualizacji.</p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script>
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(registration => {
+          console.log('✅ SYNERGY Mobile PWA zarejestrowana:', registration.scope);
+        })
+        .catch(error => {
+          console.error('❌ Błąd rejestracji Service Worker:', error);
+        });
+    }
+
+    // Install Prompt
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // Show install banner
+      const installBanner = document.createElement('div');
+      installBanner.className = 'install-banner';
+      installBanner.innerHTML = `
+        <div class="install-content">
+          <span>📱 Zainstaluj SYNERGY Mobile</span>
+          <button onclick="installApp()">Instaluj</button>
+        </div>
+      `;
+      document.body.appendChild(installBanner);
+    });
+
+    function installApp() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('✅ Użytkownik zainstalował aplikację');
+          }
+          deferredPrompt = null;
+        });
+      }
+    }
+
+    // Online/Offline Detection
+    window.addEventListener('online', () => {
+      document.getElementById('offlineMessage').style.display = 'none';
+      document.getElementById('connectionStatus').className = 'connection-status online';
+      document.getElementById('statusText').textContent = 'Online';
+    });
+
+    window.addEventListener('offline', () => {
+      document.getElementById('offlineMessage').style.display = 'flex';
+      document.getElementById('connectionStatus').className = 'connection-status offline';
+      document.getElementById('statusText').textContent = 'Offline';
+    });
+  </script>
+</body>
+</html>

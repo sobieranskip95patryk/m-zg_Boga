@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 Kolektywna Jaźń – Puls Systemu</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #0c1445 0%, #1a1a2e 50%, #2d1b69 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            background: linear-gradient(45deg, #9c27b0, #e91e63, #ff5722);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(156, 39, 176, 0.3);
+        }
+        
+        .collective-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .panel {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .panel-title {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: #e91e63;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .emotion-radar {
+            width: 100%;
+            height: 400px;
+            position: relative;
+        }
+        
+        .dominant-emotion {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(233, 30, 99, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+        }
+        
+        .dominant-emotion h3 {
+            margin: 0 0 10px 0;
+            color: #e91e63;
+        }
+        
+        .emotion-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .trend-indicators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .trend-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .trend-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .trend-label {
+            font-size: 0.9em;
+            color: #b0bec5;
+        }
+        
+        .recommendations {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        .recommendation-list {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .recommendation-card {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .recommendation-type {
+            background: rgba(255, 152, 0, 0.2);
+            color: #ffb74d;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .recommendation-description {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .weight-adjustments {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .weight-badge {
+            background: rgba(76, 175, 80, 0.2);
+            color: #a5d6a7;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+        
+        .weight-badge.negative {
+            background: rgba(244, 67, 54, 0.2);
+            color: #ef9a9a;
+        }
+        
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(45deg, #f06292, #ba68c8);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-indicator.active {
+            background: #4caf50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+        
+        .status-indicator.inactive {
+            background: #f44336;
+        }
+        
+        @media (max-width: 768px) {
+            .collective-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Kolektywna Jaźń</h1>
+            <p>Puls zbiorowej świadomości systemu - analiza wzorców emocjonalnych i trendów kolektywnych</p>
+            <div>
+                <span class="status-indicator" id="systemStatus"></span>
+                <span id="systemStatusText">Inicjalizacja...</span>
+            </div>
+        </div>
+        
+        <div class="collective-grid">
+            <div class="panel">
+                <div class="panel-title">
+                    📡 Sonar Emocji Kolektywnych
+                </div>
+                <div class="emotion-radar">
+                    <canvas id="collectiveChart"></canvas>
+                </div>
+                <div class="dominant-emotion" id="dominantEmotion">
+                    <h3>Dominująca Emocja</h3>
+                    <div class="emotion-value" id="dominantEmotionValue">Ładowanie...</div>
+                    <div class="trend-label" id="dominantEmotionTrend">Analiza trendów...</div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-title">
+                    📊 Wskaźniki Kolektywne
+                </div>
+                <div class="trend-indicators">
+                    <div class="trend-card">
+                        <div class="trend-value" id="stabilityValue">-</div>
+                        <div class="trend-label">Stabilność Emocjonalna</div>
+                    </div>
+                    <div class="trend-card">
+                        <div class="trend-value" id="totalUsers">-</div>
+                        <div class="trend-label">Aktywni Użytkownicy</div>
+                    </div>
+                    <div class="trend-card">
+                        <div class="trend-value" id="trendDirection">-</div>
+                        <div class="trend-label">Kierunek Trendu</div>
+                    </div>
+                    <div class="trend-card">
+                        <div class="trend-value" id="lastUpdate">-</div>
+                        <div class="trend-label">Ostatnia Aktualizacja</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <div class="panel-title" style="font-size: 1.1em;">
+                        🎭 Rozkład Emocji
+                    </div>
+                    <div id="emotionDistribution"></div>
+                </div>
+            </div>
+            
+            <div class="recommendations">
+                <div class="panel-title">
+                    🎯 Rekomendacje dla SYNERGY
+                </div>
+                <div class="recommendation-list" id="recommendationList">
+                    <div style="text-align: center; color: #90a4ae; padding: 20px;">
+                        Analizowanie wzorców kolektywnych...
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="refreshCollectiveData()">🔄 Odśwież Dane</button>
+            <button class="btn" onclick="generateNewMap()">🗺️ Generuj Mapę</button>
+            <button class="btn" onclick="viewDetailedAnalysis()">📈 Analiza Szczegółowa</button>
+        </div>
+    </div>
+    
+    <script src="collective_visual.js"></script>
+    <script>
+        // Zmienne globalne
+        let collectiveChart = null;
+        let collectiveData = null;
+        
+        // Inicjalizacja
+        document.addEventListener('DOMContentLoaded', function() {
+            initCollectiveRadar();
+            loadCollectiveData();
+            
+            // Auto-refresh co 60 sekund
+            setInterval(loadCollectiveData, 60000);
+        });
+        
+        function initCollectiveRadar() {
+            const ctx = document.getElementById('collectiveChart').getContext('2d');
+            
+            collectiveChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Emocje Kolektywne',
+                        data: [],
+                        backgroundColor: 'rgba(233, 30, 99, 0.2)',
+                        borderColor: 'rgba(233, 30, 99, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(233, 30, 99, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(233, 30, 99, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e0e6ed'
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 1,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: '#e0e6ed',
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            ticks: {
+                                color: '#90a4ae',
+                                backdropColor: 'transparent'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        async function loadCollectiveData() {
+            try {
+                // Próba załadowania z API
+                const response = await fetch('/api/globalvision/collective');
+                if (response.ok) {
+                    collectiveData = await response.json();
+                    updateSystemStatus(true);
+                } else {
+                    throw new Error('API not available');
+                }
+            } catch (error) {
+                console.log('API niedostępne - używanie danych demonstracyjnych');
+                collectiveData = getDemoCollectiveData();
+                updateSystemStatus(false);
+            }
+            
+            updateCollectiveDisplay();
+        }
+        
+        function updateSystemStatus(isActive) {
+            const statusIndicator = document.getElementById('systemStatus');
+            const statusText = document.getElementById('systemStatusText');
+            
+            if (isActive) {
+                statusIndicator.className = 'status-indicator active';
+                statusText.textContent = 'System Aktywny';
+            } else {
+                statusIndicator.className = 'status-indicator inactive';
+                statusText.textContent = 'Tryb Demonstracyjny';
+            }
+        }
+        
+        function updateCollectiveDisplay() {
+            if (!collectiveData) return;
+            
+            // Aktualizuj radar
+            const emotions = collectiveData.emotion_distribution || {};
+            const labels = Object.keys(emotions);
+            const values = Object.values(emotions);
+            
+            collectiveChart.data.labels = labels.map(label => 
+                label.charAt(0).toUpperCase() + label.slice(1)
+            );
+            collectiveChart.data.datasets[0].data = values;
+            collectiveChart.update();
+            
+            // Aktualizuj dominującą emocję
+            const dominantEmotion = collectiveData.dominant_emotion || 'Nieznana';
+            const dominantIntensity = collectiveData.dominant_intensity || 0;
+            const trendDirection = collectiveData.trend_direction || 'stable';
+            
+            document.getElementById('dominantEmotionValue').textContent = dominantEmotion;
+            document.getElementById('dominantEmotionTrend').textContent = 
+                `Intensywność: ${(dominantIntensity * 100).toFixed(1)}% | Trend: ${trendDirection}`;
+            
+            // Aktualizuj wskaźniki
+            document.getElementById('stabilityValue').textContent = 
+                (collectiveData.emotional_stability * 100).toFixed(1) + '%';
+            document.getElementById('totalUsers').textContent = collectiveData.total_users || 0;
+            document.getElementById('trendDirection').textContent = trendDirection;
+            
+            const lastUpdate = new Date(collectiveData.analysis_timestamp || Date.now());
+            document.getElementById('lastUpdate').textContent = lastUpdate.toLocaleTimeString();
+            
+            // Aktualizuj rozkład emocji
+            updateEmotionDistribution(emotions);
+            
+            // Załaduj rekomendacje
+            loadRecommendations();
+        }
+        
+        function updateEmotionDistribution(emotions) {
+            const distributionDiv = document.getElementById('emotionDistribution');
+            distributionDiv.innerHTML = '';
+            
+            for (const [emotion, value] of Object.entries(emotions)) {
+                const emotionBar = document.createElement('div');
+                emotionBar.style.cssText = `
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin: 8px 0;
+                    padding: 8px;
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 6px;
+                `;
+                
+                const percentage = (value * 100).toFixed(1);
+                emotionBar.innerHTML = `
+                    <span>${emotion}</span>
+                    <span style="color: #e91e63; font-weight: bold;">${percentage}%</span>
+                `;
+                
+                distributionDiv.appendChild(emotionBar);
+            }
+        }
+        
+        async function loadRecommendations() {
+            try {
+                const response = await fetch('/api/globalvision/recommendations');
+                if (response.ok) {
+                    const recommendations = await response.json();
+                    updateRecommendations(recommendations);
+                } else {
+                    updateRecommendations(getDemoRecommendations());
+                }
+            } catch (error) {
+                updateRecommendations(getDemoRecommendations());
+            }
+        }
+        
+        function updateRecommendations(recommendations) {
+            const listDiv = document.getElementById('recommendationList');
+            listDiv.innerHTML = '';
+            
+            if (!recommendations || recommendations.length === 0) {
+                listDiv.innerHTML = '<div style="text-align: center; color: #90a4ae; padding: 20px;">Brak rekomendacji w tym momencie</div>';
+                return;
+            }
+            
+            recommendations.forEach(rec => {
+                const recCard = document.createElement('div');
+                recCard.className = 'recommendation-card';
+                
+                const weightBadges = Object.entries(rec.synergy_weight_adjustments || {})
+                    .map(([key, value]) => {
+                        const isNegative = value < 0;
+                        const badgeClass = isNegative ? 'weight-badge negative' : 'weight-badge';
+                        const sign = value > 0 ? '+' : '';
+                        return `<span class="${badgeClass}">${key}: ${sign}${value}</span>`;
+                    }).join('');
+                
+                recCard.innerHTML = `
+                    <div class="recommendation-type">${rec.type}</div>
+                    <div class="recommendation-description">${rec.description}</div>
+                    <div class="weight-adjustments">${weightBadges}</div>
+                    <div style="margin-top: 10px; font-size: 0.9em; color: #90a4ae;">
+                        Pewność: ${(rec.confidence * 100).toFixed(1)}%
+                    </div>
+                `;
+                
+                listDiv.appendChild(recCard);
+            });
+        }
+        
+        function getDemoCollectiveData() {
+            return {
+                dominant_emotion: "curiosity",
+                dominant_intensity: 0.72,
+                emotional_stability: 0.65,
+                trend_direction: "rising",
+                total_users: 8,
+                emotion_distribution: {
+                    "curiosity": 0.72,
+                    "flow": 0.58,
+                    "discovery": 0.45,
+                    "integration": 0.38,
+                    "excitement": 0.35,
+                    "tension": 0.22,
+                    "uncertainty": 0.18,
+                    "transcendence": 0.15
+                },
+                analysis_timestamp: new Date().toISOString()
+            };
+        }
+        
+        function getDemoRecommendations() {
+            return [
+                {
+                    type: "exploration_boost",
+                    description: "Kolektywna ciekawość - zwiększ eksplorację nowych rozwiązań",
+                    synergy_weight_adjustments: {
+                        "exploration": 0.2,
+                        "creativity": 0.15
+                    },
+                    confidence: 0.72
+                },
+                {
+                    type: "maintain_flow",
+                    description: "Wykryto pozytywny flow - utrzymać obecne parametry",
+                    synergy_weight_adjustments: {
+                        "current_strategy": 0.1
+                    },
+                    confidence: 0.58
+                }
+            ];
+        }
+        
+        // Funkcje przycisków
+        function refreshCollectiveData() {
+            loadCollectiveData();
+        }
+        
+        function generateNewMap() {
+            // Symulacja generowania nowej mapy
+            console.log('Generowanie nowej mapy kolektywnej...');
+            setTimeout(() => {
+                loadCollectiveData();
+            }, 1000);
+        }
+        
+        function viewDetailedAnalysis() {
+            // Otwórz szczegółową analizę w nowym oknie
+            window.open('/api/consciousness/dashboard/html', '_blank');
+        }
+    </script>
+</body>
+</html>

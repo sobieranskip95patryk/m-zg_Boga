@@ -1,0 +1,142 @@
+{
+  "name": "SYNERGY Mobile Dashboard",
+  "short_name": "SYNERGY Mobile",
+  "description": "Meta-Geniusz-mózg_Boga Mobile Control Center - Collective Intelligence Dashboard",
+  "start_url": "/synergy-mobile",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0078D7",
+  "scope": "/",
+  "lang": "pl",
+  "categories": ["productivity", "utilities", "lifestyle"],
+  "icons": [
+    {
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Głosowanie kolektywne",
+      "short_name": "Głosuj",
+      "description": "Otwórz interface głosowania SYNERGY",
+      "url": "/synergy-voting",
+      "icons": [
+        {
+          "src": "icons/voting-icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Pełny dashboard",
+      "short_name": "Dashboard",
+      "description": "Otwórz pełny dashboard SYNERGY",
+      "url": "/synergy-dashboard",
+      "icons": [
+        {
+          "src": "icons/dashboard-icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "SpiralMind Visualizer",
+      "short_name": "Spirala",
+      "description": "Otwórz wizualizator spiralny",
+      "url": "/spiral-visualizer",
+      "icons": [
+        {
+          "src": "icons/spiral-icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/mobile-dashboard-1.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "SYNERGY Mobile Dashboard - Główny widok"
+    },
+    {
+      "src": "screenshots/mobile-dashboard-2.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "SYNERGY Mobile Dashboard - Moduły świadomości"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "handle_links": "preferred",
+  "edge_side_panel": {
+    "preferred_width": 480
+  },
+  "share_target": {
+    "action": "/api/synergy/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "synergy",
+      "url": "/synergy-mobile?action=%s"
+    }
+  ]
+}

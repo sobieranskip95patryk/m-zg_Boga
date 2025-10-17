@@ -1,0 +1,76 @@
+{
+  "token_info": {
+    "name": "FURBX",
+    "full_name": "Furby Exchange Token",
+    "symbol": "FBX",
+    "type": "Utility Token",
+    "blockchain": "Simulated",
+    "decimals": 2,
+    "initial_supply": 1000000,
+    "max_supply": 10000000,
+    "created_date": "2025-10-17"
+  },
+  "exchange_rates": {
+    "fantasy_credits_per_fbx": 100,
+    "usd_per_fbx": 0.10,
+    "staking_apy": 0.60,
+    "marketplace_fee": 0.05
+  },
+  "economic_parameters": {
+    "daily_mint_limit": 1000,
+    "burn_rate": 0.02,
+    "staking_minimum": 10,
+    "transfer_fee": 0.01,
+    "premium_unlock_cost": 50,
+    "referral_bonus": 25
+  },
+  "reward_tiers": {
+    "daily_login": 1,
+    "weekly_active": 10,
+    "monthly_active": 50,
+    "content_creation": 20,
+    "successful_referral": 25,
+    "marketplace_sale": 5,
+    "event_participation": 15
+  },
+  "premium_features": {
+    "voice_packs": 25,
+    "premium_avatars": 50,
+    "exclusive_scenes": 75,
+    "heat_boosters": 10,
+    "energy_boosters": 15,
+    "intimacy_boosters": 20,
+    "vip_access": 100,
+    "custom_furby": 200
+  },
+  "staking_pools": {
+    "basic": {
+      "minimum": 10,
+      "apy": 0.30,
+      "lock_period": 0
+    },
+    "premium": {
+      "minimum": 100,
+      "apy": 0.60,
+      "lock_period": 30
+    },
+    "vip": {
+      "minimum": 1000,
+      "apy": 1.20,
+      "lock_period": 90
+    }
+  },
+  "marketplace_integration": {
+    "creator_revenue_share": 0.70,
+    "platform_fee": 0.25,
+    "staking_pool_share": 0.05,
+    "minimum_price": 1,
+    "featured_listing_cost": 20
+  },
+  "governance": {
+    "voting_power_per_fbx": 1,
+    "proposal_threshold": 1000,
+    "voting_duration_days": 7,
+    "implementation_delay_days": 3
+  }
+}

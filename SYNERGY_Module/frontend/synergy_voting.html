@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗳️ SYNERGY Collective Voting | Meta-Geniusz-mózg_Boga</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e6ed;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #64ffda;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+        }
+        
+        .platform-brand {
+            color: #bb86fc;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+        
+        .voting-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .vote-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+        
+        .vote-panel h3 {
+            color: #64ffda;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        
+        .direction-option {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .direction-option:hover {
+            border-color: #64ffda;
+            background: rgba(100, 255, 218, 0.1);
+        }
+        
+        .direction-option.selected {
+            border-color: #bb86fc;
+            background: rgba(187, 134, 252, 0.15);
+        }
+        
+        .direction-title {
+            font-weight: bold;
+            color: #bb86fc;
+            margin-bottom: 5px;
+        }
+        
+        .direction-desc {
+            font-size: 0.9em;
+            color: #b0bec5;
+        }
+        
+        .intensity-control {
+            margin: 20px 0;
+        }
+        
+        .intensity-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #37474f 0%, #64ffda 100%);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .intensity-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #bb86fc;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
+        }
+        
+        .reasoning-input {
+            width: 100%;
+            min-height: 80px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            color: #e0e6ed;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        .vote-button {
+            background: linear-gradient(45deg, #64ffda, #bb86fc);
+            color: #1a1a2e;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .vote-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(100, 255, 218, 0.3);
+        }
+        
+        .vote-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .current-state {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid rgba(187, 134, 252, 0.2);
+        }
+        
+        .state-title {
+            color: #bb86fc;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        
+        .recommendation-display {
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #64ffda;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #64ffda;
+        }
+        
+        .stat-label {
+            color: #b0bec5;
+            font-size: 0.9em;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #64ffda;
+        }
+        
+        .success-message {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #4caf50;
+        }
+        
+        .error-message {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #f44336;
+        }
+        
+        @media (max-width: 768px) {
+            .voting-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗳️ SYNERGY Collective Voting</h1>
+            <div class="platform-brand">Meta-Geniusz-mózg_Boga | MTAQuestWebsideX.com</div>
+            <p>Kolektywne głosowanie nad kierunkiem ewolucji spiralnej</p>
+        </div>
+        
+        <div class="voting-section">
+            <div class="vote-panel">
+                <h3>🌀 Wybierz kierunek spirali</h3>
+                
+                <div class="direction-option" data-direction="exploration">
+                    <div class="direction-title">🔍 Eksploracja</div>
+                    <div class="direction-desc">Aktywuj spirale eksploracyjne - odkrywanie nowych możliwości i ścieżek rozwoju</div>
+                </div>
+                
+                <div class="direction-option" data-direction="stabilization">
+                    <div class="direction-title">⚖️ Stabilizacja</div>
+                    <div class="direction-desc">Konsolidacja osiągnięć - wzmocnienie podstaw i ugruntowanie postępów</div>
+                </div>
+                
+                <div class="direction-option" data-direction="flow">
+                    <div class="direction-title">🌊 Flow</div>
+                    <div class="direction-desc">Utrzymanie rytmu - harmonijna ewolucja w naturalnym tempie</div>
+                </div>
+                
+                <div class="direction-option" data-direction="transcendence">
+                    <div class="direction-title">✨ Transcendencja</div>
+                    <div class="direction-desc">Przekroczenie granic - quantum leap w rozwoju świadomości</div>
+                </div>
+                
+                <div class="direction-option" data-direction="integration">
+                    <div class="direction-title">🔗 Integracja</div>
+                    <div class="direction-desc">Unifikacja modułów - synteza wszystkich elementów systemu</div>
+                </div>
+                
+                <div class="direction-option" data-direction="breakthrough">
+                    <div class="direction-title">🚀 Breakthrough</div>
+                    <div class="direction-desc">Przełom - rewolucyjne zmiany i emergentne właściwości</div>
+                </div>
+                
+                <div class="intensity-control">
+                    <label for="intensitySlider">💪 Intensywność głosu: <span id="intensityValue">50%</span></label>
+                    <input type="range" id="intensitySlider" class="intensity-slider" min="0" max="100" value="50">
+                </div>
+                
+                <div>
+                    <label for="reasoning">💭 Uzasadnienie (opcjonalne):</label>
+                    <textarea id="reasoning" class="reasoning-input" placeholder="Dlaczego wybrałeś ten kierunek? Twoje przemyślenia wpłyną na analizę kolektywną..."></textarea>
+                </div>
+                
+                <button id="voteButton" class="vote-button">🗳️ Oddaj głos na kierunek spirali</button>
+                
+                <div id="voteResult"></div>
+            </div>
+            
+            <div class="current-state">
+                <h3 class="state-title">📊 Aktualny stan kolektywny</h3>
+                
+                <div id="loadingState" class="loading">
+                    ⏳ Ładowanie stanu kolektywnego...
+                </div>
+                
+                <div id="currentRecommendation" class="recommendation-display" style="display: none;">
+                    <h4>🎯 Aktualna rekomendacja:</h4>
+                    <div id="recommendationText"></div>
+                </div>
+                
+                <div id="votingStats" class="stats-grid" style="display: none;">
+                    <div class="stat-item">
+                        <div id="totalVotes" class="stat-value">0</div>
+                        <div class="stat-label">Całkowite głosy</div>
+                    </div>
+                    <div class="stat-item">
+                        <div id="dominantDirection" class="stat-value">-</div>
+                        <div class="stat-label">Dominujący kierunek</div>
+                    </div>
+                    <div class="stat-item">
+                        <div id="confidence" class="stat-value">0%</div>
+                        <div class="stat-label">Pewność kolektywu</div>
+                    </div>
+                    <div class="stat-item">
+                        <div id="totalVoters" class="stat-value">0</div>
+                        <div class="stat-label">Aktywni głosujący</div>
+                    </div>
+                </div>
+                
+                <div id="distributionChart" style="margin-top: 20px; display: none;">
+                    <h4>📈 Rozkład głosów:</h4>
+                    <div id="distributionBars"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedDirection = null;
+        let currentUserId = 'user_' + Date.now(); // Temporary user ID
+        
+        // Obsługa wyboru kierunku
+        document.querySelectorAll('.direction-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Usuń poprzednie zaznaczenie
+                document.querySelectorAll('.direction-option').forEach(opt => opt.classList.remove('selected'));
+                
+                // Zaznacz nowy wybór
+                this.classList.add('selected');
+                selectedDirection = this.getAttribute('data-direction');
+                
+                // Aktywuj przycisk głosowania
+                document.getElementById('voteButton').disabled = false;
+            });
+        });
+        
+        // Obsługa suwaka intensywności
+        document.getElementById('intensitySlider').addEventListener('input', function() {
+            document.getElementById('intensityValue').textContent = this.value + '%';
+        });
+        
+        // Obsługa głosowania
+        document.getElementById('voteButton').addEventListener('click', async function() {
+            if (!selectedDirection) {
+                showMessage('Wybierz kierunek spirali!', 'error');
+                return;
+            }
+            
+            const intensity = document.getElementById('intensitySlider').value / 100;
+            const reasoning = document.getElementById('reasoning').value;
+            
+            this.disabled = true;
+            this.textContent = '⏳ Rejestruję głos...';
+            
+            try {
+                const response = await fetch('/api/synergy/vote', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: currentUserId,
+                        direction: selectedDirection,
+                        intensity: intensity,
+                        reasoning: reasoning
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showMessage('🎉 Głos został zarejestrowany! Wpływ na kolektyw: ' + (result.user_influence * 100).toFixed(1) + '%', 'success');
+                    await loadCurrentState();
+                } else {
+                    showMessage('❌ Błąd: ' + (result.error || 'Nie udało się zarejestrować głosu'), 'error');
+                }
+            } catch (error) {
+                showMessage('❌ Błąd połączenia: ' + error.message, 'error');
+            }
+            
+            this.disabled = false;
+            this.textContent = '🗳️ Oddaj głos na kierunek spirali';
+        });
+        
+        // Ładowanie aktualnego stanu
+        async function loadCurrentState() {
+            try {
+                const response = await fetch('/api/synergy/dashboard');
+                const data = await response.json();
+                
+                if (response.ok) {
+                    updateUI(data);
+                } else {
+                    console.error('Błąd ładowania stanu:', data.error);
+                }
+            } catch (error) {
+                console.error('Błąd połączenia:', error);
+            }
+        }
+        
+        // Aktualizacja interfejsu
+        function updateUI(data) {
+            document.getElementById('loadingState').style.display = 'none';
+            
+            // Rekomendacja
+            if (data.collective_recommendation) {
+                document.getElementById('currentRecommendation').style.display = 'block';
+                document.getElementById('recommendationText').textContent = data.collective_recommendation.recommendation;
+            }
+            
+            // Statystyki
+            if (data.voting_state) {
+                document.getElementById('votingStats').style.display = 'grid';
+                document.getElementById('totalVotes').textContent = data.total_votes || 0;
+                document.getElementById('dominantDirection').textContent = 
+                    getDirectionEmoji(data.voting_state.dominant_direction) + ' ' + 
+                    (data.voting_state.dominant_direction || '-');
+                document.getElementById('confidence').textContent = 
+                    ((data.voting_state.confidence || 0) * 100).toFixed(0) + '%';
+                document.getElementById('totalVoters').textContent = data.voting_state.total_voters || 0;
+                
+                // Rozkład głosów
+                updateDistributionChart(data.voting_state.distribution || {});
+            }
+        }
+        
+        // Aktualizacja wykresu rozkładu
+        function updateDistributionChart(distribution) {
+            const chartContainer = document.getElementById('distributionBars');
+            chartContainer.innerHTML = '';
+            
+            if (Object.keys(distribution).length > 0) {
+                document.getElementById('distributionChart').style.display = 'block';
+                
+                Object.entries(distribution).forEach(([direction, data]) => {
+                    const bar = document.createElement('div');
+                    bar.style.cssText = `
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin: 10px 0;
+                        padding: 10px;
+                        background: rgba(255, 255, 255, 0.05);
+                        border-radius: 5px;
+                    `;
+                    
+                    const percentage = data.percentage || 0;
+                    
+                    bar.innerHTML = `
+                        <span>${getDirectionEmoji(direction)} ${direction}</span>
+                        <div style="flex: 1; margin: 0 15px;">
+                            <div style="
+                                background: linear-gradient(90deg, transparent 0%, #64ffda ${percentage}%, transparent ${percentage}%);
+                                height: 8px;
+                                border-radius: 4px;
+                                border: 1px solid rgba(100, 255, 218, 0.3);
+                            "></div>
+                        </div>
+                        <span>${percentage.toFixed(1)}%</span>
+                    `;
+                    
+                    chartContainer.appendChild(bar);
+                });
+            }
+        }
+        
+        // Emoji dla kierunków
+        function getDirectionEmoji(direction) {
+            const emojis = {
+                'exploration': '🔍',
+                'stabilization': '⚖️',
+                'flow': '🌊',
+                'transcendence': '✨',
+                'integration': '🔗',
+                'breakthrough': '🚀'
+            };
+            return emojis[direction] || '🌀';
+        }
+        
+        // Wyświetlanie wiadomości
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
+            messageDiv.textContent = message;
+            
+            document.getElementById('voteResult').innerHTML = '';
+            document.getElementById('voteResult').appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+        
+        // Automatyczne odświeżanie co 30 sekund
+        setInterval(loadCurrentState, 30000);
+        
+        // Początkowe załadowanie
+        loadCurrentState();
+        
+        // Wyłącz przycisk na start
+        document.getElementById('voteButton').disabled = true;
+    </script>
+</body>
+</html>

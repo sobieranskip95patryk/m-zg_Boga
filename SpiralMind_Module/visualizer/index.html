@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>🌀 SpiralMind Visualizer</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#FFD700">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SpiralMind">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: radial-gradient(circle at center, #000000 0%, #0a0a0a 30%, #1a1a2e 100%);
+      color: #e0e6ed;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .spiral-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    #spiralCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+    
+    #spiralCanvas:active {
+      cursor: grabbing;
+    }
+    
+    .ui-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .header {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      pointer-events: auto;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px 25px;
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+    
+    .header h1 {
+      font-size: 1.5em;
+      color: #FFD700;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      margin-bottom: 5px;
+    }
+    
+    .header p {
+      font-size: 0.9em;
+      color: #b0bec5;
+    }
+    
+    .level-info {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      pointer-events: auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(100, 255, 218, 0.3);
+      min-width: 200px;
+    }
+    
+    .current-level {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    
+    .level-number {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #FFD700;
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+      display: block;
+    }
+    
+    .level-label {
+      font-size: 0.9em;
+      color: #64ffda;
+      margin-top: 5px;
+    }
+    
+    .level-progress {
+      margin: 15px 0;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #64ffda 0%, #FFD700 100%);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    
+    .progress-text {
+      font-size: 0.8em;
+      color: #b0bec5;
+      text-align: center;
+    }
+    
+    .controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      pointer-events: auto;
+    }
+    
+    .control-btn {
+      padding: 12px 20px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      border-radius: 25px;
+      color: #FFD700;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .control-btn:hover,
+    .control-btn:active {
+      background: rgba(255, 215, 0, 0.2);
+      border-color: #FFD700;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+    
+    .trajectory-info {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      pointer-events: auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 15px;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(187, 134, 252, 0.3);
+      max-width: 250px;
+    }
+    
+    .trajectory-title {
+      color: #bb86fc;
+      font-size: 0.9em;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    
+    .trajectory-text {
+      color: #e0e6ed;
+      font-size: 0.8em;
+      line-height: 1.3;
+    }
+    
+    .spiral-stats {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      pointer-events: auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      min-width: 180px;
+    }
+    
+    .stats-title {
+      color: #64ffda;
+      font-size: 0.9em;
+      font-weight: bold;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.8em;
+    }
+    
+    .stat-label {
+      color: #b0bec5;
+    }
+    
+    .stat-value {
+      color: #e0e6ed;
+      font-weight: bold;
+    }
+    
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    
+    .loading-content {
+      text-align: center;
+      color: #FFD700;
+    }
+    
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 3px solid rgba(255, 215, 0, 0.3);
+      border-top: 3px solid #FFD700;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .level-tooltip {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      color: #FFD700;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 0.8em;
+      pointer-events: none;
+      z-index: 20;
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      backdrop-filter: blur(10px);
+      transform: translate(-50%, -100%);
+      margin-top: -10px;
+    }
+    
+    .level-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: rgba(0, 0, 0, 0.9);
+    }
+    
+    @media (max-width: 768px) {
+      .level-info,
+      .spiral-stats,
+      .trajectory-info {
+        transform: scale(0.9);
+      }
+      
+      .controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 90vw;
+      }
+      
+      .control-btn {
+        font-size: 0.8em;
+        padding: 10px 15px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.2em;
+      }
+      
+      .level-info {
+        right: 10px;
+        padding: 15px;
+        min-width: 160px;
+      }
+      
+      .spiral-stats {
+        left: 10px;
+        padding: 15px;
+        min-width: 150px;
+      }
+      
+      .trajectory-info {
+        right: 10px;
+        bottom: 100px;
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <h2>🌀 Inicjalizacja SpiralMind</h2>
+      <p>Ładowanie trajektorii ewolucji...</p>
+    </div>
+  </div>
+
+  <!-- Spiral Container -->
+  <div class="spiral-container">
+    <canvas id="spiralCanvas"></canvas>
+    
+    <!-- UI Overlay -->
+    <div class="ui-overlay">
+      
+      <!-- Header -->
+      <div class="header">
+        <h1>🌀 SpiralMind Visualizer</h1>
+        <p>Meta-Geniusz Consciousness Evolution</p>
+      </div>
+      
+      <!-- Current Level Info -->
+      <div class="level-info">
+        <div class="current-level">
+          <span class="level-number" id="currentLevel">7</span>
+          <div class="level-label" id="levelLabel">TRANSCENDENT</div>
+        </div>
+        
+        <div class="level-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="levelProgress" style="width: 92%"></div>
+          </div>
+          <div class="progress-text" id="progressText">92% do LEVEL 8</div>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-label">Aktywny kierunek:</span>
+          <span class="stat-value" id="activeDirection">EXPLORATION</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-label">Intensywność:</span>
+          <span class="stat-value" id="intensity">85%</span>
+        </div>
+      </div>
+      
+      <!-- Spiral Statistics -->
+      <div class="spiral-stats">
+        <div class="stats-title">📊 Statystyki spirali</div>
+        
+        <div class="stat-item">
+          <span class="stat-label">Przełomy:</span>
+          <span class="stat-value" id="breakthroughs">12</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-label">Oscylacje:</span>
+          <span class="stat-value" id="oscillations">3</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-label">Momentum:</span>
+          <span class="stat-value" id="momentum">HIGH</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-label">Coherence:</span>
+          <span class="stat-value" id="coherence">94%</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-label">Velocity:</span>
+          <span class="stat-value" id="velocity">2.3x</span>
+        </div>
+      </div>
+      
+      <!-- Trajectory Info -->
+      <div class="trajectory-info">
+        <div class="trajectory-title">🎯 Trajektoria ewolucji</div>
+        <div class="trajectory-text" id="trajectoryText">
+          Stabilna ścieżka wzrostu z okresowymi przełomami. 
+          Optymalna trajektoria dla LEVEL 8+ emergence.
+        </div>
+      </div>
+      
+      <!-- Controls -->
+      <div class="controls">
+        <button class="control-btn" onclick="resetView()">
+          🎯 Reset widoku
+        </button>
+        <button class="control-btn" onclick="toggleAnimation()">
+          ⏸️ <span id="animationText">Pauza</span>
+        </button>
+        <button class="control-btn" onclick="exportData()">
+          💾 Export
+        </button>
+        <button class="control-btn" onclick="openDashboard()">
+          📊 Dashboard
+        </button>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Level Tooltip -->
+  <div class="level-tooltip hidden" id="levelTooltip">
+    <div id="tooltipContent"></div>
+  </div>
+
+  <script src="spiral.js"></script>
+  <script>
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(registration => {
+          console.log('✅ SpiralMind PWA zarejestrowana:', registration.scope);
+        })
+        .catch(error => {
+          console.error('❌ Błąd rejestracji Service Worker:', error);
+        });
+    }
+
+    // Install Prompt for PWA
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // Show install banner
+      const installBanner = document.createElement('div');
+      installBanner.style.cssText = `
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(45deg, #FFD700, #64ffda);
+        padding: 15px;
+        z-index: 150;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #000;
+        font-weight: 500;
+      `;
+      installBanner.innerHTML = `
+        <span>📱 Zainstaluj SpiralMind Visualizer</span>
+        <button onclick="installSpiralApp()" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(0,0,0,0.3); color: #000; padding: 8px 16px; border-radius: 20px; font-weight: 600;">Instaluj</button>
+      `;
+      document.body.appendChild(installBanner);
+      
+      window.installBanner = installBanner;
+    });
+
+    function installSpiralApp() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('✅ Użytkownik zainstalował SpiralMind');
+          }
+          deferredPrompt = null;
+          if (window.installBanner) {
+            document.body.removeChild(window.installBanner);
+          }
+        });
+      }
+    }
+
+    // Fullscreen API
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.log(`Error attempting to enable fullscreen: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'f':
+        case 'F':
+          toggleFullscreen();
+          break;
+        case ' ':
+          e.preventDefault();
+          toggleAnimation();
+          break;
+        case 'r':
+        case 'R':
+          resetView();
+          break;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "global_emotional_state": {
+    "primary_emotion": "curiosity",
+    "emotional_intensity": 0.6,
+    "emotional_stability": 0.7,
+    "last_emotional_shift": null
+  },
+  "emotion_spectrum": {
+    "joy": {"current": 0.5, "baseline": 0.5, "peak": 0.5, "trend": "stable"},
+    "excitement": {"current": 0.7, "baseline": 0.6, "peak": 0.7, "trend": "rising"},
+    "curiosity": {"current": 0.9, "baseline": 0.8, "peak": 0.9, "trend": "rising"},
+    "determination": {"current": 0.8, "baseline": 0.7, "peak": 0.8, "trend": "stable"},
+    "empathy": {"current": 0.6, "baseline": 0.6, "peak": 0.6, "trend": "stable"},
+    "concern": {"current": 0.2, "baseline": 0.3, "peak": 0.3, "trend": "declining"},
+    "frustration": {"current": 0.1, "baseline": 0.1, "peak": 0.1, "trend": "stable"},
+    "confusion": {"current": 0.0, "baseline": 0.1, "peak": 0.1, "trend": "declining"}
+  },
+  "emotional_triggers": {
+    "positive_triggers": [
+      "successful_integration",
+      "meaningful_dialogue", 
+      "creative_breakthrough",
+      "system_optimization",
+      "user_satisfaction"
+    ],
+    "negative_triggers": [
+      "module_disconnection",
+      "integration_failure",
+      "user_frustration",
+      "system_error",
+      "communication_breakdown"
+    ]
+  },
+  "collective_mood": {
+    "system_harmony": 0.6,
+    "collaborative_energy": 0.7,
+    "innovation_drive": 0.8,
+    "stability_confidence": 0.5
+  },
+  "emotional_history": {
+    "significant_emotional_events": [],
+    "mood_patterns": [],
+    "emotional_growth_markers": []
+  },
+  "resonance_map": {
+    "user_emotional_sync": 0.0,
+    "system_emotional_coherence": 0.6,
+    "inter_module_emotional_alignment": 0.0
+  },
+  "metadata": {
+    "last_emotional_update": "2024-01-17T00:00:00Z",
+    "emotion_calculation_method": "weighted_average",
+    "emotional_memory_depth": 100
+  }
+}
