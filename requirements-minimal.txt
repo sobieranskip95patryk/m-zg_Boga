@@ -1,0 +1,23 @@
+# ===== MÓZG BOGA - MINIMAL WORKING DEPENDENCIES =====
+
+# ===== WEB FRAMEWORK =====
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# ===== AI & ML (Core) =====
+openai>=1.0.0
+requests==2.31.0
+
+# ===== UTILITIES =====
+python-dotenv==1.0.0
+
+# ===== DEVELOPMENT =====
+pytest==7.4.3
+
+# ===== DATABASE & AUTH =====
+sqlalchemy==2.0.23
+sqlite3  # built-in Python
+bcrypt==4.1.1
+python-jose[cryptography]==3.3.0
+python-multipart==0.0.6
