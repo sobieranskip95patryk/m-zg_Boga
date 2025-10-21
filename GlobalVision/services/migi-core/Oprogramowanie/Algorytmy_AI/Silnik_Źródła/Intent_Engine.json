@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "created": "2025-08-02T00:40:00+02:00",
+    "author": "xAI Grok 3",
+    "domain": "MTAquestWebsidex.com"
+  },
+  "intent_config": {
+    "core_parameters": {
+      "W": 7,
+      "M": 6,
+      "D": 4,
+      "C": 5,
+      "A": 8,
+      "E": 6,
+      "T": 3
+    },
+    "identity_matrix": [3, 6, 9, 9, 6, 3],
+    "phase_weights": {
+      "Destrukcja": 0.5,
+      "Punkt_0": 0.8,
+      "Rozwój": 1.2
+    },
+    "strategy_defaults": {
+      "focus_options": ["recovery", "optimization", "innovation"],
+      "priority_options": ["stability", "growth"],
+      "confidence_threshold": 0.5
+    },
+    "learning_settings": {
+      "learning_rate": 0.1,
+      "memory_limit": 100,
+      "update_interval": "24h"
+    }
+  },
+  "rules": {
+    "intent_adaptation": {
+      "low_quality": {
+        "condition": "quality < 0.5",
+        "action": "set_focus_to_recovery"
+      },
+      "high_quality": {
+        "condition": "quality > 0.7",
+        "action": "set_focus_to_innovation"
+      },
+      "default": {
+        "condition": "true",
+        "action": "maintain_current_focus"
+      }
+    },
+    "matrix_evolution": {
+      "iteration_count": 3,
+      "normalization": 36
+    }
+  },
+  "integration_points": {
+    "AI_Psyche_GOK:AI": {
+      "method": "calculate_success_probability",
+      "input": ["W", "M", "D", "C", "A", "E", "T"],
+      "output": "probability"
+    },
+    "Agent_Model": {
+      "method": "adapt_strategy",
+      "input": ["current_phase", "quality"],
+      "output": "strategy"
+    }
+  }
+}
+{
+  "probability": 0.74,
+  "matrix": [3, 6, 9, 9, 6, 3],
+  "weights": {
+    "W": 1.0,
+    "M": 0.67,
+    "D": 1.0,
+    "C": 1.0,
+    "A": 0.67,
+    "E": 0.33,
+    "T": 1.0
+  },
+  "phase": "Punkt 0"
+}

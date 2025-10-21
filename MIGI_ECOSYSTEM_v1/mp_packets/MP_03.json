@@ -1,0 +1,16 @@
+{
+  "trace_id": "packet-0003",
+  "timestamp": 1760021472,
+  "matrix": [
+    3,
+    6,
+    9,
+    9,
+    6,
+    3
+  ],
+  "energy": "9π",
+  "fib_step": 8,
+  "notes": "Sample MP packet",
+  "sha256": "6c6adbef4e42fee0299c538a3aa7a2dacd07b6dcf4eec0e09476f4c97ecec94d"
+}

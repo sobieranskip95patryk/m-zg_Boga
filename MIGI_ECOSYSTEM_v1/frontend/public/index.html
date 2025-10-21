@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8"/>
+    <title>GOK:AI — Okno % Sukcesu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 2rem; }
+      .card { padding: 1rem; border: 1px solid #ccc; border-radius: 12px; max-width: 640px; }
+      .row { display: flex; gap: 1rem; align-items: center; }
+      .big { font-size: 3rem; font-weight: 700; }
+      label { display:block; margin-top: .5rem; }
+      input, button { padding: .6rem .8rem; border-radius: 8px; border: 1px solid #888; }
+      button { cursor: pointer; }
+      .muted { color: #666; font-size: .9rem; }
+    </style>
+  </head>
+  <body>
+    <h1>GOK:AI — Okno % Sukcesu</h1>
+    <div class="card">
+      <div class="row">
+        <div>
+          <label>Wejście x</label>
+          <input type="number" id="x" value="1.0" step="0.1"/>
+        </div>
+        <div>
+          <label>a</label>
+          <input type="number" id="a" value="1.0" step="0.1"/>
+        </div>
+        <div>
+          <label>b</label>
+          <input type="number" id="b" value="0.0" step="0.1"/>
+        </div>
+        <div>
+          <label>Fib steps</label>
+          <input type="number" id="fib" value="8" step="1"/>
+        </div>
+      </div>
+      <label class="muted">Matryca &lt;369963&gt; (CSV)</label>
+      <input type="text" id="matrix" value="3,6,9,9,6,3" />
+      <p class="muted">Backend URL</p>
+      <input type="text" id="backend" value="http://localhost:8000" style="width:100%"/>
+      <p><button id="go">Oblicz P(S)</button></p>
+      <div id="result" class="big">--%</div>
+      <pre id="details" class="muted"></pre>
+    </div>
+    <script>
+      const btn = document.getElementById('go');
+      btn.addEventListener('click', async () => {
+        const BACKEND_URL = document.getElementById('backend').value.trim();
+        const x = parseFloat(document.getElementById('x').value);
+        const a = parseFloat(document.getElementById('a').value);
+        const b = parseFloat(document.getElementById('b').value);
+        const fib = parseInt(document.getElementById('fib').value);
+        const matrix = document.getElementById('matrix').value.split(',').map(v => parseInt(v.trim())).filter(v => !isNaN(v));
+        const payload = { x, a, b, fib_steps: fib, matrix };
+        const res = await fetch(`${BACKEND_URL}/api/ps`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        document.getElementById('result').textContent = data.ps + '%';
+        document.getElementById('details').textContent = JSON.stringify(data.details, null, 2);
+      });
+    </script>
+  </body>
+</html>

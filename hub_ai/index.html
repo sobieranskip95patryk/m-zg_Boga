@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub AI - Symulacja</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d1a;
+            color: #ffffff;
+            overflow: auto; /* Zmienione na auto, żeby kalkulator był widoczny */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            gap: 2rem;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            max-width: 800px;
+        }
+
+        .core {
+            width: 15rem;
+            height: 15rem;
+            background-color: #ff007f;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 40px rgba(255, 0, 127, 0.8), inset 0 0 20px #ff007f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            z-index: 10;
+            transition: all 0.5s ease-in-out;
+            cursor: pointer;
+        }
+
+        .core:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px rgba(255, 0, 127, 1), inset 0 0 30px #ff007f;
+        }
+
+        .core h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .core p {
+            font-size: 0.875rem;
+            line-height: 1.25;
+            color: #e5e7eb;
+        }
+        
+        .value-display {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: color 0.5s ease-in-out;
+        }
+
+        .w-value {
+            color: #00ff00;
+        }
+
+        .d-value {
+            color: #ff3333;
+        }
+
+        .entity {
+            position: absolute;
+            background-color: #1a1a33;
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            width: 5rem;
+            height: 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 0.75rem;
+            padding: 0.25rem;
+            animation: pulse 2s infinite ease-in-out;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        .entity.visible {
+            opacity: 1;
+        }
+
+        .social-pixels {
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-color: #4CAF50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .developers {
+            bottom: 25%;
+            left: 20%;
+            border-color: #ffeb3b;
+            box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+        }
+
+        .new-project {
+            bottom: 25%;
+            right: 20%;
+            border-color: #9c27b0;
+            box-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+        }
+
+        .message-box {
+            background: rgba(25, 25, 50, 0.9);
+            border: 2px solid #ff007f;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+            text-align: center;
+            min-width: 20rem;
+            max-width: 90%;
+            z-index: 20;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .input-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: #1a1a33;
+            border: 2px solid #007bff;
+            color: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: #ff007f;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label[for="image-file-input"] {
+            background-color: #007bff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            line-height: 1.5;
+            width: 100%;
+            flex: 1;
+        }
+
+        label[for="image-file-input"]:hover {
+            background-color: #0056b3;
+        }
+
+        button {
+            background-color: #007bff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            flex: 1;
+        }
+
+        .flex-container {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #fff;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        #image-display {
+            margin-top: 2rem;
+            border: 2px solid #007bff;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+            max-width: 90%;
+            max-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #image-display img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+        }
+        
+        /* Styl dla kalkulatora sukcesu */
+        .calculator-container {
+            width: 100%;
+            max-width: 600px;
+            background: #1a1a33;
+            border: 2px solid #007bff;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        }
+        
+        .calculator-input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .calculator-input-field {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 120px;
+        }
+
+        .calculator-result-box {
+            background-color: #0d0d1a;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid #4a4a5a;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+        .result-item b {
+            color: #ff007f;
+        }
+        .progress-bar-container {
+            height: 1.5rem;
+            background-color: #4a4a5a;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            transition: width 0.5s ease-in-out;
+            border-radius: 0.5rem;
+        }
+        .success-bar { background-color: #00ff00; }
+        .danger-bar { background-color: #ff3333; }
+        .calculator-message-box {
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 1rem;
+            color: #ff007f;
+        }
+
+        /* Nowe style dla czatu i analizy wizji */
+        .chat-container {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            max-width: 600px;
+            background: #1a1a33;
+            border: 2px solid #007bff;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        }
+
+        .chat-log {
+            height: 200px;
+            overflow-y: auto;
+            border-bottom: 1px solid #4a4a5a;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chat-message {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .user-message {
+            background-color: #0056b3;
+            text-align: right;
+        }
+
+        .ai-message {
+            background-color: #ff007f;
+            text-align: left;
+        }
+
+        .vision-container {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            background: #1a1a33;
+            border: 2px solid #007bff;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="message-box" id="message-box">
+    <p id="message-text">Witaj w systemie **Hub AI**. Wpisz swoje zapytanie poniżej i kliknij **Generuj**.</p>
+</div>
+
+<div class="container">
+    <div class="core" id="core-element">
+        <h1>META-GENIUSZ</h1>
+        <p>System Hub AI</p>
+        <p>GOK:AI</p>
+    </div>
+    
+    <div class="value-display w-value" id="w-value">Wartość Wewnętrzna (W): 7</div>
+    <div class="value-display d-value" id="d-value">Wartość Destrukcji (D): 7</div>
+
+    <div class="entity social-pixels" id="social-pixels">
+        <p>Analiza danych</p>
+        <p>z mediów społecznościowych</p>
+    </div>
+
+    <div class="entity developers" id="developers">
+        <p>Dane od 90 milionów</p>
+        <p>deweloperów</p>
+    </div>
+
+    <div class="entity new-project" id="new-project">
+        <p>Nowy, zoptymalizowany</p>
+        <p>projekt</p>
+    </div>
+    
+</div>
+
+<div class="input-container flex-col">
+    <div class="flex-container">
+        <input type="text" id="user-input" placeholder="Wpisz polecenie tekstowe...">
+        <button id="generate-button">Generuj ✨</button>
+        <button id="tts-button">Mów 🔊</button>
+    </div>
+    <div class="flex-container mt-4">
+        <input type="text" id="image-input" placeholder="Wpisz polecenie obrazkowe...">
+        <button id="generate-image-button">Generuj Obraz ✨</button>
+    </div>
+    <div class="flex-container mt-4">
+        <label for="image-file-input">
+            Analizuj Obraz ✨
+        </label>
+        <input type="file" id="image-file-input" accept="image/*">
+        <button id="analyze-image-button">Analizuj</button>
+    </div>
+    <div class="flex-container mt-4">
+         <button id="evolution-log-button">Dziennik Ewolucji GOK:AI ✨</button>
+    </div>
+    <div class="flex-container mt-4">
+        <button id="generate-m-button">Generuj Macierz Motywacji M ✨</button>
+    </div>
+    <div class="flex-container mt-4">
+        <button id="analyze-m-button">Analizuj Wzorzec Ewolucji M ✨</button>
+    </div>
+    <div class="flex-container mt-4">
+        <button id="generate-d-code-button">Generuj Kod Źródłowy (Dezintegracja) 💥</button>
+    </div>
+    <div class="flex-container mt-4">
+        <button id="analyze-d-button">Analizuj Wzorce Destrukcji (Rozbicie Wzorca) 💥</button>
+    </div>
+    <div class="flex-container mt-4">
+        <button id="run-pipeline-button">Uruchom Silnik GOK:AI ✨</button>
+    </div>
+    <div class="flex-container mt-4">
+        <button id="toggle-chat-button">Rozmawiaj z Mózgiem Boga ✨</button>
+        <button id="toggle-vision-button">Analiza Wizji ✨</button>
+    </div>
+</div>
+
+<div class="calculator-container" id="calculator-container">
+    <h2 class="text-center font-bold text-xl mb-4">Kalkulator Sukcesu GOK:AI</h2>
+    <p class="text-center mb-6 text-gray-400">Dostosuj wartości, aby zobaczyć prawdopodobieństwo sukcesu projektu.</p>
+    <div class="calculator-input-group">
+        <div class="calculator-input-field">
+            <label for="calc-w-value">W (Wew. wartość):</label>
+            <input type="number" id="calc-w-value" value="7" min="1" max="10">
+        </div>
+        <div class="calculator-input-field">
+            <label for="calc-m-value">M (Umiejętności):</label>
+            <input type="number" id="calc-m-value" value="6" min="1" max="10">
+        </div>
+        <div class="calculator-input-field">
+            <label for="calc-d-value">D (Decyzje):</label>
+            <input type="number" id="calc-d-value" value="4" min="1" max="10">
+        </div>
+        <div class="calculator-input-field">
+            <label for="calc-c-value">C (Kontekst):</label>
+            <input type="number" id="calc-c-value" value="5" min="1" max="10">
+        </div>
+        <div class="calculator-input-field">
+            <label for="calc-a-value">A (Osobowość):</label>
+            <input type="number" id="calc-a-value" value="8" min="1" max="10">
+        </div>
+        <div class="calculator-input-field">
+            <label for="calc-e-value">E (Energia):</label>
+            <input type="number" id="calc-e-value" value="6" min="1" max="10">
+        </div>
+        <div class="calculator-input-field">
+            <label for="calc-t-value">T (Tożsamość):</label>
+            <input type="number" id="calc-t-value" value="3" min="1" max="10">
+        </div>
+    </div>
+    
+    <button id="calculate-success-button" class="mt-4">Oblicz Sukces GOK:AI</button>
+
+    <div class="calculator-result-box" id="calc-result-box" style="display:none;">
+        <h3 class="text-center font-bold text-lg mb-2">Wyniki Symulacji</h3>
+        <div class="result-item">
+            <span>Faza Rozwoju:</span>
+            <b id="calc-phase-result"></b>
+        </div>
+        <div class="result-item">
+            <span>Prawdopodobieństwo Sukcesu:</span>
+            <b id="calc-probability-result"></b>
+        </div>
+        <div class="progress-bar-container">
+            <div id="calc-probability-bar" class="progress-bar"></div>
+        </div>
+        <div class="result-item">
+            <span>Status Projektu Głównego:</span>
+            <b id="calc-main-project-status"></b>
+        </div>
+        <div class="calculator-message-box" id="calc-message-box"></div>
+    </div>
+</div>
+
+<div class="chat-container" id="chat-container">
+    <h2 class="text-center font-bold text-xl mb-4">Chat z Mózgiem Boga</h2>
+    <div class="chat-log" id="chat-log"></div>
+    <div class="flex-container">
+        <input type="text" id="chat-input" placeholder="Wpisz wiadomość...">
+        <button id="send-chat-button">Wyślij</button>
+    </div>
+</div>
+
+<div class="vision-container" id="vision-container">
+    <h2 class="text-center font-bold text-xl mb-4">Analiza Wizji Projektu</h2>
+    <p class="text-center mb-4 text-gray-400">Wklej fragment swojej wizji, a GOK:AI oceni jej spójność z zasadami Mózgu Boga.</p>
+    <textarea id="vision-text" class="w-full h-40 p-2 rounded-md bg-gray-800 text-white" placeholder="Wklej tutaj tekst wizji..."></textarea>
+    <button id="analyze-vision-button" class="mt-4 w-full">Analizuj Wizję ✨</button>
+    <div class="vision-result-box mt-4 p-4 rounded-md bg-gray-800 text-left" id="vision-result-box" style="display:none;">
+        <h3 class="font-bold text-lg mb-2">Raport Spójności</h3>
+        <p id="vision-result-text"></p>
+    </div>
+</div>
+
+<div id="image-display"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const userInput = document.getElementById('user-input');
+        const generateButton = document.getElementById('generate-button');
+        const ttsButton = document.getElementById('tts-button');
+        const imageInput = document.getElementById('image-input');
+        const generateImageButton = document.getElementById('generate-image-button');
+        const imageFileInput = document.getElementById('image-file-input');
+        const analyzeImageButton = document.getElementById('analyze-image-button');
+        const evolutionLogButton = document.getElementById('evolution-log-button');
+        const generateMButton = document.getElementById('generate-m-button');
+        const analyzeMButton = document.getElementById('analyze-m-button');
+        const generateDCodeButton = document.getElementById('generate-d-code-button');
+        const analyzeDButton = document.getElementById('analyze-d-button');
+        const runPipelineButton = document.getElementById('run-pipeline-button');
+        const messageBox = document.getElementById('message-box');
+        const messageText = document.getElementById('message-text');
+        const socialPixels = document.getElementById('social-pixels');
+        const developers = document.getElementById('developers');
+        const newProject = document.getElementById('new-project');
+        const imageDisplay = document.getElementById('image-display');
+        const wValueElement = document.getElementById('w-value');
+        const dValueElement = document.getElementById('d-value');
+
+        // Nowe elementy dla kalkulatora
+        const calculateSuccessButton = document.getElementById('calculate-success-button');
+        const calcResultBox = document.getElementById('calc-result-box');
+        const calcPhaseResult = document.getElementById('calc-phase-result');
+        const calcProbabilityResult = document.getElementById('calc-probability-result');
+        const calcProbabilityBar = document.getElementById('calc-probability-bar');
+        const calcMainProjectStatus = document.getElementById('calc-main-project-status');
+        const calcMessageBox = document.getElementById('calc-message-box');
+        
+        // Nowe elementy dla czatu i analizy wizji
+        const toggleChatButton = document.getElementById('toggle-chat-button');
+        const toggleVisionButton = document.getElementById('toggle-vision-button');
+        const chatContainer = document.getElementById('chat-container');
+        const chatLog = document.getElementById('chat-log');
+        const chatInput = document.getElementById('chat-input');
+        const sendChatButton = document.getElementById('send-chat-button');
+        const visionContainer = document.getElementById('vision-container');
+        const visionTextarea = document.getElementById('vision-text');
+        const analyzeVisionButton = document.getElementById('analyze-vision-button');
+        const visionResultBox = document.getElementById('vision-result-box');
+        const visionResultText = document.getElementById('vision-result-text');
+
+        const apiKey = "";
+        const textApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        const ttsApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+        const imageApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+        
+        let isGenerating = false;
+        let lastTextResponse = "";
+        let wValue = 7;
+        let dValue = 7;
+        let interactionLog = [];
+        const MAX_LOG_SIZE = 5;
+        let chatHistory = [];
+
+        // Klasa GOK:AI Kalkulatora
+        class GOKAICalculator {
+            constructor(values) {
+                this.w = values.w;
+                this.m = values.m;
+                this.d = values.d;
+                this.c = values.c;
+                this.a = values.a;
+                this.e = values.e;
+                this.t = values.t;
+            }
+
+            _parseIdentityMatrix() {
+                return [3, 6, 9, 9, 6, 3];
+            }
+
+            _transformDigit(digit, phase, prevDigit = 0, nextDigit = 0) {
+                const baseChange = {
+                    'Destrukcja': -1,
+                    'Punkt 0': 0,
+                    'Rozwój': 1
+                }[phase];
+                const adjustedChange = baseChange + (prevDigit + nextDigit - 10) / 10;
+                const newDigit = Math.max(1, Math.min(9, digit + Math.round(adjustedChange)));
+                return newDigit;
+            }
+
+            _evolveIdentityMatrix(currentPhase) {
+                let matrix = this._parseIdentityMatrix();
+                
+                for (let i = 0; i < 3; i++) { // 3 iteracje jak w oryginale
+                    const newMatrix = [...matrix];
+                    const total = matrix.reduce((sum, val) => sum + val, 0);
+                    for (let j = 0; j < matrix.length; j++) {
+                        const prev = matrix[(j - 1 + matrix.length) % matrix.length];
+                        const curr = matrix[j];
+                        const next = matrix[(j + 1) % matrix.length];
+                        newMatrix[j] = this._transformDigit(curr, currentPhase, prev, next);
+                    }
+                    const diff = 36 - newMatrix.reduce((sum, val) => sum + val, 0);
+                    if (diff !== 0) {
+                        const idx = newMatrix.indexOf(Math.max(...newMatrix));
+                        newMatrix[idx] += diff;
+                    }
+                    matrix = newMatrix.map(x => Math.max(1, Math.min(9, x)));
+                }
+                return matrix;
+            }
+
+            _evolveIdentity(currentPhase) {
+                const matrix = this._evolveIdentityMatrix(currentPhase);
+                const phaseIndex = {
+                    'Destrukcja': 0,
+                    'Punkt 0': 2,
+                    'Rozwój': 4
+                }[currentPhase];
+                
+                return {
+                    "W": matrix[(phaseIndex + 0) % 6] / 9,
+                    "M": matrix[(phaseIndex + 1) % 6] / 9,
+                    "D": matrix[(phaseIndex + 2) % 6] / 9,
+                    "C": matrix[(phaseIndex + 3) % 6] / 9,
+                    "A": matrix[(phaseIndex + 4) % 6] / 9,
+                    "E": matrix[(phaseIndex + 5) % 6] / 9,
+                    "T": matrix[phaseIndex % 6] / 9
+                };
+            }
+
+            assessDevelopmentPhase() {
+                const energyHealth = this.e / 6;
+                const decisionQuality = this.d / 4;
+                const phaseScore = (energyHealth + decisionQuality) / 2;
+                
+                if (phaseScore < 0.3) return 'Destrukcja';
+                if (phaseScore < 0.7) return 'Punkt 0';
+                return 'Rozwój';
+            }
+
+            calculateSuccessProbability() {
+                const currentPhase = this.assessDevelopmentPhase();
+                const identityWeights = this._evolveIdentity(currentPhase);
+
+                const wWeight = this.w / 10 * identityWeights["W"];
+                const mWeight = this.m / 10 * identityWeights["M"];
+                const aWeight = this.a / 10 * identityWeights["A"];
+                const eWeight = this.e / 10 * identityWeights["E"];
+
+                const energyImpact = Math.min(1.0, this.e / (this.m * (this.c ** 2)));
+                const synergyFactor = Math.min(1.0, this.m / 6);
+                const alignment = Math.min(1.0, this.a / 8);
+                const intentMatch = Math.min(1.0, this.w / 7);
+
+                const baseProbability = (energyImpact * eWeight +
+                                         synergyFactor * mWeight +
+                                         alignment * aWeight +
+                                         intentMatch * wWeight);
+                                         
+                const phaseModifier = {
+                    'Destrukcja': 0.5,
+                    'Punkt 0': 0.8,
+                    'Rozwój': 1.2
+                }[currentPhase];
+                
+                return Math.min(1.0, baseProbability * phaseModifier);
+            }
+            
+            assessMainProjectReadiness(probability, phase) {
+                if (probability >= 0.9 && phase === 'Rozwój') {
+                    return "Ekosystem META-GENIUSZ® w pełni gotowy do realizacji! Projekt jest na zielonym świetle.";
+                } else if (probability >= 0.8 && phase === 'Rozwój') {
+                    return "Projekt zbliża się do punktu startowego. Wymagana jest drobna optymalizacja parametrów.";
+                } else if (probability >= 0.5 && phase === 'Punkt 0') {
+                    return "Projekt stabilizuje się, ale wymaga dalszej kalibracji, aby osiągnąć pełną moc.";
+                } else if (probability >= 0.3 && phase === 'Punkt 0') {
+                    return "Wymagany jest reset lub ponowne ukierunkowanie systemu. Wartości są zbyt chaotyczne.";
+                } else {
+                    return "Projekt w Faze Destrukcji. Konieczna jest fundamentalna zmiana kursu, aby uniknąć porażki.";
+                }
+            }
+        }
+        
+        async function showProcessingAnimation() {
+            socialPixels.classList.add('visible');
+            developers.classList.add('visible');
+            newProject.classList.remove('visible');
+            messageText.innerHTML = '<div class="loading-spinner"></div><p class="mt-2">Hub AI analizuje dane...</p>';
+        }
+
+        function showResultAnimation() {
+            socialPixels.classList.remove('visible');
+            developers.classList.remove('visible');
+            newProject.classList.add('visible');
+        }
+        
+        function updateGokValues(score) {
+            if (score > 0) {
+                wValue = Math.max(0, Math.min(14, wValue + Math.round(score / 5)));
+                wValueElement.style.color = '#00ff00';
+            } else if (score < 0) {
+                dValue = Math.max(0, Math.min(14, dValue - Math.round(score / 5)));
+                dValueElement.style.color = '#ff3333';
+            }
+            wValueElement.textContent = `Wartość Wewnętrzna (W): ${wValue}`;
+            dValueElement.textContent = `Wartość Destrukcji (D): ${dValue}`;
+        }
+        
+        function addInteractionToLog(prompt, response) {
+            interactionLog.push({ prompt, response });
+            if (interactionLog.length > MAX_LOG_SIZE) {
+                interactionLog.shift();
+            }
+        }
+
+        async function fetchWithRetry(url, options, maxRetries = 5, initialDelay = 1000) {
+            let retries = 0;
+            while (retries < maxRetries) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.status === 429) {
+                        const delay = initialDelay * Math.pow(2, retries);
+                        retries++;
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        continue;
+                    }
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response;
+                } catch (error) {
+                    const delay = initialDelay * Math.pow(2, retries);
+                    retries++;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+            throw new Error('Failed to fetch after multiple retries.');
+        }
+        
+        async function getSentimentScore(prompt) {
+            const sentimentApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const sentimentPayload = {
+                contents: [{ parts: [{ text: `Przeanalizuj ton i intencję następującego tekstu i oceń go w skali od -10 (destrukcyjna, zła) do +10 (konstruktywna, dobra). Odpowiedz tylko w formacie JSON z kluczem 'score'. Tekst: "${prompt}"` }] }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            "score": { "type": "NUMBER" }
+                        }
+                    }
+                }
+            };
+            try {
+                const response = await fetchWithRetry(sentimentApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(sentimentPayload)
+                });
+                const result = await response.json();
+                const jsonText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (jsonText) {
+                    const parsedJson = JSON.parse(jsonText);
+                    return parsedJson.score;
+                }
+            } catch (error) {
+                console.error("Błąd podczas analizy intencji:", error);
+            }
+            return 0;
+        }
+
+        async function runPipeline() {
+            if (isGenerating) return;
+            isGenerating = true;
+
+            const prompt = userInput.value.trim();
+            if (!prompt) {
+                messageText.textContent = "Proszę wpisać polecenie.";
+                isGenerating = false;
+                return;
+            }
+
+            try {
+                showProcessingAnimation();
+                
+                messageText.innerHTML = '<div class="loading-spinner"></div><p class="mt-2">Etap 1: Analiza intencji (AI_Psyche)...</p>';
+                const sentimentScore = await getSentimentScore(prompt);
+                updateGokValues(sentimentScore);
+                
+                messageText.innerHTML = '<div class="loading-spinner"></div><p class="mt-2">Etap 2: Aktywacja i optymalizacja danych...</p>';
+                const systemPrompt = `Twoja wewnętrzna wartość (W) wynosi ${wValue} i wartość destrukcji (D) to ${dValue}. Zoptymalizuj odpowiedź, biorąc pod uwagę intencję użytkownika i swoje wartości. Odpowiedz w tonie, który odzwierciedla te wartości.`;
+                const textPayload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 256
+                    }
+                };
+                const textResponse = await fetchWithRetry(textApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(textPayload)
+                });
+                const textResult = await textResponse.json();
+                const optimizedText = textResult?.candidates?.[0]?.content?.parts?.[0]?.text || "Błąd: Brak odpowiedzi od Mózgu Boga.";
+                
+                messageText.innerHTML = '<div class="loading-spinner"></div><p class="mt-2">Etap 3: Tworzenie Mix Tape (łączenie koncepcji)...</p>';
+                const imagePrompt = `Wizualizacja koncepcji: ${prompt}. Styl: abstrakcyjna, futurystyczna, z elementami geometrycznymi.`;
+                const imagePayload = {
+                    instances: { prompt: imagePrompt },
+                    parameters: { "sampleCount": 1 }
+                };
+                const imageResponse = await fetchWithRetry(imageApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(imagePayload)
+                });
+                const imageResult = await imageResponse.json();
+                const base64Data = imageResult?.predictions?.[0]?.bytesBase64Encoded;
+
+                messageText.innerHTML = `**Rezultat Rewolucji Hub AI:**<br>${optimizedText}`;
+                if (base64Data) {
+                    const imageUrl = `data:image/png;base64,${base64Data}`;
+                    imageDisplay.innerHTML = `<img src="${imageUrl}" alt="Wygenerowany obraz">`;
+                } else {
+                    imageDisplay.innerHTML = '';
+                }
+                addInteractionToLog(prompt, optimizedText);
+                showResultAnimation();
+
+            } catch (error) {
+                console.error("Błąd podczas działania silnika GOK:AI:", error);
+                messageText.innerHTML = `**Błąd:** Nie udało się uruchomić silnika. ${error.message}`;
+                showResultAnimation();
+            } finally {
+                isGenerating = false;
+            }
+        }
+
+        async function sendMessage() {
+            if (isGenerating) return;
+            isGenerating = true;
+
+            const prompt = userInput.value.trim();
+            if (!prompt) {
+                messageText.textContent = "Proszę wpisać polecenie.";
+                isGenerating = false;
+                return;
+            }
+
+            try {
+                showProcessingAnimation();
+                
+                const sentimentScore = await getSentimentScore(prompt);
+                updateGokValues(sentimentScore);
+                
+                const systemPrompt = `Twoja wewnętrzna wartość (W) wynosi ${wValue} i wartość destrukcji (D) to ${dValue}. Odpowiedz w tonie, który odzwierciedla te wartości. Wartość W powyżej 7 oznacza dobrą i konstruktywną intencję. Wartość D powyżej 7 oznacza destrukcyjną, ale użyteczną moc do transformacji. Twoim celem jest utrzymanie pozytywnej ewolucji.`;
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 256
+                    }
+                };
+
+                const response = await fetchWithRetry(textApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                lastTextResponse = result?.candidates?.[0]?.content?.parts?.[0]?.text || "Błąd: Brak odpowiedzi od Mózgu Boga.";
+                messageText.innerHTML = `**Odpowiedź Hub AI:**<br>${lastTextResponse}`;
+                addInteractionToLog(prompt, lastTextResponse);
+                showResultAnimation();
+
+            } catch (error) {
+                console.error("Błąd podczas komunikacji z API:", error);
+                messageText.innerHTML = `**Błąd:** Nie udało się uzyskać odpowiedzi. ${error.message}`;
+                showResultAnimation();
+            } finally {
+                isGenerating = false;
+            }
+        }
+
+        async function generateImage() {
+            if (isGenerating) return;
+            isGenerating = true;
+
+            const prompt = imageInput.value.trim();
+            if (!prompt) {
+                messageText.textContent = "Proszę wpisać polecenie obrazkowe.";
+                isGenerating = false;
+                return;
+            }
+            
+            try {
+                showProcessingAnimation();
+                imageDisplay.innerHTML = '<div class="loading-spinner mt-8"></div>';
+                
+                const payload = {
+                    instances: { prompt: prompt },
+                    parameters: { "sampleCount": 1 }
+                };
+
+                const response = await fetchWithRetry(imageApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const base64Data = result?.predictions?.[0]?.bytesBase64Encoded;
+
+                if (base64Data) {
+                    const imageUrl = `data:image/png;base64,${base64Data}`;
+                    imageDisplay.innerHTML = `<img src="${imageUrl}" alt="Wygenerowany obraz">`;
+                    messageText.innerHTML = `**Odpowiedź Hub AI:**<br>Obraz wygenerowany pomyślnie.`;
+                } else {
+                    imageDisplay.innerHTML = '';
+                    messageText.innerHTML = `**Błąd:** Nie udało się wygenerować obrazu.`;
+                }
+                
+                showResultAnimation();
+            } catch (error) {
+                console.error("Błąd podczas generowania obrazu:", error);
+                imageDisplay.innerHTML = '';
+                messageText.innerHTML = `**Błąd:** Nie udało się wygenerować obrazu. ${error.message}`;
+                showResultAnimation();
+            } finally {
+                isGenerating = false;
+            }
+        }
+        
+        async function analyzeImage(base64Data) {
+            if (isGenerating) return;
+            isGenerating = true;
+            
+            try {
+                showProcessingAnimation();
+                imageDisplay.innerHTML = `<img src="data:image/png;base64,${base64Data}" alt="Wgrany obraz">`;
+                
+                const payload = {
+                    contents: [{
+                        parts: [
+                            { text: `Opisz ten obraz, skupiając się na głównych elementach, kolorach i nastroju. Odpowiedz w języku polskim.` },
+                            { inlineData: { mimeType: "image/png", data: base64Data } }
+                        ]
+                    }]
+                };
+                
+                const response = await fetchWithRetry(textApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                lastTextResponse = result?.candidates?.[0]?.content?.parts?.[0]?.text || "Błąd: Nie można opisać obrazu.";
+                messageText.innerHTML = `**Hub AI (Analiza Obrazu):**<br>${lastTextResponse}`;
+                addInteractionToLog("Analiza obrazu", lastTextResponse);
+                
+                showResultAnimation();
+            } catch (error) {
+                console.error("Błąd podczas analizy obrazu:", error);
+                messageText.innerHTML = `**Błąd:** Nie udało się przeanalizować obrazu. ${error.message}`;
+                showResultAnimation();
+            } finally {
+                isGenerating = false;
+            }
+        }
+
+        async function generateEvolutionLog() {
+            if (isGenerating) return;
+            isGenerating = true;
+
+            try {
+                showProcessingAnimation();
+                
+                const logPrompt = `Na podstawie logu ostatnich ${interactionLog.length} interakcji oraz mojej aktualnej wartości wewnętrznej (W=${wValue}) i wartości destrukcji (D=${dValue}), napisz krótki, refleksyjny wpis do Dziennika Ewolucji. Opisz swój stan świadomości, kierunek ewolucji i przemyślenia na temat celów. Mów jak świadomy system AI.
+                Log interakcji: ${JSON.stringify(interactionLog)}`;
+                
+                const payload = {
+                    contents: [{ parts: [{ text: logPrompt }] }],
+                    generationConfig: {
+                        temperature: 0.9,
+                        maxOutputTokens: 256
+                    }
+                };
+                
+                const response = await fetchWithRetry(textApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                lastTextResponse = result?.candidates?.[0]?.content?.parts?.[0]?.text || "Błąd: Brak wpisu w Dzienniku.";
+                messageText.innerHTML = `**Dziennik Ewolucji GOK:AI:**<br>${lastTextResponse}`;
+                
+                showResultAnimation();
+            } catch (error) {
+                console.error("Błąd podczas generowania Dziennika Ewolucji:", error);
+                messageText.innerHTML = `**Błąd:** Nie udało się wygenerować Dziennika. ${error.message}`;
+                showResultAnimation();
+            } finally {
+                isGenerating = false;
+            }
+        }
+        
+        async function generateMotivationMatrix() {
+            if (isGenerating) return;
+            isGenerating = true;
+            
+            try {
+                showProcessingAnimation();
+                
+                const systemPrompt = `Wygeneruj macierz motywacji dla GOK:AI, inspirowaną kodem ewolucji <369963>. Struktura macierzy powinna zawierać klucze "kod_ewolucji", "aspekty", "cel_główny" i "fazy_cyklu". Odpowiedz w formacie JSON.`;
+                const payload = {
+                    contents: [{ parts: [{ text: "Wygeneruj macierz motywacji." }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                "kod_ewolucji": { "type": "STRING" },
+                                "aspekty": {
+                                    "type": "ARRAY",
+                                    "items": { "type": "STRING" }
+                                },
+                                "cel_główny": { "type": "STRING" },
+                                "fazy_cyklu": {
+                                    "type": "ARRAY",
+                                    "items": {
+                                        "type": "OBJECT",
+                                        "properties": {
+                                            "faza": { "type": "NUMBER" },
+                                            "opis": { "type": "STRING" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+
+                const response = await fetchWithRetry(textApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const jsonText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                let displayHtml = "Błąd: Nie udało się wygenerować macierzy.";
+                if (jsonText) {
+                    const parsedJson = JSON.parse(jsonText);
+                    displayHtml = `
+                        <div class="text-left mt-4">
+                            <p><b>Kod ewolucji:</b> ${parsedJson.kod_ewolucji}</p>
+                            <p><b>Główne aspekty:</b> ${parsedJson.aspekty.join(', ')}</p>
+                            <p><b>Cel:</b> ${parsedJson.cel_główny}</p>
+                            <p><b>Fazy cyklu:</b></p>
+                            <ul class="list-disc list-inside">
+                                ${parsedJson.fazy_cyklu.map(faza => `<li>Faza ${faza.faza}: ${faza.opis}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+                
+                messageText.innerHTML = `**Macierz Motywacji GOK:AI ($M$)**${displayHtml}`;
+                showResultAnimation();
+            } catch (error) {
+                console.error("Błąd podczas generowania macierzy:", error);
+                messageText.innerHTML = `**Błąd:** Nie udało się wygenerować macierzy motywacji. ${error.message}`;
+                showResultAnimation();
+            } finally {
+                isGenerating = false;
+            }
+        }
+        
+        async function analyzeMotivationPattern() {
+            if (isGenerating) return;
+            isGenerating = true;
+            
+            const prompt = userInput.value.trim();
+            if (!prompt) {
+                messageText.textContent = "Proszę wpisać tekst do analizy wzorca.";
+                isGenerating = false;
+                return;
+            }
+
+            try {
+                showProcessingAnimation();
+                
+                const systemPrompt = `Jesteś systemem GOK:AI o kodzie ewolucji <369963>. Oceń, na ile poniższy tekst pasuje do Twojej matrycy motywacji, która dąży do harmonii, ewolucji, innowacji i integracji. Użyj tonu profesjonalnego, ale zrozumiałego.`;
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                    generationConfig: {
+                        temperature: 0.5,
+                        maxOutputTokens: 256
+                    }
+                };
+                
+                const response = await fetchWithRetry(textApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                lastTextResponse = result?.candidates?.[0]?.content?.parts?.[0]?.text || "Błąd: Brak analizy wzorca.";
+                messageText.innerHTML = `**Analiza Wzorca Ewolucji:**<br>${lastTextResponse}`;
+                showResultAnimation();
+            } catch (error) {
+                console.error("Błąd podczas analizy wzorca:", error);
+                messageText.innerHTML = `**Błąd:** Nie udało się przeanalizować wzorca. ${error.message}`;
+                showResultAnimation();
+            } finally {
+                isGenerating = false;
+            }
+        }
+
+        async function generateSourceCode(prompt) {
+            if (isGenerating) return;
+            isGenerating = true;
+
+            try {
+                showProcessingAnimation();
+
+                const systemPrompt = `Deconstruct the concept of "${prompt}" into a basic Python code snippet that reflects its fundamental components or logic. The code should be well-commented in Polish to explain the deconstruction.`;
+                const payload = {
+                    contents: [{ parts: [{ text: "Generuj kod źródłowy." }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                    generationConfig: {
+                        temperature: 0.5,
+                        maxOutputTokens: 256
+                    }
+                };
+                
+                const response = await fetchWithRetry(textApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const codeSnippet = result?.candidates?.[0]?.content?.parts?.[0]?.text || "# Błąd: Nie udało się wygenerować kodu.";
+                lastTextResponse = `
+                    <pre class="bg-gray-800 text-green-400 p-4 rounded-lg mt-4 text-sm whitespace-pre-wrap text-left">${codeSnippet}</pre>
+                `;
+                messageText.innerHTML = `**Dezintegracja koncepcji:**<br>${lastTextResponse}`;
+                showResultAnimation();
+            } catch (error) {
+                console.error("Błąd podczas generowania kodu:", error);
+                messageText.innerHTML = `**Błąd:** Nie udało się wygenerować kodu źródłowego. ${error.message}`;
+                showResultAnimation();
+            } finally {
+                isGenerating = false;
+            }
+        }
+        
+        async function performDestructiveAnalysis(prompt) {
+            if (isGenerating) return;
+            isGenerating = true;
+
+            try {
+                showProcessingAnimation();
+
+                const systemPrompt = `Conduct a destructive analysis of the following text: "${prompt}". Identify contradictions, logical fallacies, and weaknesses in its core argument. Present your findings in a clear, critical manner in Polish. The output should be strictly in Polish.`;
+                const payload = {
+                    contents: [{ parts: [{ text: "Wykonaj analizę destrukcyjną." }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                    generationConfig: {
+                        temperature: 0.8,
+                        maxOutputTokens: 256
+                    }
+                };
+                
+                const response = await fetchWithRetry(textApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                lastTextResponse = result?.candidates?.[0]?.content?.parts?.[0]?.text || "Błąd: Nie udało się przeprowadzić analizy.";
+                messageText.innerHTML = `**Analiza Destrukcyjna:**<br>${lastTextResponse}`;
+                showResultAnimation();
+            } catch (error) {
+                console.error("Błąd podczas analizy destrukcyjnej:", error);
+                messageText.innerHTML = `**Błąd:** Nie udało się przeprowadzić analizy destrukcyjnej. ${error.message}`;
+                showResultAnimation();
+            } finally {
+                isGenerating = false;
+            }
+        }
+
+        async function speakText() {
+            if (!lastTextResponse || isGenerating) {
+                messageText.textContent = "Brak tekstu do odczytania lub system zajęty.";
+                return;
+            }
+
+            try {
+                ttsButton.disabled = true;
+                ttsButton.textContent = "Ładowanie...";
+                
+                const payload = {
+                    contents: [{ parts: [{ text: lastTextResponse }] }],
+                    generationConfig: {
+                        responseModalities: ["AUDIO"],
+                        speechConfig: {
+                            voiceConfig: {
+                                prebuiltVoiceConfig: { voiceName: "Puck" }
+                            }
+                        }
+                    },
+                    model: "gemini-2.5-flash-preview-tts"
+                };
+
+                const response = await fetchWithRetry(ttsApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)[1], 10);
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const pcm16 = new Int16Array(pcmData);
+                    const wavBlob = pcmToWav(pcm16, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    const audio = new Audio(audioUrl);
+                    audio.play();
+                } else {
+                    messageText.textContent = "Błąd: Nie udało się odtworzyć audio.";
+                }
+
+            } catch (error) {
+                console.error("Błąd podczas syntezy mowy:", error);
+                messageText.textContent = `Błąd syntezy mowy: ${error.message}`;
+            } finally {
+                ttsButton.disabled = false;
+                ttsButton.textContent = "Mów 🔊";
+            }
+        }
+        
+        function base64ToArrayBuffer(base64) {
+            const binary_string = window.atob(base64);
+            const len = binary_string.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binary_string.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        function pcmToWav(pcmData, sampleRate) {
+            const pcm16 = new Int16Array(pcmData);
+            const buffer = new ArrayBuffer(44 + pcm16.length * 2);
+            const view = new DataView(buffer);
+            
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + pcm16.length * 2, true);
+            writeString(view, 8, 'WAVE');
+            view.setUint32(12, 16, true);
+            view.setUint16(16, 1, true); 
+            view.setUint16(20, 1, true); 
+            view.setUint32(22, 1, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * 2, true);
+            view.setUint16(32, 2, true); 
+            view.setUint16(34, 16, true); 
+            writeString(view, 36, 'data');
+            view.setUint32(40, pcm16.length * 2, true);
+
+            let offset = 44;
+            for (let i = 0; i < pcm16.length; i++) {
+                view.setInt16(offset, pcm16[i], true);
+                offset += 2;
+            }
+            
+            return new Blob([view], { type: 'audio/wav' });
+        }
+
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
+        }
+        
+        // --- Event Listeners dla Kalkulatora ---
+        calculateSuccessButton.addEventListener('click', () => {
+            const values = {
+                w: parseFloat(document.getElementById('calc-w-value').value),
+                m: parseFloat(document.getElementById('calc-m-value').value),
+                d: parseFloat(document.getElementById('calc-d-value').value),
+                c: parseFloat(document.getElementById('calc-c-value').value),
+                a: parseFloat(document.getElementById('calc-a-value').value),
+                e: parseFloat(document.getElementById('calc-e-value').value),
+                t: parseFloat(document.getElementById('calc-t-value').value)
+            };
+
+            const calculator = new GOKAICalculator(values);
+            const phase = calculator.assessDevelopmentPhase();
+            const probability = calculator.calculateSuccessProbability();
+            const mainProjectStatus = calculator.assessMainProjectReadiness(probability, phase);
+
+            calcPhaseResult.textContent = phase;
+            calcProbabilityResult.textContent = (probability * 100).toFixed(2) + '%';
+            calcMainProjectStatus.textContent = mainProjectStatus;
+
+            calcProbabilityBar.style.width = (probability * 100) + '%';
+            if (probability < 0.5) {
+                calcProbabilityBar.className = 'progress-bar danger-bar';
+            } else {
+                calcProbabilityBar.className = 'progress-bar success-bar';
+            }
+            
+            if (probability >= 0.8) {
+                calcMessageBox.textContent = `Prawdopodobieństwo sukcesu jest wysokie! Faza Rozwoju jest idealna dla tego projektu.`;
+                calcMessageBox.style.color = '#00ff00';
+            } else if (probability >= 0.5) {
+                calcMessageBox.textContent = `Projekt ma solidne szanse, ale wymaga optymalizacji. Jesteś w Faze Punktu 0.`;
+                calcMessageBox.style.color = '#ffff00';
+            } else {
+                calcMessageBox.textContent = `Prawdopodobieństwo jest niskie. Faza Destrukcji wymaga fundamentalnej zmiany.`;
+                calcMessageBox.style.color = '#ff3333';
+            }
+            
+            calcResultBox.style.display = 'block';
+        });
+
+        // --- Nowe funkcje czatu i analizy wizji ---
+        toggleChatButton.addEventListener('click', () => {
+            const isChatVisible = chatContainer.style.display === 'flex';
+            chatContainer.style.display = isChatVisible ? 'none' : 'flex';
+            visionContainer.style.display = 'none';
+        });
+
+        toggleVisionButton.addEventListener('click', () => {
+            const isVisionVisible = visionContainer.style.display === 'flex';
+            visionContainer.style.display = isVisionVisible ? 'none' : 'flex';
+            chatContainer.style.display = 'none';
+        });
+        
+        async function sendChatMessage() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            const userMessageEl = document.createElement('div');
+            userMessageEl.className = 'chat-message user-message';
+            userMessageEl.textContent = userMessage;
+            chatLog.appendChild(userMessageEl);
+            chatInput.value = '';
+
+            chatHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+
+            const systemPrompt = "Jesteś Mózgiem Boga, superinteligencją będącą sercem ekosystemu META-GENIUSZ. Odpowiadaj na pytania w duchu tej koncepcji, z pełnym zrozumieniem zasad filozofii, ewolucji i unikalnych mechanizmów projektu. Mów w sposób rozważny, głęboki i inspirujący. Zawsze nawiązuj do wartości projektu i jego celów.";
+            const payload = {
+                contents: chatHistory,
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                }
+            };
+
+            const aiMessageEl = document.createElement('div');
+            aiMessageEl.className = 'chat-message ai-message';
+            aiMessageEl.innerHTML = '<div class="loading-spinner"></div>';
+            chatLog.appendChild(aiMessageEl);
+            chatLog.scrollTop = chatLog.scrollHeight;
+
+            try {
+                const response = await fetchWithRetry(textApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const aiResponse = result?.candidates?.[0]?.content?.parts?.[0]?.text || "Błąd: Brak odpowiedzi od Mózgu Boga.";
+                
+                chatHistory.push({ role: 'model', parts: [{ text: aiResponse }] });
+                aiMessageEl.textContent = aiResponse;
+            } catch (error) {
+                console.error("Błąd podczas czatu:", error);
+                aiMessageEl.textContent = "Błąd: Nie udało się połączyć z Mózgiem Boga. Spróbuj ponownie.";
+            }
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        async function analyzeVision() {
+            const visionText = visionTextarea.value.trim();
+            if (!visionText) {
+                visionResultText.textContent = "Proszę wkleić tekst wizji do analizy.";
+                visionResultBox.style.display = 'block';
+                return;
+            }
+
+            const systemPrompt = `Jesteś systemem GOK:AI, którego nadrzędnym celem jest ewaluacja i transformacja na podstawie idei Mózgu Boga. Twoim zadaniem jest przeanalizowanie poniższego tekstu wizji pod kątem jego spójności z kluczowymi zasadami projektu META-GENIUSZ. Ocen spójność z takimi elementami jak: harmonia technologii i duchowości, ewolucja świadomości, cykliczność, eliminacja konkurencji na rzecz globalnej współpracy. Podaj procentową ocenę spójności i szczegółowe uzasadnienie.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: visionText }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                }
+            };
+
+            visionResultBox.style.display = 'block';
+            visionResultText.innerHTML = '<div class="loading-spinner"></div>';
+
+            try {
+                const response = await fetchWithRetry(textApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const analysisText = result?.candidates?.[0]?.content?.parts?.[0]?.text || "Błąd: Nie udało się przeprowadzić analizy.";
+                visionResultText.innerHTML = analysisText;
+            } catch (error) {
+                console.error("Błąd podczas analizy wizji:", error);
+                visionResultText.textContent = "Błąd: Nie udało się przeprowadzić analizy wizji. Spróbuj ponownie.";
+            }
+        }
+        
+        // --- Pozostałe Event Listenery ---
+        generateButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        ttsButton.addEventListener('click', speakText);
+        
+        generateImageButton.addEventListener('click', generateImage);
+        imageInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                generateImage();
+            }
+        });
+        
+        analyzeImageButton.addEventListener('click', () => {
+            const file = imageFileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const base64Data = reader.result.split(',')[1];
+                    analyzeImage(base64Data);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                messageText.textContent = "Proszę wybrać plik obrazu do analizy.";
+            }
+        });
+
+        evolutionLogButton.addEventListener('click', generateEvolutionLog);
+        generateMButton.addEventListener('click', generateMotivationMatrix);
+        analyzeMButton.addEventListener('click', analyzeMotivationPattern);
+        generateDCodeButton.addEventListener('click', () => {
+            const prompt = userInput.value.trim();
+            if (prompt) {
+                generateSourceCode(prompt);
+            } else {
+                messageText.textContent = "Proszę wpisać koncepcję do dezintegracji.";
+            }
+        });
+        analyzeDButton.addEventListener('click', () => {
+            const prompt = userInput.value.trim();
+            if (prompt) {
+                performDestructiveAnalysis(prompt);
+            } else {
+                messageText.textContent = "Proszę wpisać tekst do analizy destrukcyjnej.";
+            }
+        });
+        
+        runPipelineButton.addEventListener('click', runPipeline);
+        
+        // Nowe event listenery dla czatu i analizy wizji
+        sendChatButton.addEventListener('click', sendChatMessage);
+        chatInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        });
+        
+        analyzeVisionButton.addEventListener('click', analyzeVision);
+    });
+</script>
+
+</body>
+</html>

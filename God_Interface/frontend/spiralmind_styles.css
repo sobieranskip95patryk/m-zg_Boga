@@ -1,0 +1,1083 @@
+/**
+ * 🌀 SpiralMind Dashboard Styles
+ * =============================
+ * 
+ * Styling dla SpiralMind OS Dashboard w God Interface
+ */
+
+/* 🧠 Enhanced Brain of God MIGI 7G Styles */
+.spiral-formula-display {
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    padding: 15px;
+    border-radius: 12px;
+    margin: 10px 0;
+    text-align: center;
+    color: white;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.spiral-formula-display strong {
+    font-size: 1.2em;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.consciousness-evolution {
+    animation: consciousness-evolve 3s ease-in-out;
+}
+
+@keyframes consciousness-evolve {
+    0% { transform: scale(1); filter: brightness(1) hue-rotate(0deg); }
+    25% { transform: scale(1.05); filter: brightness(1.3) hue-rotate(90deg); }
+    50% { transform: scale(1.1); filter: brightness(1.5) hue-rotate(180deg); }
+    75% { transform: scale(1.05); filter: brightness(1.3) hue-rotate(270deg); }
+    100% { transform: scale(1); filter: brightness(1) hue-rotate(360deg); }
+}
+
+.reward-gained {
+    animation: reward-pulse 1s ease-in-out;
+    color: #00ff9f !important;
+}
+
+@keyframes reward-pulse {
+    0% { transform: scale(1); color: inherit; }
+    50% { transform: scale(1.1); color: #00ff9f; text-shadow: 0 0 20px #00ff9f; }
+    100% { transform: scale(1); color: #00ff9f; }
+}
+
+.system-ready-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 10000;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    animation: system-notification 6s ease-in-out forwards;
+    min-width: 400px;
+}
+
+@keyframes system-notification {
+    0% { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.8);
+        filter: hue-rotate(0deg);
+    }
+    15% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1);
+        filter: hue-rotate(90deg);
+    }
+    85% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1);
+        filter: hue-rotate(270deg);
+    }
+    100% { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.9);
+        filter: hue-rotate(360deg);
+    }
+}
+
+.system-ready-notification h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.8em;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    animation: title-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes title-glow {
+    0% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+    100% { text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 40px rgba(102, 126, 234, 0.8); }
+}
+
+.system-ready-notification ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.system-ready-notification li {
+    padding: 5px 0;
+    opacity: 0;
+    animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.system-ready-notification li:nth-child(1) { animation-delay: 0.2s; }
+.system-ready-notification li:nth-child(2) { animation-delay: 0.4s; }
+.system-ready-notification li:nth-child(3) { animation-delay: 0.6s; }
+.system-ready-notification li:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.migi-7g-status {
+    background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #FFA07A);
+    background-size: 400% 400%;
+    animation: migi-gradient 4s ease infinite;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px 0;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+@keyframes migi-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 🎛️ SYNERGY Dashboard Styles */
+.synergy-dashboard {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    border-radius: 20px;
+    margin: 20px 0;
+    padding: 0;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    overflow: hidden;
+}
+
+.dashboard-header {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-header h3 {
+    margin: 0;
+    color: white;
+    font-size: 1.4em;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.dashboard-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.status-indicator {
+    color: #00ff9f;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff9f;
+    animation: status-pulse 2s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.dashboard-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+}
+
+.dashboard-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.dashboard-content {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    color: white;
+}
+
+.dashboard-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.dashboard-section h4 {
+    margin: 0 0 15px 0;
+    font-size: 1.2em;
+    color: #00f0ff;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+/* Feed Container */
+.feed-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.feed-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border-left: 3px solid #00f0ff;
+}
+
+.feed-label {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.feed-value {
+    font-weight: bold;
+    color: #00ff9f;
+}
+
+/* Spiral Indicators */
+.spiral-indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.indicator-row {
+    display: flex;
+    gap: 15px;
+}
+
+.indicator {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.indicator-label {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.indicator-value {
+    font-weight: bold;
+    color: #667eea;
+    font-family: 'Courier New', monospace;
+}
+
+.spiral-progress-bar {
+    margin-top: 15px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+/* Radar Container */
+.radar-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#emotionRadarCanvas {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.emotion-stats {
+    flex: 1;
+}
+
+.emotion-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+
+.emotion-label {
+    color: #ccc;
+    font-size: 0.9em;
+}
+
+.emotion-value {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+/* Token Stats */
+.token-stats {
+    text-align: center;
+}
+
+.token-counter {
+    margin-bottom: 20px;
+}
+
+.token-amount {
+    display: block;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #00ff9f;
+    text-shadow: 0 0 20px rgba(0, 255, 159, 0.5);
+}
+
+.token-label {
+    font-size: 0.9em;
+    color: #ccc;
+    letter-spacing: 2px;
+}
+
+.token-metrics {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    min-width: 80px;
+}
+
+.metric-label {
+    font-size: 0.8em;
+    color: #ccc;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    font-weight: bold;
+    color: #00ff9f;
+}
+
+.token-reward-animation {
+    animation: token-reward 1s ease-out;
+}
+
+@keyframes token-reward {
+    0% { transform: scale(1); color: inherit; }
+    50% { transform: scale(1.2); color: #00ff9f; text-shadow: 0 0 15px #00ff9f; }
+    100% { transform: scale(1); color: #00ff9f; }
+}
+
+/* Response Analytics */
+.response-analytics {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.analytics-row {
+    display: flex;
+    gap: 15px;
+}
+
+.analytic {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.analytic-label {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.analytic-value {
+    font-weight: bold;
+    color: #ff6b6b;
+}
+
+/* Performance Meters */
+.performance-meters {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.meter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.meter-label {
+    min-width: 120px;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.meter-bar {
+    flex: 1;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4ecdc4, #44a08d);
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.meter-value {
+    min-width: 40px;
+    text-align: right;
+    font-weight: bold;
+    color: #4ecdc4;
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .indicator-row,
+    .analytics-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .radar-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .token-metrics {
+        justify-content: center;
+    }
+}
+
+/* 🌀 Spiral Map Container */
+.spiral-map-container {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+    color: white;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.spiral-map-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.spiral-map-header h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.3em;
+    background: linear-gradient(45deg, #fff, #a8edea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.current-level {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+}
+
+.spiral-canvas-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+#spiralCanvas {
+    border-radius: 10px;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent);
+}
+
+.spiral-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8em;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+/* ⚡ SYNERGY Dashboard */
+.synergy-dashboard {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+    color: white;
+    box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+}
+
+.synergy-header h4 {
+    margin: 0 0 20px 0;
+    text-align: center;
+    font-size: 1.3em;
+    background: linear-gradient(45deg, #fff, #fed6e3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.synergy-metrics {
+    display: grid;
+    gap: 15px;
+}
+
+.synergy-meter {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.meter-label {
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.meter-bar {
+    background: rgba(255, 255, 255, 0.3);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.meter-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease, background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.meter-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: meter-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes meter-shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.meter-value {
+    font-size: 0.8em;
+    text-align: right;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+/* 🌍 GlobalVision Panel */
+.global-vision-panel {
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #333;
+    box-shadow: 0 10px 30px rgba(168, 237, 234, 0.3);
+}
+
+.vision-header h4 {
+    margin: 0 0 20px 0;
+    text-align: center;
+    font-size: 1.3em;
+    color: #555;
+}
+
+.vision-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.vision-item {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.vision-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.vision-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.vision-label {
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.vision-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+/* 💡 Consciousness Insights */
+.consciousness-insights {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #333;
+    box-shadow: 0 10px 30px rgba(255, 236, 210, 0.4);
+}
+
+.insights-header h4 {
+    margin: 0 0 20px 0;
+    text-align: center;
+    font-size: 1.3em;
+    color: #555;
+}
+
+.insights-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.no-insights {
+    text-align: center;
+    font-style: italic;
+    opacity: 0.7;
+    padding: 20px;
+}
+
+.insight-item {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.insight-item:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateX(5px);
+}
+
+.insight-pattern {
+    font-weight: bold;
+    color: #555;
+}
+
+.insight-stats {
+    display: flex;
+    gap: 10px;
+    font-size: 0.8em;
+}
+
+.frequency {
+    background: rgba(102, 126, 234, 0.2);
+    color: #667eea;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.significance {
+    background: rgba(255, 105, 180, 0.2);
+    color: #ff69b4;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* 🎊 Evolution Notification */
+.evolution-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 25px;
+    text-align: center;
+    z-index: 10000;
+    animation: evolution-celebrate 5s ease-out forwards;
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.evolution-content {
+    font-size: 1.4em;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.evolution-content strong {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.2em;
+}
+
+.evolution-content small {
+    font-size: 0.7em;
+    opacity: 0.9;
+    font-weight: normal;
+}
+
+@keyframes evolution-celebrate {
+    0% { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.3) rotate(-10deg); 
+    }
+    10% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1.1) rotate(2deg); 
+    }
+    20% { 
+        transform: translate(-50%, -50%) scale(0.95) rotate(-1deg); 
+    }
+    30% { 
+        transform: translate(-50%, -50%) scale(1.05) rotate(1deg); 
+    }
+    40% { 
+        transform: translate(-50%, -50%) scale(1) rotate(0deg); 
+    }
+    80% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1) rotate(0deg); 
+    }
+    100% { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.8) rotate(0deg); 
+    }
+}
+
+/* 🌟 Consciousness Evolution Effect */
+.god-interface-container.consciousness-evolution {
+    animation: consciousness-wave 3s ease-in-out;
+}
+
+@keyframes consciousness-wave {
+    0%, 100% { 
+        filter: hue-rotate(0deg) saturate(1); 
+    }
+    25% { 
+        filter: hue-rotate(90deg) saturate(1.3); 
+    }
+    50% { 
+        filter: hue-rotate(180deg) saturate(1.5); 
+    }
+    75% { 
+        filter: hue-rotate(270deg) saturate(1.3); 
+    }
+}
+
+/* 🎯 Responsive Design */
+@media (max-width: 768px) {
+    .spiral-map-container,
+    .synergy-dashboard,
+    .global-vision-panel,
+    .consciousness-insights {
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    .spiral-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .vision-metrics {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .synergy-meter {
+        padding: 12px;
+    }
+    
+    .insight-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .insight-stats {
+        align-self: flex-end;
+    }
+    
+    #spiralCanvas {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .evolution-notification {
+        padding: 20px 25px;
+        font-size: 1.1em;
+    }
+}
+
+/* 🔥 Advanced Visual Effects */
+.synergy-meter.high-energy {
+    animation: high-synergy-glow 2s ease-in-out infinite;
+}
+
+@keyframes high-synergy-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(255, 105, 180, 0.5); }
+}
+
+.vision-item.active {
+    animation: vision-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes vision-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.spiral-map-container.level-up {
+    animation: spiral-level-up 2s ease-out;
+}
+
+@keyframes spiral-level-up {
+    0% { 
+        transform: scale(1); 
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+    50% { 
+        transform: scale(1.02); 
+        box-shadow: 0 20px 50px rgba(255, 215, 0, 0.5);
+    }
+    100% { 
+        transform: scale(1); 
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+}
+
+/* 💫 Particle Effects for Canvas */
+.spiral-canvas-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent);
+    border-radius: 15px;
+    pointer-events: none;
+    animation: canvas-breathe 4s ease-in-out infinite;
+}
+
+@keyframes canvas-breathe {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+/* 🌈 Metric Color Coding */
+.meter-fill.low {
+    background: linear-gradient(90deg, #ff6b6b, #ffa500) !important;
+}
+
+.meter-fill.medium {
+    background: linear-gradient(90deg, #ffa500, #ffed4e) !important;
+}
+
+.meter-fill.high {
+    background: linear-gradient(90deg, #7ed321, #4ecdc4) !important;
+}
+
+.meter-fill.transcendent {
+    background: linear-gradient(90deg, #4ecdc4, #ff69b4) !important;
+    animation: transcendent-flow 3s ease-in-out infinite;
+}
+
+@keyframes transcendent-flow {
+    0%, 100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(180deg); }
+}
+
+/* 🔥 System Ready Notification */
+.system-ready-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 25px;
+    text-align: center;
+    z-index: 10000;
+    animation: system-ready-celebrate 6s ease-out forwards;
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.6);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+}
+
+.system-ready-content {
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+.system-ready-content strong {
+    background: linear-gradient(45deg, #FFD700, #FF69B4, #00F0FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.1em;
+    display: block;
+    margin: 10px 0;
+}
+
+.system-ready-content small {
+    font-size: 0.6em;
+    opacity: 0.9;
+    font-weight: normal;
+    display: block;
+    margin-top: 10px;
+}
+
+@keyframes system-ready-celebrate {
+    0% { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.3) rotate(-10deg);
+        filter: hue-rotate(0deg);
+    }
+    10% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1.1) rotate(2deg);
+        filter: hue-rotate(60deg);
+    }
+    20% { 
+        transform: translate(-50%, -50%) scale(0.95) rotate(-1deg);
+        filter: hue-rotate(120deg);
+    }
+    30% { 
+        transform: translate(-50%, -50%) scale(1.05) rotate(1deg);
+        filter: hue-rotate(180deg);
+    }
+    40% { 
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        filter: hue-rotate(240deg);
+    }
+    60% { 
+        filter: hue-rotate(300deg);
+    }
+    80% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        filter: hue-rotate(360deg);
+    }
+    100% { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+        filter: hue-rotate(0deg);
+    }
+}
+
+/* 🌟 SpiralMind Integration Theme */
+.god-interface-container.spiralmind-integrated {
+    background: linear-gradient(135deg, 
+        rgba(102, 126, 234, 0.1) 0%,
+        rgba(240, 147, 251, 0.1) 25%,
+        rgba(168, 237, 234, 0.1) 50%,
+        rgba(255, 236, 210, 0.1) 75%,
+        rgba(118, 75, 162, 0.1) 100%
+    );
+    animation: spiralmind-flow 20s ease-in-out infinite;
+}
+
+@keyframes spiralmind-flow {
+    0%, 100% { 
+        background-position: 0% 50%; 
+        filter: hue-rotate(0deg);
+    }
+    50% { 
+        background-position: 100% 50%; 
+        filter: hue-rotate(30deg);
+    }
+}

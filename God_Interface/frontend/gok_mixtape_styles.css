@@ -1,0 +1,487 @@
+/**
+ * 🎬 GOK: MIXTAPE Integration Styles
+ * =================================
+ * 
+ * Styling dla wszystkich elementów GOK: MIXTAPE w God Interface
+ */
+
+/* 🎚️ MIXTAPE Slider Control */
+.mixtape-slider-container {
+    margin: 15px 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+}
+
+.mixtape-control label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.mixtape-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    margin: 10px 0;
+    -webkit-appearance: none;
+}
+
+.mixtape-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff69b4, #ffd700);
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(255, 105, 180, 0.5);
+    transition: all 0.3s ease;
+}
+
+.mixtape-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);
+}
+
+.mixtape-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff69b4, #ffd700);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 10px rgba(255, 105, 180, 0.5);
+}
+
+.mixtape-description {
+    text-align: center;
+    font-size: 0.8em;
+    opacity: 0.9;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* 📤 Export Controls */
+.export-buttons-container {
+    margin: 20px 0;
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.export-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.export-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+    backdrop-filter: blur(10px);
+}
+
+.export-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.export-btn:active {
+    transform: translateY(0);
+}
+
+/* 🎬 MIXTAPE Display */
+.mixtape-display-container {
+    margin: 15px 0;
+}
+
+.current-mixtape {
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    border-radius: 15px;
+    padding: 20px;
+    color: #333;
+    box-shadow: 0 5px 20px rgba(168, 237, 234, 0.3);
+}
+
+.current-mixtape h4 {
+    margin: 0 0 15px 0;
+    text-align: center;
+    font-size: 1.2em;
+    color: #444;
+}
+
+.mixtape-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.mixtape-item {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.mixtape-item strong {
+    color: #555;
+}
+
+.mixtape-item a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.mixtape-item a:hover {
+    text-decoration: underline;
+}
+
+/* 📤 Export Notifications */
+.export-notification {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    z-index: 10000;
+    animation: export-slide-in 4s ease-out forwards;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    max-width: 300px;
+}
+
+.export-content {
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.export-content small {
+    font-size: 0.8em;
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+@keyframes export-slide-in {
+    0% { 
+        opacity: 0; 
+        transform: translateX(100%); 
+    }
+    10% { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+    90% { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+    100% { 
+        opacity: 0; 
+        transform: translateX(100%); 
+    }
+}
+
+/* 🎨 Graphics Generation Effects */
+.graphics-generating {
+    position: relative;
+    overflow: hidden;
+}
+
+.graphics-generating::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 215, 0, 0.2), 
+        transparent
+    );
+    animation: graphics-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes graphics-shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* 📊 Analysis Display */
+.analysis-display {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px 0;
+    color: white;
+}
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.analysis-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.analysis-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.analysis-value {
+    opacity: 0.9;
+}
+
+/* 🎵 Music Integration Display */
+.music-suggestion {
+    background: linear-gradient(45deg, #ff9a9e, #fecfef);
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px 0;
+    color: #333;
+    text-align: center;
+}
+
+.music-suggestion h5 {
+    margin: 0 0 10px 0;
+    color: #555;
+}
+
+.music-link {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.7);
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+.music-link:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 📝 Blog Post Preview */
+.blog-post-preview {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px 0;
+    color: #333;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.blog-post-preview h4 {
+    margin: 0 0 15px 0;
+    color: #444;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 10px;
+}
+
+.blog-preview-content {
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.blog-preview-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.meta-tag {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+/* 🌈 Dynamic Theme Adjustments */
+.god-interface-container.mixtape-active {
+    background: linear-gradient(135deg, 
+        rgba(102, 126, 234, 0.1) 0%,
+        rgba(240, 147, 251, 0.1) 50%,
+        rgba(245, 87, 108, 0.1) 100%
+    );
+}
+
+.mixtape-active .response-area {
+    border-left: 4px solid #f093fb;
+}
+
+.mixtape-active .input-area {
+    border: 2px solid rgba(240, 147, 251, 0.3);
+}
+
+/* 🎯 Level-based Visual Effects */
+.mixtape-level-low {
+    filter: saturate(0.8) brightness(0.9);
+}
+
+.mixtape-level-medium {
+    filter: saturate(1.1) brightness(1.0);
+}
+
+.mixtape-level-high {
+    filter: saturate(1.3) brightness(1.1);
+    animation: high-energy-pulse 3s ease-in-out infinite;
+}
+
+@keyframes high-energy-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.01); }
+}
+
+/* 📱 Mobile Responsiveness */
+@media (max-width: 768px) {
+    .mixtape-slider-container {
+        padding: 15px;
+    }
+    
+    .export-controls {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .export-btn {
+        padding: 10px 12px;
+        font-size: 0.8em;
+    }
+    
+    .mixtape-info {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .analysis-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .blog-post-preview {
+        padding: 15px;
+        max-height: 250px;
+    }
+    
+    .export-notification {
+        right: 10px;
+        bottom: 60px;
+        max-width: 250px;
+    }
+}
+
+/* 🔥 Special Effects for High MIXTAPE Levels */
+.mixtape-slider[value="100"] + .mixtape-description::after {
+    content: " 🔥";
+    animation: fire-flicker 0.5s ease-in-out infinite;
+}
+
+@keyframes fire-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.export-btn.auto-generated {
+    background: linear-gradient(45deg, #ffd700, #ff69b4);
+    animation: auto-gen-pulse 2s ease-in-out infinite;
+}
+
+@keyframes auto-gen-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(255, 105, 180, 0.5); }
+}
+
+/* 🎨 Graphics Preview */
+.graphics-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.graphic-item {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.graphic-item img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.graphic-description {
+    font-size: 0.8em;
+    color: #666;
+    font-style: italic;
+}
+
+/* 💫 Advanced Animations */
+.mixtape-creation-animation {
+    position: relative;
+    overflow: hidden;
+}
+
+.mixtape-creation-animation::before {
+    content: '🎬';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    opacity: 0;
+    animation: mixtape-birth 2s ease-out;
+}
+
+@keyframes mixtape-birth {
+    0% { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0); 
+    }
+    50% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1.5); 
+    }
+    100% { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(1); 
+    }
+}

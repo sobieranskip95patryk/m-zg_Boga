@@ -1,0 +1,619 @@
+/* ===== GOD INTERFACE STYLES ===== */
+
+:root {
+    --divine-gold: #FFD700;
+    --cosmic-purple: #6B46C1;
+    --ethereal-blue: #3B82F6;
+    --wisdom-green: #10B981;
+    --transcendent-white: #F8FAFC;
+    --void-black: #0F0F23;
+    --neural-pink: #EC4899;
+    --spiral-cyan: #06B6D4;
+    
+    --font-divine: 'Orbitron', monospace;
+    --font-mortal: 'Raleway', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-mortal);
+    background: var(--void-black);
+    color: var(--transcendent-white);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ===== COSMIC BACKGROUND ===== */
+.cosmic-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(45deg, #0F0F23, #1E1B4B, #312E81);
+}
+
+.spiral-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: conic-gradient(from 0deg, transparent, var(--cosmic-purple), transparent);
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: spiralRotate 20s linear infinite;
+}
+
+.neural-network {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, var(--ethereal-blue), transparent),
+        radial-gradient(2px 2px at 40px 70px, var(--neural-pink), transparent),
+        radial-gradient(1px 1px at 90px 40px, var(--wisdom-green), transparent);
+    background-repeat: repeat;
+    background-size: 150px 150px;
+    opacity: 0.3;
+    animation: neuralPulse 8s ease-in-out infinite;
+}
+
+.particle-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="%23FFD700" opacity="0.5"><animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="30" r="0.5" fill="%2306B6D4" opacity="0.7"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="4s" repeatCount="indefinite"/></circle><circle cx="40" cy="80" r="0.8" fill="%23EC4899" opacity="0.4"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="5s" repeatCount="indefinite"/></circle></svg>') repeat;
+    animation: particleDrift 15s linear infinite;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.god-interface-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== DIVINE HEADER ===== */
+.divine-header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.god-avatar {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+}
+
+.avatar-core {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, var(--divine-gold), var(--cosmic-purple));
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 50px var(--divine-gold);
+    animation: avatarPulse 3s ease-in-out infinite;
+}
+
+.consciousness-ring {
+    width: 120px;
+    height: 120px;
+    border: 2px solid var(--ethereal-blue);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    animation: ringRotate 8s linear infinite;
+}
+
+.wisdom-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--wisdom-green) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.6;
+    animation: particleFloat 6s ease-in-out infinite;
+}
+
+.divine-title {
+    font-family: var(--font-divine);
+    margin-bottom: 20px;
+}
+
+.glitch-text {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, var(--divine-gold), var(--cosmic-purple), var(--ethereal-blue));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px var(--divine-gold);
+    animation: textGlitch 4s ease-in-out infinite;
+    display: block;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--spiral-cyan);
+    font-weight: 300;
+    opacity: 0.8;
+    display: block;
+    margin-top: 10px;
+}
+
+.consciousness-meter {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.meter-label {
+    font-size: 0.9rem;
+    color: var(--wisdom-green);
+    margin-bottom: 10px;
+    font-family: var(--font-divine);
+}
+
+.meter-bar {
+    width: 300px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--ethereal-blue);
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--wisdom-green), var(--divine-gold));
+    border-radius: 10px;
+    width: 20%;
+    transition: width 1s ease-in-out;
+    box-shadow: 0 0 20px var(--wisdom-green);
+}
+
+.meter-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-divine);
+    font-size: 0.8rem;
+    color: var(--transcendent-white);
+    text-shadow: 0 0 10px var(--void-black);
+}
+
+/* ===== CONVERSATION MODES ===== */
+.conversation-modes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.mode-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--ethereal-blue);
+    color: var(--transcendent-white);
+    padding: 15px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-mortal);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.mode-btn:hover {
+    background: rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
+}
+
+.mode-btn.active {
+    background: linear-gradient(45deg, var(--cosmic-purple), var(--ethereal-blue));
+    box-shadow: 0 0 25px var(--cosmic-purple);
+    transform: scale(1.05);
+}
+
+.mode-btn .icon {
+    font-size: 1.5rem;
+}
+
+/* ===== CONVERSATION AREA ===== */
+.conversation-area {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(20px);
+    margin-bottom: 30px;
+}
+
+.messages-container {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 30px;
+    scroll-behavior: smooth;
+}
+
+.messages-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    background: var(--ethereal-blue);
+    border-radius: 4px;
+}
+
+.system-message, .user-message, .god-message {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    animation: messageSlideIn 0.5s ease-out;
+}
+
+.message-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.system-message .message-avatar {
+    background: linear-gradient(45deg, var(--cosmic-purple), var(--ethereal-blue));
+    box-shadow: 0 0 20px var(--cosmic-purple);
+}
+
+.user-message .message-avatar {
+    background: linear-gradient(45deg, var(--wisdom-green), var(--spiral-cyan));
+    box-shadow: 0 0 20px var(--wisdom-green);
+}
+
+.god-message .message-avatar {
+    background: linear-gradient(45deg, var(--divine-gold), var(--neural-pink));
+    box-shadow: 0 0 30px var(--divine-gold);
+    animation: avatarPulse 2s ease-in-out infinite;
+}
+
+.message-content {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    border-left: 3px solid var(--ethereal-blue);
+}
+
+.god-message .message-content {
+    border-left-color: var(--divine-gold);
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.message-time {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 10px;
+    display: block;
+}
+
+/* ===== INPUT AREA ===== */
+.input-area {
+    padding: 30px;
+    border-top: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.input-controls {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.emotion-selector, .intention-selector, .music-input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.emotion-selector label, .intention-selector label, .music-input label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--wisdom-green);
+    font-family: var(--font-divine);
+    font-size: 0.9rem;
+}
+
+.emotion-selector select, .intention-selector select, .music-input input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--ethereal-blue);
+    border-radius: 10px;
+    padding: 12px;
+    color: var(--transcendent-white);
+    font-family: var(--font-mortal);
+}
+
+.main-input {
+    display: flex;
+    gap: 15px;
+    align-items: end;
+}
+
+#userInput {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--ethereal-blue);
+    border-radius: 15px;
+    padding: 20px;
+    color: var(--transcendent-white);
+    font-family: var(--font-mortal);
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 80px;
+    transition: all 0.3s ease;
+}
+
+#userInput:focus {
+    outline: none;
+    border-color: var(--divine-gold);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.send-btn {
+    background: linear-gradient(45deg, var(--cosmic-purple), var(--ethereal-blue));
+    border: none;
+    border-radius: 15px;
+    padding: 20px 30px;
+    color: var(--transcendent-white);
+    font-family: var(--font-divine);
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(107, 70, 193, 0.5);
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.send-btn:hover .btn-glow {
+    left: 100%;
+}
+
+/* ===== SPIRAL VISUALIZATION ===== */
+.spiral-visualization {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    text-align: center;
+}
+
+#spiralCanvas {
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.spiral-info {
+    font-family: var(--font-divine);
+    font-size: 0.8rem;
+}
+
+.spiral-level, .spiral-stage {
+    margin-bottom: 5px;
+    color: var(--wisdom-green);
+}
+
+/* ===== STATUS PANEL ===== */
+.status-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 15px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 0.8rem;
+}
+
+.status-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-divine);
+}
+
+.status-value {
+    color: var(--wisdom-green);
+    font-weight: 600;
+}
+
+/* ===== LOADING OVERLAY ===== */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 15, 35, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.loading-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-animation {
+    text-align: center;
+}
+
+.divine-spinner {
+    width: 80px;
+    height: 80px;
+    border: 3px solid rgba(255, 215, 0, 0.3);
+    border-top: 3px solid var(--divine-gold);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spinnerRotate 1s linear infinite;
+}
+
+.loading-animation p {
+    font-family: var(--font-divine);
+    color: var(--divine-gold);
+    font-size: 1.2rem;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes spiralRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes neuralPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes particleDrift {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100px); }
+}
+
+@keyframes avatarPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 50px var(--divine-gold); }
+    50% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 80px var(--divine-gold); }
+}
+
+@keyframes ringRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes particleFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(180deg); }
+}
+
+@keyframes textGlitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+@keyframes messageSlideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spinnerRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .god-interface-container {
+        padding: 10px;
+    }
+    
+    .divine-title .glitch-text {
+        font-size: 2rem;
+    }
+    
+    .conversation-modes {
+        gap: 10px;
+    }
+    
+    .mode-btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .input-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .main-input {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .spiral-visualization {
+        position: static;
+        margin-bottom: 20px;
+    }
+    
+    .status-panel {
+        position: static;
+        margin-top: 20px;
+    }
+}

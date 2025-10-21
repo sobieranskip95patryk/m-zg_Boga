@@ -1,0 +1,32 @@
+{
+  "notes": "Przykładowe dane wejściowe dla komponentów.",
+  "intrinsic": {
+    "base": 7,
+    "tags": [
+      "pełnia",
+      "intuicja"
+    ]
+  },
+  "skills": {
+    "base": 6,
+    "habits": [
+      "proaktywność",
+      "synergia"
+    ]
+  },
+  "decisions": {
+    "base": 4
+  },
+  "context": {
+    "base": 5
+  },
+  "personality": {
+    "base": 8
+  },
+  "energy": {
+    "base": 6
+  },
+  "time": {
+    "base": 3
+  }
+}

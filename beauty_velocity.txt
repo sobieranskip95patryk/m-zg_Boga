@@ -1,0 +1,347 @@
+import React, { useEffect, useMemo, useState } from "react";
+
+// Rocket Fuel Girls — Landing + Gallery + Profile Modal
+// Design: blue–green–navy, metallic prestige aesthetic. Tailwind required.
+// Single-file React component. Default export.
+
+// ---------- Types ----------
+interface GirlProfile {
+  id: string;
+  name: string;
+  handle: string;
+  fuel: number; // off-chain credits for now
+  tier: "Platinum" | "Titanium" | "Carbon";
+  bio: string;
+  // image could be an URL; we use gradient placeholders for now
+  img?: string;
+}
+
+// ---------- Demo Data ----------
+const DEMO_GIRLS: GirlProfile[] = [
+  {
+    id: "rf-001",
+    name: "Nova Aster",
+    handle: "@nova",
+    fuel: 12840,
+    tier: "Platinum",
+    bio: "Pilotka testowa i muza napędu jonowego.",
+  },
+  {
+    id: "rf-002",
+    name: "Vega Lux",
+    handle: "@vega",
+    fuel: 10210,
+    tier: "Titanium",
+    bio: "Sztuka, moda, mikro-grawitacja.",
+  },
+  {
+    id: "rf-003",
+    name: "Lyra Helix",
+    handle: "@lyra",
+    fuel: 9370,
+    tier: "Titanium",
+    bio: "Cyberbalet i silniki plazmowe.",
+  },
+  {
+    id: "rf-004",
+    name: "Aurora Quill",
+    handle: "@aurora",
+    fuel: 7715,
+    tier: "Carbon",
+    bio: "Poetka orbit i kolekcjonerka NFT.",
+  },
+  {
+    id: "rf-005",
+    name: "Iris Volt",
+    handle: "@iris",
+    fuel: 6590,
+    tier: "Carbon",
+    bio: "Atleta zero-G, stała bywalczyni doków L2.",
+  },
+];
+
+// ---------- Palette / Aesthetic ----------
+// Metallic navy core with teal/azure accents.
+const metal = {
+  bg: "#0a1220", // deep navy
+  bgAlt: "#0e1730",
+  steel: "#1e2b45",
+  teal: "#00d4a6",
+  aqua: "#18b7ff",
+  glow: "#9be8ff",
+  luxe: "#6ee7d1",
+};
+
+function MetallicHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h1
+      className="text-4xl md:text-6xl font-extrabold tracking-tight text-center select-none"
+      style={{
+        background: `linear-gradient(92deg, ${metal.aqua}, ${metal.teal})`,
+        WebkitBackgroundClip: "text",
+        backgroundClip: "text",
+        color: "transparent",
+        textShadow: `0 0 30px ${metal.glow}40`,
+      }}
+    >
+      {children}
+    </h1>
+  );
+}
+
+function Sub({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-center max-w-2xl mx-auto text-sm md:text-base" style={{ color: "#cfe8ff" }}>
+      {children}
+    </p>
+  );
+}
+
+function FuelBadge({ value }: { value: number }) {
+  return (
+    <div className="px-3 py-1 rounded-full text-xs font-semibold"
+      style={{
+        background: `linear-gradient(135deg, ${metal.teal}20, ${metal.aqua}20)`,
+        border: `1px solid ${metal.luxe}55`,
+        color: metal.glow,
+      }}>
+      ⛽ Fuel {value.toLocaleString()}
+    </div>
+  );
+}
+
+function TierTag({ tier }: { tier: GirlProfile["tier"] }) {
+  const color = tier === "Platinum" ? metal.aqua : tier === "Titanium" ? metal.teal : "#91a4c3";
+  return (
+    <span className="text-[11px] uppercase tracking-wide font-bold"
+      style={{ color, letterSpacing: 1.2 as unknown as string }}>
+      {tier}
+    </span>
+  );
+}
+
+function MetallicCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="rounded-3xl p-4 md:p-5 border shadow-lg transition-transform hover:-translate-y-1 hover:shadow-2xl"
+      style={{
+        background: `linear-gradient(165deg, ${metal.bgAlt} 0%, ${metal.steel} 100%)`,
+        borderColor: `${metal.aqua}33`,
+        boxShadow: `0 10px 40px ${metal.aqua}14, inset 0 1px 0 ${metal.glow}22`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function Avatar({ idx }: { idx: number }) {
+  // Gradient placeholder that looks metallic
+  const angle = (idx * 47) % 360;
+  const bg = `conic-gradient(from ${angle}deg at 50% 50%, ${metal.aqua}, ${metal.teal}, ${metal.aqua})`;
+  return (
+    <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden border"
+      style={{ borderColor: `${metal.glow}44`, background: bg, filter: "saturate(0.85)" }} />
+  );
+}
+
+function Leaderboard({ girls }: { girls: GirlProfile[] }) {
+  const top = useMemo(() => [...girls].sort((a, b) => b.fuel - a.fuel).slice(0, 5), [girls]);
+  return (
+    <MetallicCard>
+      <h3 className="text-lg font-bold mb-3" style={{ color: metal.glow }}>Top Girls</h3>
+      <div className="divide-y divide-white/5">
+        {top.map((g, i) => (
+          <div key={g.id} className="flex items-center justify-between py-2">
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 text-center text-xs font-bold rounded-full" style={{ background: `${metal.aqua}1a`, color: metal.glow }}>{i+1}</div>
+              <div>
+                <div className="text-sm font-semibold" style={{ color: "#e9f5ff" }}>{g.name}</div>
+                <div className="text-[11px]" style={{ color: "#b9c8df" }}>{g.handle}</div>
+              </div>
+            </div>
+            <FuelBadge value={g.fuel} />
+          </div>
+        ))}
+      </div>
+    </MetallicCard>
+  );
+}
+
+function ProfileModal({ girl, onClose }: { girl: GirlProfile | null; onClose: () => void }) {
+  if (!girl) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(4,10,22,0.72)" }}>
+      <div className="absolute inset-0" onClick={onClose} />
+      <div className="relative max-w-2xl w-full"> 
+        <MetallicCard>
+          <div className="grid md:grid-cols-2 gap-4">
+            <Avatar idx={parseInt(girl.id.replace(/\D/g, "")) || 1} />
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-xl font-extrabold" style={{ color: "#e7f7ff" }}>{girl.name}</h3>
+                  <div className="text-sm" style={{ color: "#b9d9ef" }}>{girl.handle}</div>
+                </div>
+                <TierTag tier={girl.tier} />
+              </div>
+              <p className="text-sm" style={{ color: "#cfe8ff" }}>{girl.bio}</p>
+              <div className="mt-2"><FuelBadge value={girl.fuel} /></div>
+              <div className="mt-3 flex gap-2">
+                <button
+                  className="px-4 py-2 rounded-xl font-semibold"
+                  style={{
+                    background: `linear-gradient(92deg, ${metal.teal}, ${metal.aqua})`,
+                    color: "#001621",
+                    boxShadow: `0 8px 28px ${metal.aqua}40`,
+                  }}
+                  onClick={() => alert("TODO: Connect wallet → Send Fuel")}
+                >
+                  Zasil Fuel
+                </button>
+                <button
+                  className="px-4 py-2 rounded-xl font-semibold border"
+                  style={{ borderColor: `${metal.glow}44`, color: metal.glow }}
+                  onClick={onClose}
+                >
+                  Zamknij
+                </button>
+              </div>
+            </div>
+          </div>
+        </MetallicCard>
+      </div>
+    </div>
+  );
+}
+
+export default function RocketFuelGirls() {
+  const [girls, setGirls] = useState<GirlProfile[]>(DEMO_GIRLS);
+  const [query, setQuery] = useState("");
+  const [picked, setPicked] = useState<GirlProfile | null>(null);
+
+  // ---------- Tiny runtime tests (no external runner) ----------
+  useEffect(() => {
+    const tests: { name: string; run: () => boolean }[] = [
+      { name: "palette metal has navy", run: () => /^#0a12/i.test(metal.bg) },
+      { name: "demo has >= 5 girls", run: () => DEMO_GIRLS.length >= 5 },
+      { name: "filtering works for 'a'", run: () => filterGirls(DEMO_GIRLS, "a").length > 0 },
+    ];
+    tests.forEach(t => console.log(`[RFG TEST] ${t.name}: ${t.run() ? "OK" : "FAIL"}`));
+  }, []);
+
+  const filtered = useMemo(() => filterGirls(girls, query), [girls, query]);
+
+  return (
+    <div className="min-h-screen" style={{ background: `radial-gradient(1200px 600px at 20% -10%, ${metal.aqua}0d, transparent), radial-gradient(1000px 700px at 120% 120%, ${metal.teal}0d, transparent), ${metal.bg}` }}>
+      {/* Header */}
+      <header className="max-w-6xl mx-auto px-6 py-6 flex items-center gap-4">
+        <LogoMark />
+        <div className="ml-1">
+          <div className="text-xs font-semibold" style={{ color: metal.glow }}>MTAQuestWebsideX</div>
+          <div className="text-sm md:text-base" style={{ color: "#cfe8ff" }}>Rocket Fuel Girls</div>
+        </div>
+        <div className="ml-auto flex items-center gap-2">
+          <button className="px-3 py-1.5 rounded-xl text-xs font-semibold border" style={{ borderColor: `${metal.glow}44`, color: metal.glow }} onClick={() => alert("TODO: Connect Wallet")}>Połącz Portfel</button>
+          <button className="px-3 py-1.5 rounded-xl text-xs font-semibold" style={{ background: `linear-gradient(92deg, ${metal.aqua}, ${metal.teal})`, color: "#001621" }} onClick={() => alert("TODO: Dashboard")}>Dashboard</button>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="max-w-6xl mx-auto px-6 pt-8 pb-10 text-center">
+        <MetallicHeading>Beauty. Velocity. Capital.</MetallicHeading>
+        <div className="mt-3">
+          <Sub>Galeria elitarnych twórczyń. Zasilaj ich lot Fuel kredytami i pnij je na szczyt rankingu.</Sub>
+        </div>
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <a href="#gallery" className="px-5 py-3 rounded-2xl font-semibold" style={{ background: `linear-gradient(92deg, ${metal.teal}, ${metal.aqua})`, color: "#001621", boxShadow: `0 10px 40px ${metal.aqua}33` }}>Wejdź do Galerii</a>
+          <button className="px-5 py-3 rounded-2xl font-semibold border" style={{ borderColor: `${metal.glow}55`, color: metal.glow }} onClick={() => alert("TODO: Whitepaper / Tokenomics")}>Tokenomics</button>
+        </div>
+      </section>
+
+      {/* Main */}
+      <main className="max-w-6xl mx-auto px-6 pb-16 grid md:grid-cols-5 gap-6">
+        {/* Left Column */}
+        <div className="md:col-span-2 space-y-6">
+          <MetallicCard>
+            <h3 className="text-lg font-bold mb-2" style={{ color: metal.glow }}>Leaderboard</h3>
+            <Leaderboard girls={girls} />
+          </MetallicCard>
+
+          <MetallicCard>
+            <h3 className="text-lg font-bold mb-3" style={{ color: metal.glow }}>Filtruj</h3>
+            <input
+              placeholder="Szukaj po imieniu lub @handle"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-transparent outline-none border"
+              style={{ borderColor: `${metal.glow}33`, color: "#eaffff" }}
+            />
+            <div className="mt-2 text-xs" style={{ color: "#a9cfe0" }}>{filtered.length} wyników</div>
+          </MetallicCard>
+        </div>
+
+        {/* Gallery */}
+        <section id="gallery" className="md:col-span-3 grid sm:grid-cols-2 gap-5">
+          {filtered.map((g, idx) => (
+            <button key={g.id} className="text-left" onClick={() => setPicked(g)}>
+              <MetallicCard>
+                <Avatar idx={idx + 1} />
+                <div className="mt-3 flex items-start justify-between gap-3">
+                  <div>
+                    <div className="text-base font-bold" style={{ color: "#e9f5ff" }}>{g.name}</div>
+                    <div className="text-xs" style={{ color: "#b9c8df" }}>{g.handle}</div>
+                  </div>
+                  <TierTag tier={g.tier} />
+                </div>
+                <div className="mt-2"><FuelBadge value={g.fuel} /></div>
+              </MetallicCard>
+            </button>
+          ))}
+        </section>
+      </main>
+
+      {/* Modal */}
+      <ProfileModal girl={picked} onClose={() => setPicked(null)} />
+
+      {/* Footer */}
+      <footer className="px-6 pb-10">
+        <div className="max-w-6xl mx-auto text-xs flex flex-col sm:flex-row items-center justify-between gap-3" style={{ color: "#9cb9d1" }}>
+          <div>© {new Date().getFullYear()} Rocket Fuel Girls • Powered by MTAQuestWebsideX</div>
+          <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full" style={{ background: metal.teal }} /> Prestige-grade metallic UI</div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+// ---------- Helpers ----------
+function filterGirls(girls: GirlProfile[], q: string): GirlProfile[] {
+  const s = q.trim().toLowerCase();
+  if (!s) return girls;
+  return girls.filter(g => g.name.toLowerCase().includes(s) || g.handle.toLowerCase().includes(s));
+}
+
+function LogoMark({ size = 42 }: { size?: number }) {
+  const s = size;
+  return (
+    <div className="relative" style={{ width: s, height: s }}>
+      {/* glow */}
+      <div className="absolute inset-0 blur-xl opacity-80" style={{
+        background: `conic-gradient(from 0deg at 50% 50%, ${metal.aqua}, ${metal.teal}, ${metal.aqua})`,
+        filter: "blur(16px)",
+        borderRadius: 9999,
+      }} />
+      <svg viewBox="0 0 100 100" className="relative z-10">
+        <defs>
+          <linearGradient id="rfg-g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor={metal.aqua} />
+            <stop offset="100%" stopColor={metal.teal} />
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="44" stroke="url(#rfg-g)" strokeWidth="4" fill="none" />
+        <path d="M50 18 L60 40 L82 42 L66 58 L70 80 L50 68 L30 80 L34 58 L18 42 L40 40 Z" fill="url(#rfg-g)" opacity="0.9" />
+      </svg>
+    </div>
+  );
+}
