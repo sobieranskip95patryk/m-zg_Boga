@@ -1,0 +1,3 @@
+# Ten plik zapewnia, że katalog uploads/ zostanie dodany do Git
+# Katalog jest potrzebny do przechowywania przesłanych zdjęć
+# Rzeczywiste pliki zdjęć są ignorowane przez .gitignore
